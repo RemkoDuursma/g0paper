@@ -97,6 +97,20 @@ Problem that g0 is frequently negative (e.g. @heroult2013)
 
 @egea2011 Assumes g0 is constant, does not vary with water stress, and that it represents a ‘cuticular conductance’.
 
+@manzoni assumes minimum conductance is cuticular only, because CO2 does not diffuse across it but water does. Seems to work in his modelling context but appears to be in disagreement with the observation that gmin >> gcut. 
+
+
+Various measures of minimum conductance
+
+- gcut (cuticle without stomata)
+- gmin (minimum conductance in situ, stomata closed)
+- g0 (minimum conductance in the Ball-Berry-type model)
+- gdark (nighttime conductance)
+
+gdark > gmin > gcut
+g0?
+
+
 
 
 ## Figures
