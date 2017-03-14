@@ -72,6 +72,8 @@ df$g0 <- as.numeric(g0)
 df$R2 <- as.numeric(df$R2)
 
 
+write.csv(df, "data/Miner_table1.csv", row.names=FALSE)
+
 with(df, plot(R2, g0))
 l <- loess(g0 ~ R2, data=df)
 plot_loess(l, add=TRUE)

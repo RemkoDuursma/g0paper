@@ -40,7 +40,7 @@ T: +61(0)45701806
 
 @lombardozzi2017 puts g0 into CLM, notes in introduction that 'conductance during the night (and at other times when A = 0 ) is thus represented using g0'. 
 
-@barnard2013 makes the same assumption
+@barnard2013 makes the same assumption, without any discussion of the possibility that daytime g0 might be different from nighttime conductance
 
 @dekauwe2015 makes this point as well, their Fig. A2 (can we add that also?)
 
@@ -111,7 +111,8 @@ gdark > gmin > gcut
 g0?
 
 
-
+@rescodedios2016 early night gs much (much) lower than pre-dawn gs, in E. camaldulensis
+@rescodedios2013 nighttime fluctuation gs independent of environment
 
 ## Figures
 
