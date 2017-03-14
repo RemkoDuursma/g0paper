@@ -6,3 +6,5 @@
 *.docx
 !manuscriptstyle.docx
 *.Rproj
+download/
+output/

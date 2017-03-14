@@ -104,3 +104,52 @@ figure4 <- function(lin2015){
 }
 
 
+figure5 <- function(){
+  
+  par(mfrow=c(2,2), mar=c(4,4,1,1), mgp=c(2.5,0.5,0), tcl=0.2, las=1,
+      cex.axis=0.9, cex.lab=1.1)
+  
+  g1 <- 4
+  g0 <- 0.03
+  
+  lty0 <- 1
+  lty1 <- 5
+  col0 <- "black"
+  col1 <- "black"
+  
+  r0 <- Photosyn(PPFD=seq(20,1000, length=101),
+                 g1=g1, g0=0, Vcmax=70, Jmax=140,
+                 VPD=2, Tleaf=20, Ca=400)
+  r1 <- Photosyn(PPFD=seq(20,1000, length=101),
+                 g1=g1, g0=g0, Vcmax=70, Jmax=140,
+                 VPD=2, Tleaf=20, Ca=400)
+  
+  with(r0, plot(PPFD, ALEAF/GS, type='l', ylim=c(0,80), col=col0, lty=lty0))
+  with(r1, lines(PPFD, ALEAF/GS, col=col1, lty=lty1))
+  
+  with(r0, plot(PPFD, Ci, type='l',
+                col=col0, lty=lty0,
+                ylim=c(250,400)))
+  with(r1, lines(PPFD, Ci, col=col1, lty=lty1))
+  
+  tleafs <- seq(10,45,length=101)
+  vpds <- 0.000605 * tleafs^2.39
+  r0 <- Photosyn(PPFD=1500,
+                 g1=g1, g0=0, Vcmax=70, Jmax=140,
+                 VPD=vpds, Tleaf=tleafs, Ca=400)
+  r1 <- Photosyn(PPFD=1500,
+                 g1=g1, g0=g0, Vcmax=70, Jmax=140,
+                 VPD=vpds, Tleaf=tleafs, Ca=400)
+  
+  with(r0, plot(Tleaf, ELEAF, type='l', 
+                col=col0, lty=lty0,
+                ylim=c(0,10)))
+  with(r1, lines(Tleaf, ELEAF, col=col1, lty=lty1))
+  
+  with(r0, plot(VPD, Ci, type='l', 
+                col=col0, lty=lty0,
+                ylim=c(0,400)))
+  with(r1, lines(VPD, Ci, col=col1, lty=lty1))
+  
+}
+

@@ -77,6 +77,16 @@ Problem that g0 is frequently negative (e.g. @heroult2013)
 
 
 
+[@medlyn_reconciling_2011] does not develop theory for g0, instead adds it as a minimum conductancce because that's how it is!
+
+When fitting a Ball-Berry type model, negative values are quite common. A typical approach is to avoid this by setting some value based on guesswork [e.g. @leuning_modelling_1990], which we assume is quite common when inspecting the many rounded values in the review by 
+
+The first Ball-Berry model did not have a g0 
+
+
+
+
+
 @waldencoleman2013 Very interesting! gdark is different from gmin. Whole-plant WUE correlated with gdark (but not gmin). Lots of references on gdark and gmin and their variation. Closed system to measure gdark+gmin; gmin on detached leaves.
 
 @santrucek Direct measurements showing much higher 'cuticular' conductance of the leaf side with stomata, though stomata were closed. In agreement with @kerstiens1996 who showed 10x higher gmin for stomatal side vs. non-stomatal cuticle.
@@ -99,6 +109,8 @@ Problem that g0 is frequently negative (e.g. @heroult2013)
 
 @manzoni assumes minimum conductance is cuticular only, because CO2 does not diffuse across it but water does. Seems to work in his modelling context but appears to be in disagreement with the observation that gmin >> gcut. 
 
+
+[@leuning_critical-appraisal_1995]
 
 Various measures of minimum conductance
 
