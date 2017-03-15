@@ -1,5 +1,7 @@
 
-pacman::p_load(car, dplyr, tidyr, nlme, nlshelper, tibble, magicaxis, plantecophys, readxl)
+pacman::p_load(car, dplyr, tidyr, nlme, nlshelper, 
+               forcats, tibble, magicaxis, 
+               plantecophys, readxl)
 
 
 
@@ -73,7 +75,22 @@ gdfr <- bind_rows(kerst, lombar, g0s) %>%
   mutate(method = factor(method, levels=c("gcut_isol","gcut_seal","gmin","gnight", "g0")))
 
 
-kerst2 <- inner_join(kerst, trydb, by=c("species" = "AccSpeciesName"))
+# Kerstiens dataset with growth form, phenology, etc.
+kerst2 <- inner_join(kerst, trydb, by=c("species" = "AccSpeciesName")) %>%
+  filter(PhylogeneticGroup != "Pteridophytes")
+
+kerst2$PlantGrowthForm <- as.factor(kerst2$PlantGrowthForm) %>%
+  fct_collapse(shrub = c("herb/shrub","shrub","shrub/tree"),
+               tree = "tree",
+               herb = "herb",
+               graminoid="graminoid")
+
+kerst2$PhylogeneticGroup <- as.factor(kerst2$PhylogeneticGroup) %>%
+  fct_collapse(Angiosperm = c("Angiosperm_Eudicotyl","Angiosperm_Magnoliid","Angiosperm_Monocotyl"))
+
+
+kerst2$LeafPhenology <- as.factor(kerst2$LeafPhenology) %>%
+  fct_collapse(evergreen = c("deciduous/evergreen","evergreen"))
 
 
 # Blackman, WTC4
