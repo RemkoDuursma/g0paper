@@ -8,3 +8,6 @@
 *.Rproj
 download/
 output/
+*.html
+*.rds
+*.xlsx
