@@ -1,5 +1,5 @@
 
-pacman::p_load(car, dplyr, tidyr, nlme, nlshelper, tibble, magicaxis)
+pacman::p_load(car, dplyr, tidyr, nlme, nlshelper, tibble, magicaxis, plantecophys)
 
 
 
@@ -58,6 +58,12 @@ gdfr <- bind_rows(kerst, lombar, g0s) %>%
   mutate(method = factor(method, levels=c("gcut_isol","gcut_seal","gmin","gnight", "g0")))
 
 
+# Blackman, WTC4
+wtc4gmin <- read.csv("data/wtc4_gmin_detached.csv") %>%
+  rename(gmin = gmin_mmol_m2_s) %>%
+  mutate(ch_temp_fac = as.factor(ch_temp))
+
+wtc4gdark <- read.csv("data/wtc4_gnight.csv")
 
 
 

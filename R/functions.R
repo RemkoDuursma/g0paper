@@ -50,3 +50,34 @@ fits_lin2015 <- function(lin2015a){
 }
 
 
+# Simple function for placing labels on a figure.
+plotlabel <- function(txt, where, inset=0.08, inset.x=inset, inset.y=inset,...){
+  u <- par()$usr
+  if(grepl("left",where))x <- u[1] + inset.x*(u[2]-u[1])
+  if(grepl("right",where))x <- u[2] - inset.x*(u[2]-u[1])
+  if(grepl("bottom",where))y <- u[3] + inset.y*(u[4]-u[3])
+  if(grepl("top",where))y <- u[4] - inset.y*(u[4]-u[3])
+  
+  text(x,y,txt,font=2,...)
+}
+
+
+convert_all_pdf <- function(path, ...){
+  o <- getwd()
+  on.exit(setwd(o))
+  setwd(path)
+  pdfs <- dir(pattern="[.]pdf")
+  for(i in seq_along(pdfs)){
+    convert_pdf_png(pdfs[i])
+    message(i)
+  }
+}
+
+convert_pdf_png <- function(filename, fnout=NULL, overwrite=TRUE, res=600, resize=100){
+  if(is.null(fnout))fnout <- gsub("[.]pdf",".png",filename)
+  if(!file.exists(fnout) | overwrite){
+    cmd <- sprintf("convert -density %s -resize %s%% -colorspace CMYK %s %s",res, resize, filename,fnout) 
+    shell(cmd)
+  }
+}
+
