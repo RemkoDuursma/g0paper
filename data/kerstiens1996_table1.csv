@@ -1,329 +1,314 @@
-gmin,method
-14,A
-3,E2
-1.2,D
-7,E2
-32,E2
-1.4,E1
-5.3,C
-6.7,C
-4.4,D
-18,C
-2,A
-3.9,D
-17,C
-8,E1
-6.2,D
-10,C
-1.7,D
-0.4,C
-1.2,D
-22,D
-0.7,C
-1.3,D
-11,E1
-3.6,D
-7.4,D
-6.9,D
-5.6,C
-10,D
-5,D
-6.9,C
-1.2,C
-3.6,D
-7.4,C
-7.9,D
-0.8,D
-0.9,D
-13,E1
-2.2,D
-3.5,D
-28,D
-18,D
-14,D
-0.5,A
-49,E1
-9,E1
-50,E1
-36,D
-26,E1
-0.9,D
-14,E2
-36,E2
-4,E2
-3,E2
-17,E1
-15,E1
-7.1,C
-4.7,A
-1,C
-0.6,A
-2,A
-21,E1
-17,E1
-18,E1
-0.1,A
-0.5,A
-0.2,A
-14,D
-15,C
-6.5,C
-25,E1
-1.6,D
-8.3,D
-9.9,D
-15,D
-16,D
-1.7,C
-3.9,D
-2,C
-13,D
-0.5,A
-0.2,A
-14,D
-15,C
-6.5,C
-25,E1
-1.6,D
-8.3,D
-9.9,D
-15,D
-16,D
-1.7,C
-3.9,D
-2,C
-13,D
-10,E1
-2,D
-75,E1
-2.7,A
-63,E3
-2,C
-13,D
-4.5,E2
-26,C
-36,D
-24,D
-8,D
-1.6,A
-8,C
-7,C
-7,C
-4.4,D
-3.7,C
-2.5,C
-5.6,D
-4.1,D
-6,D
-5,E1
-5,C
-25,D
-26,D
-0.6,A
-0.4,A
-0.4,A
-65,D
-1.7,A
-32,E1
-4.8,D
-1.9,C
-2.3,A
-23,D
-6,D
-23,E1
-25,E1
-12,E2
-18,D
-12,D
-15,E1
-5.6,E1
-0.8,D
-0.3,A
-1,C
-0.9,C
-0.6,A
-0.3,C
-0.6,C
-1,D
-8,E2
-10,D
-23,D
-4,C
-0.8,A
-1.1,A
-20,D
-27,D
-5.4,D
-4.1,D
-2,A
-25,D
-19,C
-5,D
-1.8,A
-0,D
-1.9,A
-6.6,D
-1.8,A
-55,E1
-52,E1
-6.7,C
-7.7,A
-4.8,A
-8,C
-7,D
-80,D
-5.6,C
-107,D
-0.2,A
-1.1,D
-0.3,A
-4.7,D
-2.3,A
-13,C
-67,E3
-2.4,D
-6.6,C
-5.5,A
-5.1,C
-0.2,D
-15,E3
-26,E1
-23,E1
-5.3,D
-4.3,D
-8.6,D
-10,D
-13,D
-9.6,E1
-18,D
-9.9,D
-50,D
-52,E1
-5,E3
-0.3,A
-29,E1
-10,D
-0.3,D
-6.4,D
-43,E1
-1.4,D
-9,E2
-0.8,D
-2,E3
-1.2,D
-44,D
-1.3,D
-1.1,D
-24,D
-47,E2
-1.4,D
-0.6,D
-1,D
-0.4,D
-1.8,D
-1,D
-0.8,D
-0.8,D
-0.6,D
-5,E2
-4.6,D
-1,D
-3,D
-1.1,D
-1.1,D
-0.8,D
-0.7,D
-80,E1
-7.2,A
-5,C
-6.3,D
-5.5,D
-0.7,C
-3.7,D
-0.3,D
-3,C
-3.3,E1
-1.7,A
-5,C
-0.6,A
-0.3,D
-3,E2
-10,D
-21,D
-2.2,D
-1.2,A
-2.1,A
-7.4,D
-10,C
-3.6,C
-47,E1
-4.9,E1
-2.2,C
-3,C
-6.9,D
-8.9,D
-7.3,C
-27,C
-11,D
-8.4,C
-11,C
-11,C
-5,D
-2.4,E1
-15,E1
-28,D
-11,D
-0.5,D
-0.1,A
-14,D
-14,E2
-69,E1
-7.1,E1
-12,D
-13,D
-1.9,E1
-1.2,E1
-25,E1
-19,E1
-9.7,E1
-8.6,E1
-4.5,E3
-13,D
-11,D
-12,D
-18,E1
-7.3,D
-0.8,D
-1.4,D
-1.7,D
-1.2,D
-1.6,D
-27,E1
-12,D
-15,D
-15,E3
-9.4,E3
-22,E1
-23,D
-10,D
-22,D
-24,D
-7,E2
-4.2,C
-7.6,D
-12.5,D
-0.1,A
-28,D
-6.6,D
-4.5,D
-3,D
-0.8,A
-0.8,D
-4.8,E1
-2.4,E1
-40,E3
-12,D
-14,D
-29,E3
-6.2,E1
-8.9,E1
+gmin,method,species
+14,A,Abies alba
+3,E2,Abies grandis
+1.2,D,Abies lasiocarpa
+7,E2,Abies magnifica
+32,E2,Abies procera
+1.4,E1,Abies sibirica
+5.3,C,Acer platanoides
+6.7,C,Acer platanoides
+4.4,D,Acer platanoides
+18,C,Acer pseudoplatanus
+2,A,Acer pseudoplatanus
+3.9,D,Acer pseudoplatanus
+17,C,Acer saccharum
+8,E1,Acer saccharum
+6.2,D,Acer saccharum
+10,C,Acer syriacum
+1.7,D,Aechmea bracteata
+0.4,C,Aechmea fasciata
+1.2,D,Aechmea tillandsioides
+22,D,Allium ursinum
+0.7,C,Alocasia macrorrhiza
+1.3,D,Ananas comosus
+11,E1,Arachis hypogaea
+3.6,D,Arctostaphylos uva ursi
+7.4,D,Asarum europaeum
+6.9,D,Asarum europaeum
+5.6,C,Astragalus glycophyllos
+10,D,Avena sativa
+5,D,Beta vulgaris
+6.9,C,Betula pubescens
+1.2,C,Betula pubescens
+3.6,D,Betula pubescens
+7.4,C,Betula verrucosa
+7.9,D,Betula verrucosa
+0.8,D,Billbergia euphemiae
+0.9,D,Billbergia pyramidalis
+13,E1,Brachypodium pinnatum
+2.2,D,Bromelia balansae
+3.5,D,Cajanus cajan
+28,D,Caltha palustris
+18,D,Caltha palustris
+14,D,Camellia sinensis
+0.5,A,Camellia sinensis
+49,E1,Capsicum annuum
+9,E1,Carex alba
+50,E1,Carex aquatilis
+36,D,Carex curvula
+26,E1,Carex flocca
+0.9,D,Catopsis berteroniana
+14,E2,Ceanothus incanus
+36,E2,Ceanothus thyrsiflorus
+4,E2,Cerastes ferrisae
+3,E2,Cerastes ramulosa
+17,E1,Cercis canadensis
+15,E1,Chloris gayana
+7.1,C,Circaea lutetiana
+4.7,A,Citrus aurantium
+1,C,Citrus aurantium
+0.6,A,Citrus aurantium
+2,A,Citrus limon
+21,E1,Citrus mitis
+17,E1,Citrus mitis
+18,E1,Citrus mitis
+0.1,A,Clivia muniata
+0.5,A,Clivia muniata
+0.2,A,Coffea arabica
+14,D,Coffea arabica
+15,C,Coffea arabica
+6.5,C,Coffea robusta
+25,E1,Coix lacryma-jobi
+1.6,D,Coleus blumei
+8.3,D,Convolvulus arvensis
+9.9,D,Convolvulus arvensis
+15,D,Coronilla varia
+16,D,Coronilla varia
+1.7,C,Corylus avellana
+3.9,D,Corylus avellana
+2,C,Corylus avellana
+13,D,Corylus avellana
+10,E1,Corylus avellana
+2,D,Cryptanthus acaulis
+75,E1,Cucumis sativus
+2.7,A,Cydonia oblongata
+63,E3,Datura stramonium
+2,C,Delphinium
+13,D,Diplotaxis tenuifolia
+4.5,E2,Echeveria secunda
+26,C,Elatostema sessile
+36,D,Epilobium hirsutum
+24,D,Eriophorum angustifolium
+8,D,Eucalyptus pauciflora
+1.6,A,Euonymus japonica
+8,C,Fagus sylvatica
+7,C,Fagus sylvatica
+7,C,Fagus sylvatica
+4.4,D,Fagus sylvatica
+3.7,C,Fagus sylvatica
+2.5,C,Fagus sylvatica
+5.6,D,Fagus sylvatica
+4.1,D,Fagus sylvatica
+6,D,Fagus sylvatica
+5,E1,Fagus sylvatica
+5,C,Fagus sylvatica
+25,D,Festuca arundinacea
+26,D,Festuca halleri
+0.6,A,Ficus benjamina
+0.4,A,Ficus elastica
+0.4,A,Ficus elastica
+65,D,Filipendula ulmaria
+1.7,A,Forsythia suspensa
+32,E1,Fraxinus americana
+4.8,D,Fraxinus excelsior
+1.9,C,Geum urbanum
+2.3,A,Gingko biloba
+23,D,Glycine max
+6,D,Glycine max
+23,E1,Glycine max
+25,E1,Gossypium hirsutum
+12,E2,Gossypium hirsutum
+18,D,Gossypium hirsutum
+12,D,Gossypium hirsutum
+15,E1,Gossypium hirsutum
+5.6,E1,Gossypium hirsutum
+0.8,D,Gossypium lingulata
+0.3,A,Hedera helix
+1,C,Hedera helix
+0.9,C,Hedera helix
+0.6,A,Hedera helix
+0.3,C,Hedera helix
+0.6,C,Hedera helix
+1,D,Hedera helix
+8,E2,Helianthus annuus
+10,D,Hordeum vulgare
+23,D,Hordeum vulgare
+4,C,Hypericum androsaemum
+0.8,A,Ilex aquifolium
+1.1,A,Ilex aquifolium
+20,D,Impatiens noli tangere
+27,D,Impatiens parviflora
+5.4,D,Juglans nigra
+4.1,D,Juglans regia
+2,A,Juglans regia
+25,D,Laburnum anagyroides
+19,C,Lamium galeobdolon
+5,D,Larrea tridentata
+1.8,A,Laurus nobilis
+0,D,Leymus angustus
+1.9,A,Ligustrum vulgare
+6.6,D,Ligustrum vulgare
+1.8,A,Liriodendron tulipifera
+55,E1,Lycopersicon esculentum
+52,E1,Lycopersicon esculentum
+6.7,C,Lysimachia vulgaris
+7.7,A,Maianthemum bifolium
+4.8,A,Maianthemum bifolium
+8,C,Malus sylvestris
+7,D,Medicago sativus
+80,D,Melampyrum pratense
+5.6,C,Mentha aquatica
+107,D,Molinia caerulea
+0.2,A,Monstera deliciosa
+1.1,D,Neoregelia
+0.3,A,Nerium oleander
+4.7,D,Nerium oleander
+2.3,A,Nerium oleander
+13,C,Nicodemia diversifolia
+67,E3,Nicotiana tabacum
+2.4,D,Ochagavia carnea
+6.6,C,Olea europaea
+5.5,A,Olea europaea
+5.1,C,Olea lancea
+0.2,D,Opuntia camanchica
+15,E3,Oryza sativa
+26,E1,Oryza sativa
+23,E1,Oryza sativa
+5.3,D,Oxalis acetosella
+4.3,D,Oxalis acetosella
+8.6,D,Oxytropis pilosa
+10,D,Paeonia officinalis
+13,D,Panicum ramosum
+9.6,E1,Pelargonium zonale
+18,D,Pennisetum americanum
+9.9,D,Peucedanum cerveria
+50,D,Phalaris arundinacea
+52,E1,Phaseolus vulgaris
+5,E3,Phaseolus vulgaris
+0.3,A,Philodendron selloum
+29,E1,Phyllitis scolopendrium
+10,D,Phyllitis scolopendrium
+0.3,D,Picea abies
+6.4,D,Picea abies
+43,E1,Picea abies
+1.4,D,Picea abies
+9,E2,Picea breweriana
+0.8,D,Picea engelmannii
+2,E3,Picea engelmannii
+1.2,D,Picea excelsa
+44,D,Picea glauca
+1.3,D,Picea rubens
+1.1,D,Picea rubens
+24,D,Picea rubens
+47,E2,Picea sitchensis
+1.4,D,Picea sitchensis
+0.6,D,Pinus albicaulis
+1,D,Pinus banksiana
+0.4,D,Pinus cembra
+1.8,D,Pinus cembra
+1,D,Pinus contorta
+0.8,D,Pinus contorta
+0.8,D,Pinus flexilis
+0.6,D,Pinus ponderosa
+5,E2,Pinus ponderosa
+4.6,D,Pinus sylvestris
+1,D,Pinus sylvestris
+3,D,Pinus sylvestris
+1.1,D,Pinus sylvestris
+1.1,D,Pinus sylvestris
+0.8,D,Pitcairnia macrochlamyus
+0.7,D,Pitcairnia undulata
+80,E1,Plantago major
+7.2,A,Polygonatum multiflorum
+5,C,Populus tremula
+6.3,D,Prenanthes purpurea
+5.5,D,Prenanthes purpurea
+0.7,C,Prunus avium
+3.7,D,Prunus avium
+0.3,D,Prunus avium
+3,C,Prunus laurocerasus
+3.3,E1,Prunus laurocerasus
+1.7,A,Prunus laurocerasus
+5,C,Prunus laurocerasus
+0.6,A,Prunus laurocerasus
+0.3,D,Pseudotsuga menziesii
+3,E2,Pseudotsuga menziesii
+10,D,Pulmonaria officinalis
+21,D,Pulmonaria officinalis
+2.2,D,Puya
+1.2,A,Pyrus communis
+2.1,A,Pyrus communis
+7.4,D,Quercus alba
+10,C,Quercus coccifera
+3.6,C,Quercus ilex
+47,E1,Quercus macrocarpa
+4.9,E1,Quercus robur
+2.2,C,Quercus robur
+3,C,Quercus robur
+6.9,D,Quercus robur
+8.9,D,Quercus robur
+7.3,C,Quercus robur
+27,C,Quercus sessiliflora
+11,D,Quercus stellata
+8.4,C,Rhamnus alaternus
+11,C,Rhamnus alnifolius
+11,C,Rhamnus glandulosus
+5,D,Rhododendron ferrugineum
+2.4,E1,Rhododendron hybridum
+15,E1,Rosa
+28,D,Rumex acetosa
+11,D,Ruta graveolens
+0.5,D,Sabal palmetto
+0.1,A,Schefflera actinophylla
+14,D,Sedum maximum
+14,E2,Sedum purpureum
+69,E1,Solanum melongena
+7.1,E1,Sorghum bicolor
+12,D,Sorghum bicolor
+13,D,Sorghum bicolor
+1.9,E1,Sorghum bicolor
+1.2,E1,Sorghum bicolor
+25,E1,Sorghum bicolor
+19,E1,Sorghum bicolor
+9.7,E1,Sorghum bicolor
+8.6,E1,Sorghum bicolor
+4.5,E3,Sorghum dochna
+13,D,Stachys recta
+11,D,Stachys recta
+12,D,Stellaria nemorum
+18,E1,Suaeda maritima
+7.3,D,Tilia cordata
+0.8,D,Tillandsia achyrostachys
+1.4,D,Tillandsia capitata
+1.7,D,Tillandsia karwinskyana
+1.2,D,Tillandsia multicaulis
+1.6,D,Tillandsia polystachia
+27,E1,Trifolium repens
+12,D,Triticum aestivum
+15,D,Triticum aestivum
+15,E3,Triticum aestivum
+9.4,E3,Triticum aestivum
+22,E1,Triticum aestivum
+23,D,Triticum turgidum
+10,D,Triticum
+22,D,Triticum
+24,D,Triticum vulgaris
+7,E2,Tsuga heterophylla
+4.2,C,Urtica dioica
+7.6,D,Vaccinium myrtillus
+12.5,D,Vaccinium uliginosum
+0.1,A,Vanilla planifolia
+28,D,Veronica beccabunga
+6.6,D,Vicia sepum
+4.5,D,Vigna mungo
+3,D,Vigna unguiculata
+0.8,A,Vinca minor
+0.8,D,Vriesea carinata
+4.8,E1,Zea mays
+2.4,E1,Zea mays
+40,E3,Zea mays
+12,D,Zea mays
+14,D,Zea mays
+29,E3,Zea mays
+6.2,E1,Zea mays
+8.9,E1,Zea mays

@@ -76,7 +76,7 @@ similarly at high T. See also Kala. Figure 1.
 Barnard and Bauerle said so too but gave no details.
 Even in very good datasets, g0 and g1 are strongly correlated (Figure 2).
 Across datasets, g0 increases when the model fits poorly (Figure 3), and the width of the confidence interval increases when less variation in a ball-berry coefficient.
-Often g0 is even negative [@heroult2013; @leuning1990], so it is often set to some arbitrary value 
+Often g0 is even negative [@heroult2013; @leuning_modelling_1990], so it is often set to some arbitrary value 
 
 When fitting a Ball-Berry type model, negative values are quite common. A typical approach is to avoid this by setting some value based on guesswork [e.g. @leuning_modelling_1990], which we assume is quite common when inspecting the many rounded values in the review by 
 
@@ -123,10 +123,12 @@ Stomata simply do not close all the way, might stay open regardless of photosynt
 
 ## minimum conductance
 
+Hygen 1951 early work showing MLD method
+
 true cuticular
 MLD method (Figure 6) gives higher values but this is probably more useful for models (since these are whole leaves)
 
-@santrucek Direct measurements showing much higher 'cuticular' conductance of the leaf side with stomata, though stomata were closed. In agreement with @kerstiens1996 who showed 10x higher gmin for stomatal side vs. non-stomatal cuticle.
+santrucek Direct measurements showing much higher 'cuticular' conductance of the leaf side with stomata, though stomata were closed. In agreement with @kerstiens1996 who showed 10x higher gmin for stomatal side vs. non-stomatal cuticle.
 
 @riederer2001 Review on cuticular conductance. gcut is not correlated with cuticle thickness. No reference to stomata. Cuticles are even less permeable than polymers of equivalent thickness used in packaging.
 

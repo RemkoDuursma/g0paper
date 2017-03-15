@@ -1,5 +1,5 @@
 
-pacman::p_load(car, dplyr, tidyr, nlme, nlshelper, tibble, magicaxis, plantecophys)
+pacman::p_load(car, dplyr, tidyr, nlme, nlshelper, tibble, magicaxis, plantecophys, readxl)
 
 
 
@@ -7,6 +7,21 @@ if(!dir.exists("download"))dir.create("download")
 if(!dir.exists("output"))dir.create("output")
 source("R/functions.R")
 source("R/figures.R")
+
+
+# You must find TRY categorical traits yourself and place it in /data
+# I cannot share it here (registration required)
+if(!file.exists("data/trydb.rds")){
+  tryfile <- "data/TRY_Categorical_Traits_Lookup_Table_2012_03_17_TestRelease.xlsx"
+  if(!file.exists(tryfile))stop("Place the TRY look up table in data/.")
+  trydb <- read_excel(tryfile)
+  trydb <- trydb[,c("AccSpeciesName","PhylogeneticGroup","PlantGrowthForm","LeafType","LeafPhenology")]
+  saveRDS(trydb, "data/trydb.rds")
+} else {
+  trydb <- readRDS("data/trydb.rds")
+}
+
+
 
 # Lin et al. 2015
 linfn <- "download/lin2015.csv"
@@ -58,12 +73,16 @@ gdfr <- bind_rows(kerst, lombar, g0s) %>%
   mutate(method = factor(method, levels=c("gcut_isol","gcut_seal","gmin","gnight", "g0")))
 
 
+kerst2 <- inner_join(kerst, trydb, by=c("species" = "AccSpeciesName"))
+
+
 # Blackman, WTC4
 wtc4gmin <- read.csv("data/wtc4_gmin_detached.csv") %>%
   rename(gmin = gmin_mmol_m2_s) %>%
   mutate(ch_temp_fac = as.factor(ch_temp))
 
 wtc4gdark <- read.csv("data/wtc4_gnight.csv")
+
 
 
 
