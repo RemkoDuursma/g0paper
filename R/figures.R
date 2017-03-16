@@ -88,7 +88,16 @@ figure_gmin_review_3 <- function(){
   plot_kerst2("PhylogeneticGroup", "gmin", subset(kerst2, PlantGrowthForm == "tree"))
   #plot_kerst2("PhylogeneticGroup", "gmin")
   
+  kerst2$group <- as.character(kerst2$PlantGrowthForm)
+  kerst2$group[which(kerst2$PlantGrowthForm == "tree")] <- as.character(kerst2$PhylogeneticGroup)[which(kerst2$PlantGrowthForm == "tree")]
+  kerst2$group <- factor(kerst2$group, levels=c("graminoid","herb","shrub","Angiosperm","Gymnosperm"))
+  plot_kerst2("group", "gmin")
+  
+  
 }
+
+
+
 
 figure_g0g1_cor <- function(lin2015){
   
