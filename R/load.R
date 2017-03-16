@@ -48,12 +48,17 @@ lin2015a <- group_by(lin2015, fitgroup) %>%
 lin2015coef <- fits_lin2015(lin2015a)
 
 
+# Riederer and Schreiber 2001
+rieder <- read.csv("data/riederer2001_table1.csv") %>%
+  mutate(gmin = 10^5 * 10^-3 * gmin / 41)
+
 # Kerstiens 1996
 kerst <- read.csv("data/kerstiens1996_table1.csv", stringsAsFactors = FALSE) %>%
   filter(gmin > 0,
          method %in% c("A","C","D")) %>%
   mutate(method = dplyr::recode(method, A="gcut_isol", C="gcut_seal", D="gmin"),
-         gmin = 10^5 * 10^-3 * gmin / 40)   # convert to mmol m-2 s-1 assume 40 mol m-3
+         gmin = 2 * 10^5 * 10^-3 * gmin / 41)   # convert to mmol m-2 s-1 assume 41 mol m-3
+                # 2 because gmin was expressed as per total leaf area.
 
 # Miner et al. 2016
 miner <- read.csv("data/Miner_table1.csv")
@@ -101,6 +106,15 @@ wtc4gmin <- read.csv("data/wtc4_gmin_detached.csv") %>%
 wtc4gdark <- read.csv("data/wtc4_gnight.csv")
 
 
+# From Lin2015, data where A < threshold.
+minags <- group_by(lin2015, fitgroup) %>%
+  summarize(
+    Amin = min(Photo, na.rm=TRUE),
+    gsmin = min(Cond, na.rm=TRUE),
+    Qrange = max(PARin) - min(PARin),
+    Pathway = unique(Pathway)[1]
+  ) %>%
+  filter(Amin < 2)
 
 
 

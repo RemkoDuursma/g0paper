@@ -46,6 +46,24 @@ Importance of stomatal conductance. Prevalence of the Ball-Berry model, and g0. 
 
 
 
+# Methods
+
+## Data
+
+Kerstiens 1996.
+Permeances were converted to molar fluxes assuming 41 mol m-3 (but see Kerstiens for a note on this - it is apparently not appropriate).
+Data from Riederer2001 not included because overlap with Kerstiens; but reported values very similar.
+
+```{r, echo=FALSE, eval=FALSE}
+with(subset(kerst, method == "gcut_isol"), summary(gmin))
+with(subset(rieder, gmin < 100000), summary(gmin))
+```
+
+Compilation of night-time conductance from lombardozzi.
+
+Minimum conductance from Blackman (WTC4). See Drake for WTC4 methods.
+
+
 # Do we need g~0~ in simulations of water and carbon fluxes?
 
 
@@ -98,6 +116,9 @@ g0?
 
 
 
+## Cuticular 
+
+Not really a conductance, since water does not diffuse as a gas through the cuticle. Instead it dissolves into the medium of the cuticle, diffuses through the solid matrix, and is desorped at the outer edge of the cuticle. The main barrier to diffusion is actually a thin layer at the leaf surface, and hence gcut does not depend on the thickness of the cuticle (Rieder Schreiber 1996).
 
 ## nighttime
 Nighttime conductance not necessarily same as minimum conductance

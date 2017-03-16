@@ -25,6 +25,70 @@ figure_gmin_review <- function(gdfr){
   
 }
 
+figure_gmin_review_2 <- function(gdfr, minags){
+  par(mar=c(3,5,1,0.5), cex.lab=1.2)
+  fit <- lm(log10(gmin) ~ method-1, data=gdfr)
+  cis <- confint(fit)
+  quans <- sapply(split(gdfr, gdfr$method), function(x)quantile(log10(x$gmin), probs=c(0.05, 0.95)))
+  gmins <- with(gdfr, tapply(log10(gmin), method, mean, na.rm=TRUE))
+  
+  plot(1:5, 10^gmins, pch=19, cex=1.2, xlab="",
+       axes=FALSE,
+       panel.first=segments(x0=1:5, x1=1:5, y0=10^quans[1,], y1=10^quans[2,], col="grey"),
+       ylim=c(0,50),
+       xlim=c(0.5,6.5),
+       ylab=expression(Conductance~~(mmol~m^-2~s^-1)))
+  axis(1, at=1:6, labels=c(expression(g["cut,isol"]),
+                           expression(g["min,seal"]),
+                           expression(g[min]),
+                           expression(g[dark]),
+                           expression(g[0]),
+                           expression(g["s,low A"])))
+  axis(2)
+  box()
+  arrows(x0=1:5, x1=1:5, y0=10^cis[,1], y1=10^cis[,2], angle=90, length=0.1, code=3)
+  
+  quang <- quantile(minags$gsmin, probs=c(0.05, 0.95))
+  points(6, 1000*mean(minags$gsmin), pch=19, cex=1.2,
+         panel.first=segments(x0=6, x1=6, y0=1000*quang[1], y1=1000*quang[2], col="grey"))
+  cig <- 1000*(mean(minags$gsmin) + c(-2,2)*sd(minags$gsmin)/sqrt(nrow(minags)))
+  arrows(x0=6, x1=6, y0=cig[1], y1=cig[2], angle=90, length=0.1, code=3)
+}
+
+
+figure_gmin_review_3 <- function(){
+  
+  library(multcomp)
+  
+  plot_kerst2 <- function(yvar = "PhylogeneticGroup", meth = "gcut_isol", data=kerst2, ...){
+    
+    data <- data[data$method == meth,]
+    data$yvar <- as.factor(data[,yvar])
+    
+    fit <- lm(log10(gmin) ~ yvar - 1, data=data)
+    ci <- 10^confint(fit)
+    mn <- 10^coef(fit)
+    
+    g <- glht(fit, linfct=mcp(yvar = "Tukey"))
+    lets <- cld(g)$mcletters$Letters
+    
+    n <- length(mn)
+    plot(1:n, mn, pch=19, cex=1.1, ylim=c(0, max(ci)+0.05*max(ci)), axes=FALSE,
+         xlim=c(0.5, n+0.5), ...)
+    axis(1, at=1:n, labels=levels(data$yvar))
+    arrows(x0=1:n, x1=1:n, y0=ci[,1], y1=ci[,2], angle=90, length=0.1, code=3)
+    text(x=1:n, y=ci[,2], lets, pos=3)
+    axis(2)
+    box()
+  }
+  
+  
+  
+  plot_kerst2("PlantGrowthForm", "gmin")
+  plot_kerst2("PhylogeneticGroup", "gmin", subset(kerst2, PlantGrowthForm == "tree"))
+  #plot_kerst2("PhylogeneticGroup", "gmin")
+  
+}
 
 figure_g0g1_cor <- function(lin2015){
   
@@ -92,15 +156,7 @@ figure_R2g0 <- function(lin2015coef, miner){
 figure_amings <- function(lin2015){
   
   par(mar=c(5,5,1,1), cex.axis=0.9, cex.lab=1.1)
-  minags <- group_by(lin2015, fitgroup) %>%
-    summarize(
-      Amin = min(Photo, na.rm=TRUE),
-      gsmin = min(Cond, na.rm=TRUE),
-      Qrange = max(PARin) - min(PARin),
-      Pathway = unique(Pathway)[1]
-    ) %>%
-    filter(Amin < 5)
-  
+
   with(minags, plot(Amin, gsmin, pch=16,
                     ylim=c(0,0.15),
                     xlab=expression(min~A~~(mu*mol~m^-2~s^-1)),
