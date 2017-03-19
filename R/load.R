@@ -1,7 +1,7 @@
 
-pacman::p_load(car, dplyr, tidyr, nlme, nlshelper, 
+pacman::p_load(Hmisc, car, dplyr, tidyr, nlme, nlshelper, 
                forcats, tibble, magicaxis, 
-               plantecophys, readxl)
+               plantecophys, readxl, multcomp)
 
 
 
@@ -59,6 +59,14 @@ kerst <- read.csv("data/kerstiens1996_table1.csv", stringsAsFactors = FALSE) %>%
   mutate(method = dplyr::recode(method, A="gcut_isol", C="gcut_seal", D="gmin"),
          gmin = 2 * 10^5 * 10^-3 * gmin / 41)   # convert to mmol m-2 s-1 assume 41 mol m-3
                 # 2 because gmin was expressed as per total leaf area.
+# Notes:
+# A - astomatous cuticle, removed from leaf (permeance)
+# B - detached leaves, stomatal side sealed
+# C - whole leaves, stomatal side sealed (not clear when B or C, so all sealed leaves = C)
+# D - mass loss of detached leaves (gmin)
+# E1 - gnight / gdark
+# E2 - minimum conductance measured during the day (vague!)
+# E3 - presumed stomatal closure (v high CO2, ABA, drought, VPD) (vague!)
 
 # Miner et al. 2016
 miner <- read.csv("data/Miner_table1.csv")

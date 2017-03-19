@@ -56,9 +56,7 @@ figure_gmin_review_2 <- function(gdfr, minags){
 }
 
 
-figure_gmin_review_3 <- function(){
-  
-  library(multcomp)
+figure_gmin_review_3 <- function(kerst2){
   
   plot_kerst2 <- function(yvar = "PhylogeneticGroup", meth = "gcut_isol", data=kerst2, ...){
     
@@ -74,25 +72,28 @@ figure_gmin_review_3 <- function(){
     
     n <- length(mn)
     plot(1:n, mn, pch=19, cex=1.1, ylim=c(0, max(ci)+0.05*max(ci)), axes=FALSE,
-         xlim=c(0.5, n+0.5), ...)
-    axis(1, at=1:n, labels=levels(data$yvar))
+         xlim=c(0.7, n+0.3), ...)
+    axis(1, at=1:n, labels=capitalize(levels(data$yvar)))
     arrows(x0=1:n, x1=1:n, y0=ci[,1], y1=ci[,2], angle=90, length=0.1, code=3)
     text(x=1:n, y=ci[,2], lets, pos=3)
     axis(2)
     box()
   }
   
+  # plot_kerst2("PlantGrowthForm", "gmin")
+  # plot_kerst2("PhylogeneticGroup", "gmin", subset(kerst2, PlantGrowthForm == "tree"))
+  # #plot_kerst2("PhylogeneticGroup", "gmin")
   
-  
-  plot_kerst2("PlantGrowthForm", "gmin")
-  plot_kerst2("PhylogeneticGroup", "gmin", subset(kerst2, PlantGrowthForm == "tree"))
-  #plot_kerst2("PhylogeneticGroup", "gmin")
-  
+  # Combine angio/gymno with growth form
   kerst2$group <- as.character(kerst2$PlantGrowthForm)
-  kerst2$group[which(kerst2$PlantGrowthForm == "tree")] <- as.character(kerst2$PhylogeneticGroup)[which(kerst2$PlantGrowthForm == "tree")]
+  kerst2$group[which(kerst2$PlantGrowthForm == "tree")] <- 
+    as.character(kerst2$PhylogeneticGroup)[which(kerst2$PlantGrowthForm == "tree")]
   kerst2$group <- factor(kerst2$group, levels=c("graminoid","herb","shrub","Angiosperm","Gymnosperm"))
-  plot_kerst2("group", "gmin")
   
+  par(mar=c(4,5,2,2), mgp=c(2.5,0.5,0), tcl=-0.2, cex.lab=1.2, cex.axis=0.8)
+  plot_kerst2("group", "gmin",
+              xlab="", ylab=expression(g[min]~~(mmol~m^-2~s^-1)))
+  mtext(side=1, text="Tree", at=4.5, line=2, cex=1)
   
 }
 
@@ -151,6 +152,7 @@ figure_R2g0 <- function(lin2015coef, miner){
   abline(h=0)
   l <- loess(g0 ~ R2, data=lin2015coef, span=0.8)
   plot_loess(l, add=TRUE, band=FALSE, lwd=2, col="darkgrey")
+  legend("topright", "Lin et al. 2015", bty='n', cex=0.8)
   
   with(miner,plot(R2, g0, pch=16, ylim=c(-0.1, 0.3), xlim=c(0,1),
                   xlab=expression(R^2),
@@ -158,6 +160,7 @@ figure_R2g0 <- function(lin2015coef, miner){
   abline(h=0)
   l <- loess(g0 ~ R2, data=miner, span=0.8)
   plot_loess(l, add=TRUE, band=FALSE, lwd=2, col="darkgrey")
+  legend("topright", "Miner et al. 2017", bty='n', cex=0.8)
   
 }
 
@@ -301,5 +304,40 @@ figure_wtc4_gmin <- function(wtc4gmin, wtc4gdark){
 }
 
 
+
+figure_wtc4_gmin_2 <- function(wtc4gmin){
+  
+  #l <- layout(matrix(c(1,2), ncol=2), widths=c(2,1))
+  
+  par(mar=c(4,4,1,1), mgp=c(2.5, 0.5, 0), tcl=0.1, cex.axis=0.9, 
+      cex.lab=1.2)
+  wtc4gmina <- group_by(wtc4gmin, chamber, ch_temp) %>%
+    summarize(gmin = mean(gmin),
+              growth_T = unique(growth_T)) %>%
+    group_by(ch_temp, growth_T) %>%
+    summarize(gmin_mean = mean(gmin),
+              n = n(),
+              se = sd(gmin)/sqrt(n),
+              gmin_lcl = gmin_mean - qt(0.975, n-1)*se,
+              gmin_ucl = gmin_mean + qt(0.975, n-1)*se
+    )
+  
+  palette(c("blue2", "red2"))
+  
+  with(wtc4gmina, {
+    plot(ch_temp, gmin_mean, ylim=c(0,12), pch=19, col=growth_T, cex=1.2,
+         xlab=expression(Measurement~T~~(degree*C)),
+         ylab=expression(g[min]~~(mmol~m^-2~s^-1)),
+         xlim=c(17,28), axes=FALSE)
+    arrows(x0=ch_temp, x1=ch_temp, y0=gmin_mean - se, y1=gmin_mean + se, angle=90, code=3, length=0.07, col=growth_T)
+  })
+  axis(2)
+  axis(1, at=seq(17.5, 27.5, by=2.5))
+  box()
+  legend("topleft", c("Ambient",expression(Ambient~+~3~degree*C)), pch=19, pt.cex=1.1, col=palette(), 
+         title="Growth T", bty='n')
+  
+  
+}
 
 
