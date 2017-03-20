@@ -99,6 +99,8 @@ Often g0 is even negative [@heroult2013; @leuning_modelling_1990], so it is ofte
 When fitting a Ball-Berry type model, negative values are quite common. A typical approach is to avoid this by setting some value based on guesswork [e.g. @leuning_modelling_1990], which we assume is quite common when inspecting the many rounded values in the review by 
 
 
+Water travels more freely across the cuticle than CO2 [@boyer1997; @boyer2015]
+
 # Components of g0
 
 - gcut (cuticle without stomata)
@@ -110,6 +112,9 @@ gdark > gmin > gcut
 g0?
 
 
+@schuster2016 thermal tolerance and gmin relationship across species. 
+
+
 @egea2011 Assumes g0 is constant, does not vary with water stress, and that it represents a ‘cuticular conductance’.
 
 @waldencoleman2013 Very interesting! gdark is different from gmin. Whole-plant WUE correlated with gdark (but not gmin). Lots of references on gdark and gmin and their variation. Closed system to measure gdark+gmin; gmin on detached leaves.
@@ -118,7 +123,13 @@ g0?
 
 ## Cuticular 
 
-Not really a conductance, since water does not diffuse as a gas through the cuticle. Instead it dissolves into the medium of the cuticle, diffuses through the solid matrix, and is desorped at the outer edge of the cuticle. The main barrier to diffusion is actually a thin layer at the leaf surface, and hence gcut does not depend on the thickness of the cuticle (Rieder Schreiber 1996).
+Not really a conductance, since water does not diffuse as a gas through the cuticle. Instead it dissolves into the medium of the cuticle, diffuses through the solid matrix, and is desorped at the outer edge of the cuticle. The main barrier to diffusion is actually a thin layer at the leaf surface, and hence gcut does not depend on the thickness of the cuticle  [@riederer2001].
+
+gcut is probably too low in the way it is measured (as a permeance), due to low water content of the cuticle in those conditions [@kerstiens1996]
+
+
+gseal on average not different from gcut - but for individual studies they frequently differ a lot indicating variable role of stomatal contribution (santrucek)
+
 
 ## nighttime
 Nighttime conductance not necessarily same as minimum conductance
@@ -168,6 +179,9 @@ conductance: cuticle + closed stomata + cracks, broken stomata
 
 - gmin as a plastic trait. Temperature response generally unresolved [@kerstiens2006]
 - @riederer2001 correlation between temperature and gcut (non-stomatal cuticles)
+- @schuster2016 correlation temperature, gcut AND gmin for Nerium oleander (page 59). T range much wider than Blackman though... But Schuster gmin not different from gcut at most temperatures, which is a bit strange too.
+page 90 few gmin values from drying curves that we can add.
+
 - @burghardt2003 gmin review
 - @schreiber1996 cuticle review
 
