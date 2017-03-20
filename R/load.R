@@ -125,4 +125,10 @@ minags <- group_by(lin2015, fitgroup) %>%
   filter(Amin < 2)
 
 
+# Rosana Lopez gmin data
+lopez <- read.csv("data/lopez_gmin_hakea.csv") %>% group_by(species, treatment) %>%
+  summarize(gmin = mean(gmin))
+
+lopw <- reshape(as.data.frame(lopez), direction="wide", idvar="species", timevar="treatment")
+
 

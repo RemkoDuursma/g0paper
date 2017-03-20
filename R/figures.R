@@ -341,3 +341,26 @@ figure_wtc4_gmin_2 <- function(wtc4gmin){
 }
 
 
+
+figure_hakea_gmin <- function(lopw){
+  
+  abbrev_hak <- function(x)gsub("hakea","H.",x)
+  
+  lopw2 <- lopw[order(lopw$gmin.w),]
+  lopw2 <- subset(lopw2, !is.na(gmin.d))
+  
+  bar_cols <- c("lightgrey","black")
+  par(mar=c(7,4,1,1), las=3, yaxs="i",
+      mgp=c(2.5, 0.5,0), tcl=0.2, cex.axis=0.9, cex.lab=1.1)
+  barplot(t(as.matrix(lopw2[,2:3])), beside=T,
+          ylim=c(0,1.4),
+          col=bar_cols,
+          names.arg=abbrev_hak(lopw2$species),
+          ylab=expression(g[min]~~(mmol~m^-2~s^-1)))
+  box()
+  legend("topleft", c("Well-watered","Drought stress"), fill=bar_cols,
+         bty='n', cex=0.9)
+  
+}
+
+
