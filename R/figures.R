@@ -71,10 +71,10 @@ figure_gmin_review_3 <- function(kerst2){
     lets <- cld(g)$mcletters$Letters
     
     n <- length(mn)
-    plot(1:n, mn, pch=19, cex=1.1, ylim=c(0, max(ci)+0.05*max(ci)), axes=FALSE,
+    plot(1:n, mn, pch=19, cex=1.1, ylim=c(0, max(ci)+0.1*max(ci)), axes=FALSE,
          xlim=c(0.7, n+0.3), ...)
     axis(1, at=1:n, labels=capitalize(levels(data$yvar)))
-    arrows(x0=1:n, x1=1:n, y0=ci[,1], y1=ci[,2], angle=90, length=0.1, code=3)
+    arrows(x0=1:n, x1=1:n, y0=ci[,1], y1=ci[,2], angle=90, length=0.05, code=3)
     text(x=1:n, y=ci[,2], lets, pos=3)
     axis(2)
     box()
@@ -90,10 +90,12 @@ figure_gmin_review_3 <- function(kerst2){
     as.character(kerst2$PhylogeneticGroup)[which(kerst2$PlantGrowthForm == "tree")]
   kerst2$group <- factor(kerst2$group, levels=c("graminoid","herb","shrub","Angiosperm","Gymnosperm"))
   
-  par(mar=c(4,5,2,2), mgp=c(2.5,0.5,0), tcl=-0.2, cex.lab=1.2, cex.axis=0.8)
+  par(mar=c(6.5,4,1,1), mgp=c(2.5,0.5,0), tcl=-0.2, 
+      las=3, yaxs="i",
+      cex.lab=1.2, cex.axis=0.8)
   plot_kerst2("group", "gmin",
               xlab="", ylab=expression(g[min]~~(mmol~m^-2~s^-1)))
-  mtext(side=1, text="Tree", at=4.5, line=2, cex=1)
+  #mtext(side=1, text="Tree", at=4.5, line=2, cex=1)
   
 }
 
@@ -151,7 +153,7 @@ figure_R2g0 <- function(lin2015coef, miner){
   })
   abline(h=0)
   l <- loess(g0 ~ R2, data=lin2015coef, span=0.8)
-  plot_loess(l, add=TRUE, band=FALSE, lwd=2, col="darkgrey")
+  plot_loess(l, add=TRUE, band=TRUE, lwd=2, col="darkgrey")
   legend("topright", "Lin et al. 2015", bty='n', cex=0.8)
   
   with(miner,plot(R2, g0, pch=16, ylim=c(-0.1, 0.3), xlim=c(0,1),
@@ -159,7 +161,7 @@ figure_R2g0 <- function(lin2015coef, miner){
                   ylab=expression(g[0]~~(mol~m^-2~s^-1))))
   abline(h=0)
   l <- loess(g0 ~ R2, data=miner, span=0.8)
-  plot_loess(l, add=TRUE, band=FALSE, lwd=2, col="darkgrey")
+  plot_loess(l, add=TRUE, band=TRUE, lwd=2, col="darkgrey")
   legend("topright", "Miner et al. 2017", bty='n', cex=0.8)
   
 }
@@ -309,8 +311,8 @@ figure_wtc4_gmin_2 <- function(wtc4gmin){
   
   #l <- layout(matrix(c(1,2), ncol=2), widths=c(2,1))
   
-  par(mar=c(4,4,1,1), mgp=c(2.5, 0.5, 0), tcl=0.1, cex.axis=0.9, 
-      cex.lab=1.2)
+  par(mar=c(4,4,1,1), mgp=c(2.5, 0.5, 0), tcl=0.2, cex.axis=0.9, 
+      cex.lab=1.2, yaxs="i")
   wtc4gmina <- group_by(wtc4gmin, chamber, ch_temp) %>%
     summarize(gmin = mean(gmin),
               growth_T = unique(growth_T)) %>%
@@ -329,12 +331,15 @@ figure_wtc4_gmin_2 <- function(wtc4gmin){
          xlab=expression(Measurement~T~~(degree*C)),
          ylab=expression(g[min]~~(mmol~m^-2~s^-1)),
          xlim=c(17,28), axes=FALSE)
-    arrows(x0=ch_temp, x1=ch_temp, y0=gmin_mean - se, y1=gmin_mean + se, angle=90, code=3, length=0.07, col=growth_T)
+    arrows(x0=ch_temp, x1=ch_temp, y0=gmin_mean - se, y1=gmin_mean + se, 
+           angle=90, code=3, length=0.07, col=growth_T)
   })
   axis(2)
   axis(1, at=seq(17.5, 27.5, by=2.5))
   box()
-  legend("topleft", c("Ambient",expression(Ambient~+~3~degree*C)), pch=19, pt.cex=1.1, col=palette(), 
+  legend("topleft", c("Ambient",expression(Ambient~+~3~degree*C)), 
+         pch=19, pt.cex=1.1, col=palette(), 
+         cex=0.8,
          title="Growth T", bty='n')
   
   
