@@ -71,10 +71,10 @@ figure_gmin_review_3 <- function(kerst2){
     lets <- cld(g)$mcletters$Letters
     
     n <- length(mn)
-    plot(1:n, mn, pch=19, cex=1.1, ylim=c(0, max(ci)+0.05*max(ci)), axes=FALSE,
+    plot(1:n, mn, pch=19, cex=1.1, ylim=c(0, max(ci)+0.1*max(ci)), axes=FALSE,
          xlim=c(0.7, n+0.3), ...)
     axis(1, at=1:n, labels=capitalize(levels(data$yvar)))
-    arrows(x0=1:n, x1=1:n, y0=ci[,1], y1=ci[,2], angle=90, length=0.1, code=3)
+    arrows(x0=1:n, x1=1:n, y0=ci[,1], y1=ci[,2], angle=90, length=0.05, code=3)
     text(x=1:n, y=ci[,2], lets, pos=3)
     axis(2)
     box()
@@ -90,19 +90,21 @@ figure_gmin_review_3 <- function(kerst2){
     as.character(kerst2$PhylogeneticGroup)[which(kerst2$PlantGrowthForm == "tree")]
   kerst2$group <- factor(kerst2$group, levels=c("graminoid","herb","shrub","Angiosperm","Gymnosperm"))
   
-  par(mar=c(4,5,2,2), mgp=c(2.5,0.5,0), tcl=-0.2, cex.lab=1.2, cex.axis=0.8)
+  par(mar=c(6.5,4,1,1), mgp=c(2.5,0.5,0), tcl=-0.2, 
+      las=3, yaxs="i",
+      cex.lab=1.2, cex.axis=0.8)
   plot_kerst2("group", "gmin",
               xlab="", ylab=expression(g[min]~~(mmol~m^-2~s^-1)))
-  mtext(side=1, text="Tree", at=4.5, line=2, cex=1)
+  #mtext(side=1, text="Tree", at=4.5, line=2, cex=1)
   
 }
 
 
 
 
-figure_g0g1_cor <- function(lin2015){
+figure_g0g1_cor <- function(lin2015, group, legend=FALSE){
   
-  x <- subset(lin2015, fitgroup == "Nicolas Martin-StPaul_Quercus ilex_StPaul_Puechabon")
+  x <- subset(lin2015, fitgroup == group)
   
   # for bootCase to work
   assign("x",x,envir=.GlobalEnv)
@@ -117,8 +119,11 @@ figure_g0g1_cor <- function(lin2015){
   
   par(mfrow=c(1,2), mar=c(4,4,1,1), mgp=c(2.5,0.5,0), tcl=0.2, las=1,
       cex.lab=1.1, cex.axis=0.9)
-  with(x, plot(BBopti, Cond, ylim=c(0, 0.15),
+  with(x, plot(BBopti, Cond, 
                xlim=c(0,0.04),
+               ylim=c(0,0.15),
+               # ylim=c(0, max(Cond)),
+               # xlim=c(0,max(BBopti)),
                panel.first=add_regres_line(fit),
                xlab=expression(A/(C[a]*sqrt(D))),
                ylab=expression(g[s]~(mol~m^-2~s^-1)),
@@ -128,10 +133,14 @@ figure_g0g1_cor <- function(lin2015){
   plot(el, type='l', lty=3, 
        xlab=expression(g[0]~~(mol~m^-2~s^-1)), 
        ylab=expression(g[1]~~(kPa^-0.5)),
+       xlim=c(0,0.025),
        ylim=c(3,5))
+       # xlim=c(min(b[,1]), max(b[,1])),
+       # ylim=c(min(b[,2]), max(b[,2])))
   points(b, pch=16, cex=0.3, col="dimgrey")
   points(coef(fit)[1],coef(fit)[2], pch=19)
   
+  if(legend)legend("topright", group, bty='n', cex=0.6)
 }
 
 
@@ -151,7 +160,7 @@ figure_R2g0 <- function(lin2015coef, miner){
   })
   abline(h=0)
   l <- loess(g0 ~ R2, data=lin2015coef, span=0.8)
-  plot_loess(l, add=TRUE, band=FALSE, lwd=2, col="darkgrey")
+  plot_loess(l, add=TRUE, band=TRUE, lwd=2, col="darkgrey")
   legend("topright", "Lin et al. 2015", bty='n', cex=0.8)
   
   with(miner,plot(R2, g0, pch=16, ylim=c(-0.1, 0.3), xlim=c(0,1),
@@ -159,7 +168,7 @@ figure_R2g0 <- function(lin2015coef, miner){
                   ylab=expression(g[0]~~(mol~m^-2~s^-1))))
   abline(h=0)
   l <- loess(g0 ~ R2, data=miner, span=0.8)
-  plot_loess(l, add=TRUE, band=FALSE, lwd=2, col="darkgrey")
+  plot_loess(l, add=TRUE, band=TRUE, lwd=2, col="darkgrey")
   legend("topright", "Miner et al. 2017", bty='n', cex=0.8)
   
 }
@@ -184,18 +193,24 @@ figure_sim <- function(){
       cex.axis=0.9, cex.lab=1.1)
   
   g1 <- 4
-  g0 <- 0.03
+  g0_1 <- 0.01
+  g0_2 <- 0.03
   
   lty0 <- 1
   lty1 <- 5
+  lty2 <- 4
   col0 <- "black"
   col1 <- "black"
+  col2 <- "black"
   
   r0 <- Photosyn(PPFD=seq(20,1000, length=101),
                  g1=g1, g0=0, Vcmax=70, Jmax=140,
                  VPD=2, Tleaf=20, Ca=400)
   r1 <- Photosyn(PPFD=seq(20,1000, length=101),
-                 g1=g1, g0=g0, Vcmax=70, Jmax=140,
+                 g1=g1, g0=g0_1, Vcmax=70, Jmax=140,
+                 VPD=2, Tleaf=20, Ca=400)
+  r2 <- Photosyn(PPFD=seq(20,1000, length=101),
+                 g1=g1, g0=g0_2, Vcmax=70, Jmax=140,
                  VPD=2, Tleaf=20, Ca=400)
   
   with(r0, plot(PPFD, ALEAF/GS, type='l', ylim=c(0,80), col=col0, lty=lty0,
@@ -203,9 +218,12 @@ figure_sim <- function(){
                 ylab=expression(A[n]/g[s]~~(mu*mol~mol^-1))
                 ))
   with(r1, lines(PPFD, ALEAF/GS, col=col1, lty=lty1))
+  with(r2, lines(PPFD, ALEAF/GS, col=col2, lty=lty2))
   
-  legend("bottomright", c(expression(g[0] == 0), expression(g[0] == 0.03)),
-         lty=c(lty0, lty1), bty='n')
+  legend("bottomright", c(expression(g[0] == 0), 
+                          expression(g[0] == 0.01),
+                          expression(g[0] == 0.03)),
+         lty=c(lty0, lty1, lty2), bty='n')
   
   with(r0, plot(PPFD, Ci, type='l',
                 xlab=expression(PPFD~~(mu*mol~m^-2~s^-1)),
@@ -213,6 +231,7 @@ figure_sim <- function(){
                 col=col0, lty=lty0,
                 ylim=c(250,400)))
   with(r1, lines(PPFD, Ci, col=col1, lty=lty1))
+  with(r2, lines(PPFD, Ci, col=col2, lty=lty2))
   
   tleafs <- seq(10,45,length=101)
   vpds <- 0.000605 * tleafs^2.39
@@ -220,7 +239,10 @@ figure_sim <- function(){
                  g1=g1, g0=0, Vcmax=70, Jmax=140,
                  VPD=vpds, Tleaf=tleafs, Ca=400)
   r1 <- Photosyn(PPFD=1500,
-                 g1=g1, g0=g0, Vcmax=70, Jmax=140,
+                 g1=g1, g0=g0_1, Vcmax=70, Jmax=140,
+                 VPD=vpds, Tleaf=tleafs, Ca=400)
+  r2 <- Photosyn(PPFD=1500,
+                 g1=g1, g0=g0_2, Vcmax=70, Jmax=140,
                  VPD=vpds, Tleaf=tleafs, Ca=400)
   
   with(r0, plot(Tleaf, ELEAF, type='l', 
@@ -229,6 +251,7 @@ figure_sim <- function(){
                 col=col0, lty=lty0,
                 ylim=c(0,10)))
   with(r1, lines(Tleaf, ELEAF, col=col1, lty=lty1))
+  with(r2, lines(Tleaf, ELEAF, col=col2, lty=lty2))
   
   with(r0, plot(VPD, Ci, type='l', 
                 xlab="VPD (kPa)",
@@ -236,7 +259,7 @@ figure_sim <- function(){
                 col=col0, lty=lty0,
                 ylim=c(0,400)))
   with(r1, lines(VPD, Ci, col=col1, lty=lty1))
-  
+  with(r2, lines(VPD, Ci, col=col2, lty=lty2))
 }
 
 
@@ -309,8 +332,8 @@ figure_wtc4_gmin_2 <- function(wtc4gmin){
   
   #l <- layout(matrix(c(1,2), ncol=2), widths=c(2,1))
   
-  par(mar=c(4,4,1,1), mgp=c(2.5, 0.5, 0), tcl=0.1, cex.axis=0.9, 
-      cex.lab=1.2)
+  par(mar=c(4,4,1,1), mgp=c(2.5, 0.5, 0), tcl=0.2, cex.axis=0.9, 
+      cex.lab=1.2, yaxs="i")
   wtc4gmina <- group_by(wtc4gmin, chamber, ch_temp) %>%
     summarize(gmin = mean(gmin),
               growth_T = unique(growth_T)) %>%
@@ -329,12 +352,15 @@ figure_wtc4_gmin_2 <- function(wtc4gmin){
          xlab=expression(Measurement~T~~(degree*C)),
          ylab=expression(g[min]~~(mmol~m^-2~s^-1)),
          xlim=c(17,28), axes=FALSE)
-    arrows(x0=ch_temp, x1=ch_temp, y0=gmin_mean - se, y1=gmin_mean + se, angle=90, code=3, length=0.07, col=growth_T)
+    arrows(x0=ch_temp, x1=ch_temp, y0=gmin_mean - se, y1=gmin_mean + se, 
+           angle=90, code=3, length=0.07, col=growth_T)
   })
   axis(2)
   axis(1, at=seq(17.5, 27.5, by=2.5))
   box()
-  legend("topleft", c("Ambient",expression(Ambient~+~3~degree*C)), pch=19, pt.cex=1.1, col=palette(), 
+  legend("topleft", c("Ambient",expression(Ambient~+~3~degree*C)), 
+         pch=19, pt.cex=1.1, col=palette(), 
+         cex=0.8,
          title="Growth T", bty='n')
   
   
