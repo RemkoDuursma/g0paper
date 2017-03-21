@@ -1,7 +1,8 @@
 
 pacman::p_load(Hmisc, car, dplyr, tidyr, nlme, nlshelper, 
                forcats, tibble, magicaxis, 
-               plantecophys, readxl, multcomp)
+               plantecophys, readxl, multcomp,
+               reporttools)
 
 
 
@@ -129,6 +130,26 @@ minags <- group_by(lin2015, fitgroup) %>%
 lopez <- read.csv("data/lopez_gmin_hakea.csv") %>% group_by(species, treatment) %>%
   summarize(gmin = mean(gmin))
 
+# some meta data for this dataset (leaf form, MAP)
+lopmet <- read.csv("data/lopez_gmin_hakea_meta.csv")
+
+# Wide format
 lopw <- reshape(as.data.frame(lopez), direction="wide", idvar="species", timevar="treatment")
+
+lopw <- dplyr::select(lopmet, species, leaf.form) %>% distinct() %>%
+  right_join(lopw, by="species")
+
+# Version 2; by population merged with lopmet (because MAP varies by population)
+lopez2 <- read.csv("data/lopez_gmin_hakea.csv") %>% group_by(species, population, treatment) %>%
+  summarize(gmin = mean(gmin)) %>% 
+  inner_join(lopmet, by=c("species","population"))
+
+
+
+
+
+
+
+
 
 

@@ -378,7 +378,8 @@ figure_hakea_gmin <- function(lopw){
   bar_cols <- c("lightgrey","black")
   par(mar=c(7,4,1,1), las=3, yaxs="i",
       mgp=c(2.5, 0.5,0), tcl=0.2, cex.axis=0.9, cex.lab=1.1)
-  barplot(t(as.matrix(lopw2[,2:3])), beside=T,
+  m <- t(as.matrix(lopw2[,c("gmin.w","gmin.d")]))
+  b <- barplot(m, beside=T,
           ylim=c(0,1.4),
           col=bar_cols,
           names.arg=abbrev_hak(lopw2$species),
@@ -386,7 +387,10 @@ figure_hakea_gmin <- function(lopw){
   box()
   legend("topleft", c("Well-watered","Drought stress"), fill=bar_cols,
          bty='n', cex=0.9)
-  
+  y <- m[1,]
+  x <- colMeans(b)
+  ch <- toupper(substr(as.character(lopw2$leaf.form),1,1))
+  text(x,y,ch, pos=3, font=3, cex=0.7)
 }
 
 
