@@ -102,9 +102,9 @@ figure_gmin_review_3 <- function(kerst2){
 
 
 
-figure_g0g1_cor <- function(lin2015){
+figure_g0g1_cor <- function(lin2015, group, legend=FALSE){
   
-  x <- subset(lin2015, fitgroup == "Nicolas Martin-StPaul_Quercus ilex_StPaul_Puechabon")
+  x <- subset(lin2015, fitgroup == group)
   
   # for bootCase to work
   assign("x",x,envir=.GlobalEnv)
@@ -119,8 +119,11 @@ figure_g0g1_cor <- function(lin2015){
   
   par(mfrow=c(1,2), mar=c(4,4,1,1), mgp=c(2.5,0.5,0), tcl=0.2, las=1,
       cex.lab=1.1, cex.axis=0.9)
-  with(x, plot(BBopti, Cond, ylim=c(0, 0.15),
+  with(x, plot(BBopti, Cond, 
                xlim=c(0,0.04),
+               ylim=c(0,0.15),
+               # ylim=c(0, max(Cond)),
+               # xlim=c(0,max(BBopti)),
                panel.first=add_regres_line(fit),
                xlab=expression(A/(C[a]*sqrt(D))),
                ylab=expression(g[s]~(mol~m^-2~s^-1)),
@@ -130,10 +133,14 @@ figure_g0g1_cor <- function(lin2015){
   plot(el, type='l', lty=3, 
        xlab=expression(g[0]~~(mol~m^-2~s^-1)), 
        ylab=expression(g[1]~~(kPa^-0.5)),
+       xlim=c(0,0.025),
        ylim=c(3,5))
+       # xlim=c(min(b[,1]), max(b[,1])),
+       # ylim=c(min(b[,2]), max(b[,2])))
   points(b, pch=16, cex=0.3, col="dimgrey")
   points(coef(fit)[1],coef(fit)[2], pch=19)
   
+  if(legend)legend("topright", group, bty='n', cex=0.6)
 }
 
 
@@ -186,18 +193,24 @@ figure_sim <- function(){
       cex.axis=0.9, cex.lab=1.1)
   
   g1 <- 4
-  g0 <- 0.03
+  g0_1 <- 0.01
+  g0_2 <- 0.03
   
   lty0 <- 1
   lty1 <- 5
+  lty2 <- 4
   col0 <- "black"
   col1 <- "black"
+  col2 <- "black"
   
   r0 <- Photosyn(PPFD=seq(20,1000, length=101),
                  g1=g1, g0=0, Vcmax=70, Jmax=140,
                  VPD=2, Tleaf=20, Ca=400)
   r1 <- Photosyn(PPFD=seq(20,1000, length=101),
-                 g1=g1, g0=g0, Vcmax=70, Jmax=140,
+                 g1=g1, g0=g0_1, Vcmax=70, Jmax=140,
+                 VPD=2, Tleaf=20, Ca=400)
+  r2 <- Photosyn(PPFD=seq(20,1000, length=101),
+                 g1=g1, g0=g0_2, Vcmax=70, Jmax=140,
                  VPD=2, Tleaf=20, Ca=400)
   
   with(r0, plot(PPFD, ALEAF/GS, type='l', ylim=c(0,80), col=col0, lty=lty0,
@@ -205,9 +218,12 @@ figure_sim <- function(){
                 ylab=expression(A[n]/g[s]~~(mu*mol~mol^-1))
                 ))
   with(r1, lines(PPFD, ALEAF/GS, col=col1, lty=lty1))
+  with(r2, lines(PPFD, ALEAF/GS, col=col2, lty=lty2))
   
-  legend("bottomright", c(expression(g[0] == 0), expression(g[0] == 0.03)),
-         lty=c(lty0, lty1), bty='n')
+  legend("bottomright", c(expression(g[0] == 0), 
+                          expression(g[0] == 0.01),
+                          expression(g[0] == 0.03)),
+         lty=c(lty0, lty1, lty2), bty='n')
   
   with(r0, plot(PPFD, Ci, type='l',
                 xlab=expression(PPFD~~(mu*mol~m^-2~s^-1)),
@@ -215,6 +231,7 @@ figure_sim <- function(){
                 col=col0, lty=lty0,
                 ylim=c(250,400)))
   with(r1, lines(PPFD, Ci, col=col1, lty=lty1))
+  with(r2, lines(PPFD, Ci, col=col2, lty=lty2))
   
   tleafs <- seq(10,45,length=101)
   vpds <- 0.000605 * tleafs^2.39
@@ -222,7 +239,10 @@ figure_sim <- function(){
                  g1=g1, g0=0, Vcmax=70, Jmax=140,
                  VPD=vpds, Tleaf=tleafs, Ca=400)
   r1 <- Photosyn(PPFD=1500,
-                 g1=g1, g0=g0, Vcmax=70, Jmax=140,
+                 g1=g1, g0=g0_1, Vcmax=70, Jmax=140,
+                 VPD=vpds, Tleaf=tleafs, Ca=400)
+  r2 <- Photosyn(PPFD=1500,
+                 g1=g1, g0=g0_2, Vcmax=70, Jmax=140,
                  VPD=vpds, Tleaf=tleafs, Ca=400)
   
   with(r0, plot(Tleaf, ELEAF, type='l', 
@@ -231,6 +251,7 @@ figure_sim <- function(){
                 col=col0, lty=lty0,
                 ylim=c(0,10)))
   with(r1, lines(Tleaf, ELEAF, col=col1, lty=lty1))
+  with(r2, lines(Tleaf, ELEAF, col=col2, lty=lty2))
   
   with(r0, plot(VPD, Ci, type='l', 
                 xlab="VPD (kPa)",
@@ -238,7 +259,7 @@ figure_sim <- function(){
                 col=col0, lty=lty0,
                 ylim=c(0,400)))
   with(r1, lines(VPD, Ci, col=col1, lty=lty1))
-  
+  with(r2, lines(VPD, Ci, col=col2, lty=lty2))
 }
 
 

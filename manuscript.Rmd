@@ -187,33 +187,34 @@ conductance: cuticle + closed stomata + cracks, broken stomata
 plotfig("output/figure1.png")
 ```
 
-**Figure 1**. Simulations with the plantecophys R package, with and without a g~0~. For the bottom two panels, VPD and T~air~ were covaried based on an empirical relationship, reflecting the fact that they covary in field conditions. For all simulations it is assumed that T~leaf~ is equal to T~air~. Parameters were, etc.
+**Figure 1**. Simulations  of intrinsic water-use efficiency (A~n~/g~s~), intercellular CO~2~ concentration (C~i~) and leaf transpiration rate (E~L~) with three values of g~0~. For the top two panels, all environmental drivers were held constant except the photosynthetic photon flux density (PPFD), demonstrating that the inclusion of g~0~ is necessary to simulate the decrease in A~n~/g~s~ at low PPFD. For the bottom two panels, VPD and T~air~ were covaried based on an empirical relationship [@duursma2014], reflecting typical covariation in field conditions. For all simulations it is assumed that T~leaf~ is equal to T~air~. Parameters were, etc.
 
 
 ```{r fig.height=4,echo=FALSE, eval=includefigs}
 plotfig("output/figure2.png")
 ```
 
-**Figure 2**. Example linear regression of stomatal conductance (g~s~) against a stomatal index, here the linearized version of the model of Medlyn et al. (2011). Example data is taken from Lin et al. (2015), chosen is a dataset with a very good fit as an example. Solid line is regression line, shaded area a 95% confidence interval. Right panel, visualized correlation between estimated slope (g~1~) and intercept (g~0~) of the regression. Dotted ellipse is a bivariate 95% confidence interval (using confidenceEllipse from the car R package), symbols 1000 bootstrap samples of the coefficients (using bootCase in the car R package).
+**Figure 2**. Example linear regression of stomatal conductance (g~s~) against a stomatal index, in this case the linearized version of the model of Medlyn et al. (2011). This example shows a very good fit between g~s~ and the stomatal index, and was selected from the database of Lin et al. (2015). The solid line is regression line, and the shaded area a 95% confidence interval for the mean. The right panel visualizes the correlation between estimated slope (g~1~) and intercept (g~0~) of the regression. The dotted ellipse is a bivariate 95% confidence interval for slope and intercept. The symbols represent 1000 bootstrap samples of the coefficients.
 
 
 ```{r fig.height=4,echo=FALSE, eval=includefigs}
 plotfig("output/figure3.png")
 ```
 
-**Figure 3**.
+**Figure 3**. Correlation between estimated g~0~ and the R^2^ of the regression. In the left panel, we fitted the linearized form of the Medlyn et al. (2011) model to each of the datasets in the Lin et al. (2015) database. Vertical lines are 95% confidence intervals. In the right panel, a very similar association between g~0~ and R^2^ is presented by the review of Miner et al. (2017), using the Ball-Berry model.
 
 ```{r fig.width=4,echo=FALSE, eval=includefigs}
 plotfig("output/figure4.png")
 ```
 
-**Figure 4**.
+**Figure 4**. Comparison of various estimates of minimum conductance. Error bars are standard errors, grey vertical lines 90% quantiles indicating wide range of variation for any variable. g~cut,isol~ : cuticual permeance measured on isolated cuticles that lack stomata (data from Kerstiens 1996), g~min,seal~ : minimum conductance based on leaf dry-down curves where the side of the leaf that bears stomata is sealed (data from Kerstiens 1996), g~min~ : minimum conductance based on leaf-dry-down curves (data from Kerstiens 1996, and more added), g~dark : stomatal conductance at night, measured in field conditions (data from Lombardozzi et al. 2017), g~0~ fitted g~0~ in the Medlyn et al. (2011) model with the Lin et al. (2015) database, g~s,low A~ : for the Lin et al. (2015) database, minimum g~s~ when net assimilation rate was less than 2 $mu$ mol m^-2^ s^-1^, calculated once for each dataset.
+
 
 ```{r fig.height=5, fig.width=5, echo=FALSE, eval=includefigs}
 plotfig("output/figure5.png")
 ```
 
-**Figure 5**.
+**Figure 5**. Analysis of g~min~ from Figure 4 by plant growth form and phylogenetic group. Different letters denote significant differences at $alpha$ = 0.05. The groups Trees are split by angiosperms and gymnosperms.
 
 ```{r fig.height=4,echo=FALSE, eval=includefigs}
 plotfig("output/figure6.png")
