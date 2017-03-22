@@ -30,7 +30,7 @@ T: +61(0)45701806
 
 
 ```{r echo=FALSE}
-includefigs <- FALSE
+includefigs <- TRUE
 library(png)
 library(grid)
 
@@ -253,7 +253,7 @@ plotfig("output/figure6.png")
 plotfig("output/figure7.png")
 ```
 
-**Figure 7**. Minimum conductance measured from leaf dry-down curves on a variety *Hakea* species, a genus native to Australia. Plants were grown in containers in a grow house, and supplied with ample water or underwent long-term mild drought stress. Bars are labelled by leaf form : broadleaf (B) or needle-like (N). g~min~ was higher for species with needle-like leaves, both for well-watered plants (Wilcoxon test, p `r pval(wilcox.test(gmin.w ~ leaf.form, data=lopw)$p.value)`) and droughted plants (p `r pval(wilcox.test(gmin.d ~ leaf.form, data=lopw)$p.value)`).
+**Figure 7**. Minimum conductance measured from leaf dry-down curves on a variety *Hakea* species, a genus native to Australia. Plants were grown in containers in a grow house, and supplied with ample water or underwent long-term mild drought stress. Bars are labelled by leaf form : broadleaf (B) or needle-like (N). For droughted plants, g~min~ was higher for species with needle-like leaves (Wilcoxon test, p `r pval(wilcox.test(gmin.d ~ leaf.form, data=lopw)$p.value)`)), but not for well-watered plants (p `r pval(wilcox.test(gmin.w ~ leaf.form, data=lopw)$p.value)`).
 
 
 

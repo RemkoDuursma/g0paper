@@ -380,7 +380,7 @@ figure_hakea_gmin <- function(lopw){
       mgp=c(2.5, 0.5,0), tcl=0.2, cex.axis=0.9, cex.lab=1.1)
   m <- t(as.matrix(lopw2[,c("gmin.w","gmin.d")]))
   b <- barplot(m, beside=T,
-          ylim=c(0,1.4),
+          ylim=c(0,10),
           col=bar_cols,
           names.arg=abbrev_hak(lopw2$species),
           ylab=expression(g[min]~~(mmol~m^-2~s^-1)))
