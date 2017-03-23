@@ -57,9 +57,7 @@ rieder <- read.csv("data/riederer2001_table1.csv") %>%
 kerst <- read.csv("data/kerstiens1996_table1.csv", stringsAsFactors = FALSE) %>%
   filter(gmin > 0,
          method %in% c("A","C","D")) %>%
-  mutate(method = dplyr::recode(method, A="gcut_isol", C="gcut_seal", D="gmin"),
-         gmin = 2 * 10^5 * 10^-3 * gmin / 41)   # convert to mmol m-2 s-1 assume 41 mol m-3
-                # 2 because gmin was expressed as per total leaf area.
+  mutate(method = dplyr::recode(method, A="gcut_isol", C="gcut_seal", D="gmin"))
 # Notes:
 # A - astomatous cuticle, removed from leaf (permeance)
 # B - detached leaves, stomatal side sealed
@@ -68,6 +66,18 @@ kerst <- read.csv("data/kerstiens1996_table1.csv", stringsAsFactors = FALSE) %>%
 # E1 - gnight / gdark
 # E2 - minimum conductance measured during the day (vague!)
 # E3 - presumed stomatal closure (v high CO2, ABA, drought, VPD) (vague!)
+
+# Add some more data to kerst. Manually entered from various sources.
+gminrev <- read.csv("data/gmin_review_literature.csv",stringsAsFactors = FALSE) %>% 
+  mutate(method = "gmin") %>%
+  dplyr::select(gmin, method, species)
+
+kerst <- bind_rows(kerst, gminrev) %>% 
+  mutate(gmin = 2 * 10^5 * 10^-3 * gmin / 41)   
+# convert to mmol m-2 s-1 assume 41 mol m-3
+# 2 because gmin was expressed as per total leaf area.
+
+
 
 # Miner et al. 2016
 miner <- read.csv("data/Miner_table1.csv")
