@@ -58,7 +58,7 @@ figure_gmin_review_2 <- function(gdfr, minags){
 
 figure_gmin_review_3 <- function(kerst2){
   
-  plot_kerst2 <- function(yvar = "PhylogeneticGroup", meth = "gcut_isol", data=kerst2, ...){
+  plot_kerst2 <- function(yvar = "PhylogeneticGroup", meth = "gmin", data=kerst2, ...){
     
     data <- data[data$method == meth,]
     data$yvar <- as.factor(data[,yvar])
@@ -75,7 +75,7 @@ figure_gmin_review_3 <- function(kerst2){
          xlim=c(0.7, n+0.3), ...)
     axis(1, at=1:n, labels=capitalize(levels(data$yvar)))
     arrows(x0=1:n, x1=1:n, y0=ci[,1], y1=ci[,2], angle=90, length=0.05, code=3)
-    text(x=1:n, y=ci[,2], lets, pos=3)
+    text(x=1:n, y=ci[,2], lets, pos=3, cex=0.8)
     axis(2)
     box()
   }
