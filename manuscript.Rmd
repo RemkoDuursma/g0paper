@@ -146,7 +146,7 @@ The first Ball-Berry model did not have a g0
 [@collatz1992] shows that including g0 affects response of gs to RH in the coupled leaf gas exchange model. And "It seems possible that other conditions such as severe drought stress may affect the minimum value of  g  as well, though we currently have no evidence to support this."
 
 
-[@medlyn_reconciling_2011] does not develop theory for g~0~, instead adds it as a minimum conductance because that's how it is!
+[@medlyn2011] does not develop theory for g~0~, instead adds it as a minimum conductance because that's how it is!
 
 g~0~ modifies not just conductance in zero light, but also low light and high VPD/ high T. It is commonly observed and makes sense that Ci converges to Ca at zero light, but the coupled leaf gas exchange model does not predict that unless a g0 is included [@leuning1995].
 
@@ -169,15 +169,15 @@ similarly at high T. See also Kala. Figure 1.
 "We have assumed in the following equations that when stomata are closed the leaf conductance is zero because field data are generally inadequate to define a cuticular conductance." [@jarvis1976]
 
 
-The difficulty of this can be seen from the fact that a) many studies set g0 to something rather than fitting it (e.g. @leuning1995 uses 0.01 for all); presumably because unreliable estimates were obtained, b) negative fitted values are common [@leuning1995; @herault2013; @miner2016].
+The difficulty of this can be seen from the fact that a) many studies set g0 to something rather than fitting it (e.g. @leuning1995 uses 0.01 for all); presumably because unreliable estimates were obtained, b) negative fitted values are common [@leuning1995; @heroult2013; @miner2016].
 
 
 Barnard and Bauerle said so too but gave no details.
 Even in very good datasets, g0 and g1 are strongly correlated (Figure 2).
 Across datasets, g0 increases when the model fits poorly (Figure 3), and the width of the confidence interval increases when less variation in a ball-berry coefficient.
-Often g0 is even negative [@heroult2013; @leuning_modelling_1990], so it is often set to some arbitrary value 
+Often g0 is even negative [@heroult2013; @leuning1990], so it is often set to some arbitrary value 
 
-When fitting a Ball-Berry type model, negative values are quite common. A typical approach is to avoid this by setting some value based on guesswork [e.g. @leuning_modelling_1990], which we assume is quite common when inspecting the many rounded values in the review by 
+When fitting a Ball-Berry type model, negative values are quite common. A typical approach is to avoid this by setting some value based on guesswork [e.g. @leuning1990], which we assume is quite common when inspecting the many rounded values in the review by 
 
 g~0~ fitted is higher than minimum g~s~ from datasets. If we restric the fittings to those were g~0~ had a relatively narrow width of the confidence interval (< 0.03 mol m-2 s-1), then the average was `r with(subset(lin2015coef, g0_uci - g0_lci < 0.03), mean(g0))` compared to `r mean(lin2015coef$g0)` for all. 
 
