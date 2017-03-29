@@ -3,11 +3,11 @@ title: "On the minimum leaf conductance g~0~"
 author: ''
 date: ''
 output:
-  html_document:
-    theme: flatly
-    number_sections: true
   word_document:
     reference_docx: manuscriptstyle.docx
+  html_document:
+    number_sections: yes
+    theme: flatly
 csl: global-change-biology.csl
 bibliography: references.bib
 ---
@@ -58,22 +58,13 @@ The g~0~ parameter is the intercept, i.e. g~s~ when A is zero. Depending on the 
 
 The objective of this paper is to review sources of variation and common misconceptions on the g~0~ parameter.
 
-We argue that
-
-- we need g0 to get responses at low light correct, and probably at high T
-- g0 is poorly estimated as the intercept, with the usual regression technique
-- can we estimate g0 independently? Some assume that g0 = gdark (also @miner2017 !) but that's rubbish. It is also much larger than cuticular conductance, but seems roughly consistent with gmin (minimum conductance from leaf dry-down curves).
-- there is inter-specific variation in gmin that is related to growth form 
-- gmin is a plastic trait as it responds to growth at elevated temperature, and growth in dry soil
-- models should consider night-time conductance and daily minimum conductance as distinctly separate processes.
-
-
 g~0~ is often defined as g~s~ when A approaches zero when PPFD approaches zero [@leuning1995] but it is clear from Eq. 1 that g~0~ is also attained when A approaches zero due to other environmental drivers, in particular temperature, and drought stress (which may either reduce photosynthetic capacity or g~1~, or both, see Zhou). It is not clear nor obvious whether these various minima should equal each other.
 
 One estimate of g~0~ (low PPFD) comes from night-time measurements of conductance, which have been known for a long time to be substantially larger than zero. It is however not clear whether daytime g~0~ at low PPFD, for darkened leaves, is comparable in magnitude to g~0~ in the dark at night. Evidence from experiments where environmental conditions are held constant suggests that g~s~ varies tremendously throughout the day independent of these drivers, and has therefore been attributed to an internal clock (Resco).
 
 @manzoni2011 assumes minimum conductance is cuticular only, because CO2 does not diffuse across it but water does. Seems to work in his modelling context but appears to be in disagreement with the observation that gmin >> gcut. 
 
+@kala2016 g0 effect heat waves etc.
 
 
 # Need for inclusion of g0 in models
