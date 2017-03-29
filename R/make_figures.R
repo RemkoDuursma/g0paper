@@ -17,14 +17,3 @@ to.pdf(figure_hakea_gmin(lopw), "output/figure7.pdf", height=5, width=6)
 
 convert_all_pdf("output")
 
-
-
-
-
-# pdf("allfits.pdf")
-# for(g in lin2015coef$fitgroup){
-#   figure_g0g1_cor(lin2015, g)
-# }
-# dev.off()
-
-

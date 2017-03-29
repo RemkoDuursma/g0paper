@@ -1,10 +1,11 @@
 ---
-title: "On g~0~"
+title: "On the minimum leaf conductance g~0~"
 author: ''
 date: ''
 output:
   html_document:
     theme: flatly
+    number_sections: true
   word_document:
     reference_docx: manuscriptstyle.docx
 csl: global-change-biology.csl
@@ -30,7 +31,7 @@ T: +61(0)45701806
 
 
 ```{r echo=FALSE}
-includefigs <- F
+includefigs <- T
 library(png)
 library(grid)
 
@@ -42,31 +43,8 @@ pval <- function(...)formatPval(..., includeEquality=TRUE)
 ```
 
 
-# new outline
+# Introduction: questions about g0.
 
-1. Introduction (short): questions about g0.
-2. Need for inclusion of g0 in models
-3. Comparison of values for various possible definitions
-4. Estimation of g~0~ by fitting 
-5. Nighttime conductance (v. short)
-6. Cuticular conductance (short)
-7. Minimum conductance (longer)
-8. Recommendations and future work
-
-
-
-
-
-
-
-
-
-
-
-
-# Abstract
-
-# Introduction
 
 Prevalence of the Ball-Berry class of stomatal conductance models characterized by dependence on assimilation rate, CO~2~ and VPD or RH.
 
@@ -94,50 +72,12 @@ g~0~ is often defined as g~s~ when A approaches zero when PPFD approaches zero [
 
 One estimate of g~0~ (low PPFD) comes from night-time measurements of conductance, which have been known for a long time to be substantially larger than zero. It is however not clear whether daytime g~0~ at low PPFD, for darkened leaves, is comparable in magnitude to g~0~ in the dark at night. Evidence from experiments where environmental conditions are held constant suggests that g~s~ varies tremendously throughout the day independent of these drivers, and has therefore been attributed to an internal clock (Resco).
 
+@manzoni2011 assumes minimum conductance is cuticular only, because CO2 does not diffuse across it but water does. Seems to work in his modelling context but appears to be in disagreement with the observation that gmin >> gcut. 
 
 
 
+# Need for inclusion of g0 in models
 
-
-
-
-
-
-
-
-# Methods
-
-## Data
-
-We compare estimates of g~cut~, g~min~, and g~dark~ from the literature. Measurements of g~cut~ and g~min~ were taken from the compilation by @kerstiens1996, with additional g~min~ measurements from @schuster2016, @burghardt2003, @cavenderbares2007, and @phillips2010 (for the latter study, raw data were obtained and g~min~ calculated). It is customary for g~cut~ and g~min~ to be expressed per unit total leaf surface area, however, since we aim a comparison with g~s~ and g~dark~, all values were converted to per unit projected surface area. Units were converted to molar fluxes assuming 41 mol m^-3^ (cf. @kerstiens1996). For g~dark~, we used a recent compilation of measurements from @lombardozzi2017.
-
-For the combined dataset, we looked up plant growth form and phylogenetic group (angiosperm or gymnosperm) from the TRY categorical traits database [@kattge2011].
-
-We present two case studies demonstrating the acclimation of g~min~ to environmental drivers. Both studies use identical methods. The first dataset was collected on *Eucalyptus parramattensis* growing in twelve whole-tree chambers (see Drake for methods), either tracking ambient conditions or exposed to a constant +3 C air temperature. Leaves were sampled from XXX, n=XXX. The second case study was on *Hakea* plants. Details here (measurement T?). Methods for gmin from drying curves here.
-
-
-## Model
-
-
-
-\
-(2)
-$$ A_n = \frac{g_s}{1.6}(C_a - C_i) $$
-
-\
-where g~s~ is the conductance to H~2~O (the factor 1.6 converts to conductance to CO~2~). 
-
-
-\
-(3)
-$$ A_n = \frac{a \cdot (C_i - \Gamma^{*})}{C_i + b} - R_d$$
-
-where a = V~cmax~ or ~J/4~ (where J goes to Jmax at high light) depending on the limitation to photosynthesis, and b also varies. Dependence on temperature enters through V~cmax~, J~max~, R~d~, $\Gamma^{*}$ [@medlyn2002].
-
-Implemented in the *plantecophys* R package [@duursma2015]
-
-
-# Do we need g~0~ in simulations of water and carbon fluxes?
 
 The first Ball-Berry model did not have a g0 
 
@@ -163,156 +103,24 @@ similarly at high T. See also Kala. Figure 1.
 
 @messinger2006 Conclude that Ci response of gs is the same in the dark or when DCMU was applied (which disrupts electron transport). However, Fig5A-B indicate that gs was much higher in the dark than when DCMU was applied (although the ‘response’ was similar). This indicates gs response to low PAR (darkness) is more than just responding to what photosynthesis does.
 
- **Cite Figure 1**
-
-
-We need a non-zero minimum conductance when simulating water fluxes in very dry soil [@blackman2016; @anderegg2012]
-Also @gleason2014
-
-
-# g~0~ is poorly estimated from regression
-
-"We have assumed in the following equations that when stomata are closed the leaf conductance is zero because field data are generally inadequate to define a cuticular conductance." [@jarvis1976]
-
-
-The difficulty of this can be seen from the fact that a) many studies set g0 to something rather than fitting it (e.g. @leuning1995 uses 0.01 for all); presumably because unreliable estimates were obtained, b) negative fitted values are common [@leuning1995; @heroult2013; @miner2017].
-
-
-Barnard and Bauerle said so too but gave no details.
-Even in very good datasets, g0 and g1 are strongly correlated (Figure 2).
-Across datasets, g0 increases when the model fits poorly (Figure 3), and the width of the confidence interval increases when less variation in a ball-berry coefficient.
-Often g0 is even negative [@heroult2013; @leuning1990], so it is often set to some arbitrary value 
-
-When fitting a Ball-Berry type model, negative values are quite common. A typical approach is to avoid this by setting some value based on guesswork [e.g. @leuning1990], which we assume is quite common when inspecting the many rounded values in the review by 
-
-g~0~ fitted is higher than minimum g~s~ from datasets. If we restric the fittings to those were g~0~ had a relatively narrow width of the confidence interval (< 0.03 mol m-2 s-1), then the average was `r with(subset(lin2015coef, g0_uci - g0_lci < 0.03), mean(g0))` compared to `r mean(lin2015coef$g0)` for all. 
-
-
-Water travels more freely across the cuticle than CO2 [@boyer1997; @boyer2015]
-
-**Cite Figure 2 and 3**
-
-
-# Definitions of minimum conductance
-
-- gcut (cuticle without stomata)
-- gmin (minimum conductance in situ, stomata closed)
-- g0 (minimum conductance in the Ball-Berry-type model)
-- gdark (nighttime conductance)
-
-gdark > gmin > gcut
-g0?
-
-**Cite Figure 4**
-
-@schuster2016 thermal tolerance and gmin relationship across species. 
-
-
 @egea2011 Assumes g0 is constant, does not vary with water stress, and that it represents a ‘cuticular conductance’.
 
-@waldencoleman2013 Very interesting! gdark is different from gmin. Whole-plant WUE correlated with gdark (but not gmin). Lots of references on gdark and gmin and their variation. Closed system to measure gdark+gmin; gmin on detached leaves.
 
-@muchow1989 correlation stomatal density and gmin suggesting leaky stomata
+\
+(2)
+$$ A_n = \frac{g_s}{1.6}(C_a - C_i) $$
 
-@brodribb2014 59-94% of transpiration during leaf dry down was from stomatal side of the leaf in seven conifer species, suggesting large component of gmin is leaky stomata.
-
-@brodribb2014 gmin across conifer species was correlated with the rainfall of the driest quarter, again suggesting gmin is a plastic trait
-
-
-## Cuticular permeance
-
-Not really a conductance, since water does not diffuse as a gas through the cuticle. Instead it dissolves into the medium of the cuticle, diffuses through the solid matrix, and is desorped at the outer edge of the cuticle. The main barrier to diffusion is actually a thin layer at the leaf surface, and hence gcut does not depend on the thickness of the cuticle  [@riederer2001; @anfodillo2002]. @onoda2012 found that thicker cuticles are more resistant to tearing (force to tear and tensile strength both approx proportional to cuticle thickness)
-
-gcut is probably too low in the way it is measured (as a permeance), due to low water content of the cuticle in those conditions [@kerstiens1996]
+\
+where g~s~ is the conductance to H~2~O (the factor 1.6 converts to conductance to CO~2~). 
 
 
-gseal on average not different from gcut - but for individual studies they frequently differ a lot indicating variable role of stomatal contribution (santrucek)
+\
+(3)
+$$ A_n = \frac{a \cdot (C_i - \Gamma^{*})}{C_i + b} - R_d$$
 
+where a = V~cmax~ or ~J/4~ (where J goes to Jmax at high light) depending on the limitation to photosynthesis, and b also varies. Dependence on temperature enters through V~cmax~, J~max~, R~d~, $\Gamma^{*}$ [@medlyn2002].
 
-## Night-time conductance
-
-Nighttime conductance not necessarily same as minimum conductance
-We are not reviewing nighttime conductance here, that has been done extensively by others [@caird2007]
-
-gnight not constant 
-@barbour2007 considerable stomatal control during the night; mirrors daytime
-@howard2007 nighttime conductance lower in drought. Nighttime 2-5x higher than cuticular.
-
-@misson2004 g0 decreases with pre-dawn water potential
-
-Stomata simply do not close all the way, might stay open regardless of photosynthesis, or are broken. 
-
-@rescodedios2016 early night gs much (much) lower than pre-dawn gs, in E. camaldulensis
-@rescodedios2013 nighttime fluctuation gs independent of environment
-
-@caird2007 For many species, gnight is not stable throughout the night period. Endogenous, gradual increases in stomatal opening during predawn hours have been reported in many species under natural field conditions as well as in controlled environments [lots of refs]
-
-
-
-@korner1994 table of minimum conductance. Also points out (without reference) that g0 in droughted leaves is certainly lower than g0 in dark or very high CO2 leaves.
-
-@howard2007 gdark much higher than gmin (Helianthus annuus). In general this is the case [@caird2007]
-
-
-## Minimum conductance from leaf-dry down curves
-
-Hygen 1951 early work showing MLD method
-
-true cuticular
-MLD method (Figure 6) gives higher values but this is probably more useful for models (since these are whole leaves)
-
-santrucek Direct measurements showing much higher 'cuticular' conductance of the leaf side with stomata, though stomata were closed. In agreement with @kerstiens1996 who showed 10x higher gmin for stomatal side vs. non-stomatal cuticle.
-
-@riederer2001 Review on cuticular conductance. gcut is not correlated with cuticle thickness. No reference to stomata. Cuticles are even less permeable than polymers of equivalent thickness used in packaging.
-
-@fanourakis2013 gmin (desiccation gmin) much higher in high RH grown plants, at any value of leaf water content (Table 1). This may suggest that gmin is useful for the plant, and is reduced actively in response to water loss (Hypothesis 2).
-
-
-@burghardt2003 gmin was the same as cuticular permeance (Table 3) (Gmin is lowest gs in desiccating leaves, which includes cuticle and closed stomata). This demonstrates that stomata were able to completely close, and not lose significant amounts of water (with the exception of Hedera helix).
-
-
-conductance: cuticle + closed stomata + cracks, broken stomata
-
-- Kerstiens
-@boyer1997 shows that water but not CO~2~ diffuses across non-stomatal cuticles.
-
-@manzoni2011 assumes minimum conductance is cuticular only, because CO2 does not diffuse across it but water does. Seems to work in his modelling context but appears to be in disagreement with the observation that gmin >> gcut. 
-
-- gmin as a plastic trait. Temperature response generally unresolved [@kerstiens2006]
-- @riederer2001 correlation between temperature and gcut (non-stomatal cuticles)
-- @schuster2016 correlation temperature, gcut AND gmin for Nerium oleander (page 59). T range much wider than Blackman though... But Schuster gmin not different from gcut at most temperatures, which is a bit strange too.
-page 90 few gmin values from drying curves that we can add.
-
-- @burghardt2003 gmin review
-- @schreiber1996 cuticle review
-
-
-[@anfodillo2002] gmin high altitude. Four-fold increase gmin from February (winter) to August in Picea abies, probably due to incomplete stomatal closure not changes in cuticle properties. Cite common finding that gmin increases with altitude (top left page 485).
-
-[@herrick1991] gmin increased with altitude in Picea rubens. 
-
-
-[@jordan2007] large increase gmin in the herb Agastachys odorata with leaf age
-
-Sack et al. 2010 protocol for measurement
-
-[@cavenderbares2007] gdark similar to gmin in oaks (unusual!). Lower gmin in droughted oaks. 
-
-[@duarte2016] fitted g0 with BB and BBOpti. Lower g0 in heat wave treatment. Also lower gdark in heat wave treatment. But g1 or m not affected by heat waves (again example where a gmin is a responsive parameter!)
-
-
-
-
-** cite figures 5,6 and 7**
-
-
-# Future directions
-
-
-
-
-
-## Figures
+Implemented in the *plantecophys* R package [@duursma2015]
 
 
 ```{r fig.height=6,echo=FALSE, eval=includefigs}
@@ -320,6 +128,73 @@ plotfig("output/figure1.png")
 ```
 
 **Figure 1**. Simulations  of intrinsic water-use efficiency (A~n~/g~s~), intercellular CO~2~ concentration (C~i~) and leaf transpiration rate (E~L~) with three values of g~0~. For the top two panels, all environmental drivers were held constant except the photosynthetic photon flux density (PPFD), demonstrating that the inclusion of g~0~ is necessary to simulate the decrease in A~n~/g~s~ at low PPFD. For the bottom two panels, VPD and T~air~ were covaried based on an empirical relationship [@duursma2014], reflecting typical covariation in field conditions. For all simulations it is assumed that T~leaf~ is equal to T~air~. Parameters were, etc.
+
+
+
+We need a non-zero minimum conductance when simulating water fluxes in very dry soil [@blackman2016; @anderegg2012]
+Also @gleason2014, @sinclair2000
+
+
+
+
+# Comparison of values for various definitions
+
+
+
+**Table 1.** Definitions of minimum conductance
+
+| Variable   |  Definition |
+| ---------- | ----------- |
+| g~cut~     | Conductance of an isolated non-stomatal cuticle         |
+| g~min~     | Minimum conductance measured from a leaf dry-down curve |
+| g~dark~    | Night-time conductance                                  |
+| g~0~       | Intercept in the Ball-Berry-type stomatal conductance model, fitted. |
+
+
+We compare estimates of g~cut~, g~min~, and g~dark~ from the literature. Measurements of g~cut~ and g~min~ were taken from the compilation by @kerstiens1996, with additional g~min~ measurements from @schuster2016, @burghardt2003, @cavenderbares2007, and @phillips2010 (for the latter study, raw data were obtained and g~min~ calculated). It is customary for g~cut~ and g~min~ to be expressed per unit total leaf surface area, however, since we aim a comparison with g~s~ and g~dark~, all values were converted to per unit projected surface area. Units were converted to molar fluxes assuming 41 mol m^-3^ (cf. @kerstiens1996). For g~dark~, we used a recent compilation of measurements from @lombardozzi2017.
+
+For the combined dataset, we looked up plant growth form and phylogenetic group (angiosperm or gymnosperm) from the TRY categorical traits database [@kattge2011].
+
+@korner1994 table of minimum conductance. Also points out (without reference) that g0 in droughted leaves is certainly lower than g0 in dark or very high CO2 leaves.
+
+
+@waldencoleman2013 gdark is much higher than gmin. Whole-plant WUE correlated with gdark (but not gmin). Lots of references on gdark and gmin and their variation. Closed system to measure gdark+gmin; gmin on detached leaves.
+
+
+
+```{r fig.width=4,echo=FALSE, eval=includefigs}
+plotfig("output/figure4.png")
+```
+
+**Figure 4**. Comparison of various estimates of minimum conductance. Error bars are standard errors, grey vertical lines 90% quantiles indicating wide range of variation for any variable. g~cut,isol~ : cuticual permeance measured on isolated cuticles that lack stomata (data from Kerstiens 1996), g~min,seal~ : minimum conductance based on leaf dry-down curves where the side of the leaf that bears stomata is sealed (data from Kerstiens 1996), g~min~ : minimum conductance based on leaf-dry-down curves (data from Kerstiens 1996, with a few extra data points - to be added), g~dark : stomatal conductance in the dark at night, measured in field conditions (data from Lombardozzi et al. 2017), g~0~ : fitted g~0~ in the Medlyn et al. (2011) model with the Lin et al. (2015) database, g~s,low A~ : for the Lin et al. (2015) database, minimum g~s~ when net assimilation rate was less than 2 $mu$ mol m^-2^ s^-1^, calculated once for each dataset. Minimum conductance and cuticular conductance are commonly expressed per all surface area but here projected was used because that's more common for g0, gdark.
+
+
+
+
+# Estimation of g~0~ by fitting 
+
+
+"We have assumed in the following equations that when stomata are closed the leaf conductance is zero because field data are generally inadequate to define a cuticular conductance." [@jarvis1976]
+
+
+The difficulty of this can be seen from the fact that a) many studies set g0 to something rather than fitting it (e.g. @leuning1995 uses 0.01 for all); presumably because unreliable estimates were obtained, b) negative fitted values are common [@leuning1995; @heroult2013; @miner2017].
+
+
+[@barnard2013] mention difficulty of fitting but give no details.
+
+Even in very good datasets, g0 and g1 are strongly correlated (Figure 2).
+Across datasets, g0 increases when the model fits poorly (Figure 3), and the width of the confidence interval increases when less variation in a ball-berry coefficient.
+
+Often g0 is even negative [@heroult2013; @leuning1990], so it is often set to some arbitrary value 
+
+When fitting a Ball-Berry type model, negative values are quite common. A typical approach is to avoid this by setting some value based on guesswork [e.g. @leuning1990], which we assume is quite common when inspecting the many rounded values in the review by 
+
+g~0~ fitted is higher than minimum g~s~ from datasets. If we restrict the fittings to those were g~0~ had a relatively narrow width of the confidence interval (< 0.03 mol m-2 s-1), then the average was `r with(subset(lin2015coef, g0_uci - g0_lci < 0.03), mean(g0))` compared to `r mean(lin2015coef$g0)` for all. 
+
+Relatively few reports on the plasticity of g~0~, perhaps because it is so poorly estimated. Exceptions:
+
+[@duarte2016] fitted g0 with BB and BBOpti. Lower g0 in heat wave treatment. Also lower gdark in heat wave treatment. But g1 or m not affected by heat waves (again example where a gmin is a responsive parameter!)
+
 
 
 ```{r fig.height=4,echo=FALSE, eval=includefigs}
@@ -335,17 +210,110 @@ plotfig("output/figure3.png")
 
 **Figure 3**. Correlation between estimated g~0~ and the R^2^ of the regression. In the left panel, we fitted the linearized form of the Medlyn et al. (2011) model to each of the datasets in the Lin et al. (2015) database. Vertical lines are 95% confidence intervals. In the right panel, a very similar association between g~0~ and R^2^ is presented by the review of @miner2017, using the Ball-Berry model.
 
-```{r fig.width=4,echo=FALSE, eval=includefigs}
-plotfig("output/figure4.png")
-```
 
-**Figure 4**. Comparison of various estimates of minimum conductance. Error bars are standard errors, grey vertical lines 90% quantiles indicating wide range of variation for any variable. g~cut,isol~ : cuticual permeance measured on isolated cuticles that lack stomata (data from Kerstiens 1996), g~min,seal~ : minimum conductance based on leaf dry-down curves where the side of the leaf that bears stomata is sealed (data from Kerstiens 1996), g~min~ : minimum conductance based on leaf-dry-down curves (data from Kerstiens 1996, with a few extra data points - to be added), g~dark : stomatal conductance in the dark at night, measured in field conditions (data from Lombardozzi et al. 2017), g~0~ : fitted g~0~ in the Medlyn et al. (2011) model with the Lin et al. (2015) database, g~s,low A~ : for the Lin et al. (2015) database, minimum g~s~ when net assimilation rate was less than 2 $mu$ mol m^-2^ s^-1^, calculated once for each dataset. Minimum conductance and cuticular conductance are commonly expressed per all surface area but here projected was used because that's more common for g0, gdark.
+
+
+
+
+# Nighttime conductance (v. short)
+
+- gdark is variable during the night
+- gdark is an active process not just a fixed parameter
+- gs very early morning is quite high because in many cases gs increases before the sun comes up
+- reviewed extensively elsewhere
+
+
+Nighttime conductance not necessarily same as minimum conductance
+We are not reviewing nighttime conductance here, that has been done extensively by others [@caird2007]
+
+gnight not constant 
+@barbour2007 considerable stomatal control during the night; mirrors daytime
+@howard2007 nighttime conductance lower in drought. Nighttime 2-5x higher than cuticular.
+
+@misson2004 g0 decreases with pre-dawn water potential
+
+@rescodedios2016 early night gs much (much) lower than pre-dawn gs, in E. camaldulensis
+@rescodedios2013 nighttime fluctuation gs independent of environment
+
+@caird2007 For many species, gnight is not stable throughout the night period. Endogenous, gradual increases in stomatal opening during predawn hours have been reported in many species under natural field conditions as well as in controlled environments [lots of refs]
+
+@howard2007 gdark much higher than gmin (Helianthus annuus). In general this is the case [@caird2007]
+
+
+#  Cuticular conductance (short)
+
+- true cuticular conductance is that of isolated non-stomatal peels, and is very low compared to other definitions
+- what is it, and is it variable with anything? yes, temperature, humidity.
+
+Water travels more freely across the cuticle than CO2 [@boyer1997; @boyer2015]
+
+Details of cuticular composition, modes of transport, and composition has been reviewed 
+[@kerstiens1996; @kerstiens2006; @schreiber1996; @schreiber2001]
+
+Not really a conductance, since water does not diffuse as a gas through the cuticle. Instead it dissolves into the medium of the cuticle, diffuses through the solid matrix, and is desorped at the outer edge of the cuticle. The main barrier to diffusion is actually a thin layer at the leaf surface, and hence gcut does not depend on the thickness of the cuticle  [@riederer2001; @anfodillo2002]. @onoda2012 found that thicker cuticles are more resistant to tearing (force to tear and tensile strength both approx proportional to cuticle thickness)
+
+gcut is probably too low in the way it is measured (as a permeance), due to low water content of the cuticle in those conditions [@kerstiens1996]
+
+
+@riederer2001 Review on cuticular conductance. gcut is not correlated with cuticle thickness. No reference to stomata. Cuticles are even less permeable than polymers of equivalent thickness used in packaging.
+
+- @riederer2001 correlation between temperature and gcut (non-stomatal cuticles)
+
+# Minimum conductance (longer)
+
+[@hygen1951] early work showing MLD method
+
+Sack et al. 2010 protocol for measurement
+
+
+- similar to minimum gs observed for the Lin dataset
+- plastic trait
+
+One reason gmin is higher than gcut is the role of stomata, even when presumably shut or as shut as they will be.
+
+gseal on average not different from gcut - but for individual studies they frequently differ a lot indicating variable role of stomatal contribution [@santrucek2004; @brodribb2014]. @muchow1989 correlation stomatal density and gmin suggesting leaky stomata. [@santrucek2004] Direct measurements showing much higher conductance of the leaf side with stomata, though stomata were closed.
+
+@brodribb2014 59-94% of transpiration during leaf dry down was from stomatal side of the leaf in seven conifer species, suggesting large component of gmin is leaky stomata.
+
+but not always, in @burghardt2003 gmin was the same as cuticular permeance (Gmin is lowest gs in desiccating leaves, which includes cuticle and closed stomata). This demonstrates that stomata were able to completely close, and not lose significant amounts of water (with the exception of Hedera helix).
+
+
+
+## Minimum conductance acclimates to growing conditions
+
+
+@anfodillo2002 gmin high altitude. Four-fold increase gmin from February (winter) to August in Picea abies, probably due to incomplete stomatal closure not changes in cuticle properties. Cite common finding that gmin increases with altitude (top left page 485).
+
+@herrick1991 gmin increased with altitude in Picea rubens. 
+
+Hypothesis that conifers have low gmin may have to be revisited in the light of @brodribb2014 (check what they actually say!)
+
+@jordan2007 large increase gmin in the herb Agastachys odorata with leaf age
+
+@fanourakis2013 gmin (desiccation gmin) much higher in high RH grown plants, at any value of leaf water content (Table 1). This may suggest that gmin is useful for the plant, and is reduced actively in response to water loss (Hypothesis 2).
+
+@schuster2016 thermal tolerance and gmin relationship across species. 
+
+@brodribb2014 gmin across conifer species was correlated with the rainfall of the driest quarter, again suggesting gmin is a plastic trait
+
+[@cavenderbares2007] gdark similar to gmin in oaks (unusual!). Lower gmin in droughted oaks. 
+
+- @schuster2016 correlation temperature, gcut AND gmin for Nerium oleander (page 59). T range much wider than Blackman though... But Schuster gmin not different from gcut at most temperatures, which is a bit strange too.
+page 90 few gmin values from drying curves that we can add.
+
+We present two case studies demonstrating the acclimation of g~min~ to environmental drivers. Both studies use identical methods. The first dataset was collected on *Eucalyptus parramattensis* growing in twelve whole-tree chambers (see Drake for methods), either tracking ambient conditions or exposed to a constant +3 C air temperature. Leaves were sampled from XXX, n=XXX. The second case study was on *Hakea* plants. Details here (measurement T?). Methods for gmin from drying curves here.
+
+
+
 
 ```{r fig.height=5, fig.width=5, echo=FALSE, eval=includefigs}
 plotfig("output/figure5.png")
 ```
 
 **Figure 5**. Analysis of g~min~ from Figure 4 by plant growth form and phylogenetic group. Different letters denote significant differences at $alpha$ = 0.05. The groups 'Angiosperm' and 'Gymnosperm' include trees only. 
+
+
+
 
 ```{r fig.height=4,echo=FALSE, eval=includefigs}
 plotfig("output/figure6.png")
@@ -360,6 +328,20 @@ plotfig("output/figure7.png")
 ```
 
 **Figure 7**. Minimum conductance measured from leaf dry-down curves on a variety *Hakea* species, a genus native to Australia. Plants were grown in containers in a grow house, and supplied with ample water or underwent long-term mild drought stress. Bars are labelled by leaf form : broadleaf (B) or needle-like (N). For droughted plants, g~min~ was higher for species with needle-like leaves (Wilcoxon test, p `r pval(wilcox.test(gmin.d ~ leaf.form, data=lopw)$p.value)`)), but not for well-watered plants (p `r pval(wilcox.test(gmin.w ~ leaf.form, data=lopw)$p.value)`).
+
+
+
+
+# Recommendations and future work
+
+
+g0 at the moment covers everything, but we need separate ones (night, high VPD/T, drought, low PAR during day)
+g0 is poorly estimated from regression - we need to figure out whether it can be measured independently
+one option is to use gmin in models, perhaps as averages by growth form / group, but that approach will have to be tested
+g0 is certainly not the same as gdark despite the fact that on average they have similar magnitudes. We know for sure gs can be much lower than fitted g0 and gdark in field conditions.
+
+
+
 
 
 
