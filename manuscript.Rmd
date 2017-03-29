@@ -30,7 +30,7 @@ T: +61(0)45701806
 
 
 ```{r echo=FALSE}
-includefigs <- TRUE
+includefigs <- F
 library(png)
 library(grid)
 
@@ -40,6 +40,28 @@ source("R/load.R")
 
 pval <- function(...)formatPval(..., includeEquality=TRUE)
 ```
+
+
+# new outline
+
+1. Introduction (short): questions about g0.
+2. Need for inclusion of g0 in models
+3. Comparison of values for various possible definitions
+4. Estimation of g~0~ by fitting 
+5. Nighttime conductance (v. short)
+6. Cuticular conductance (short)
+7. Minimum conductance (longer)
+8. Recommendations and future work
+
+
+
+
+
+
+
+
+
+
 
 
 # Abstract
@@ -62,10 +84,25 @@ We argue that
 
 - we need g0 to get responses at low light correct, and probably at high T
 - g0 is poorly estimated as the intercept, with the usual regression technique
-- can we estimate g0 independently? Some assume that g0 = gdark but that's rubbish. It is also much larger than cuticular conductance, but seems roughly consistent with gmin (minimum conductance from leaf dry-down curves).
+- can we estimate g0 independently? Some assume that g0 = gdark (also @miner2017 !) but that's rubbish. It is also much larger than cuticular conductance, but seems roughly consistent with gmin (minimum conductance from leaf dry-down curves).
 - there is inter-specific variation in gmin that is related to growth form 
 - gmin is a plastic trait as it responds to growth at elevated temperature, and growth in dry soil
 - models should consider night-time conductance and daily minimum conductance as distinctly separate processes.
+
+
+g~0~ is often defined as g~s~ when A approaches zero when PPFD approaches zero [@leuning1995] but it is clear from Eq. 1 that g~0~ is also attained when A approaches zero due to other environmental drivers, in particular temperature, and drought stress (which may either reduce photosynthetic capacity or g~1~, or both, see Zhou). It is not clear nor obvious whether these various minima should equal each other.
+
+One estimate of g~0~ (low PPFD) comes from night-time measurements of conductance, which have been known for a long time to be substantially larger than zero. It is however not clear whether daytime g~0~ at low PPFD, for darkened leaves, is comparable in magnitude to g~0~ in the dark at night. Evidence from experiments where environmental conditions are held constant suggests that g~s~ varies tremendously throughout the day independent of these drivers, and has therefore been attributed to an internal clock (Resco).
+
+
+
+
+
+
+
+
+
+
 
 
 # Methods
@@ -93,19 +130,23 @@ where g~s~ is the conductance to H~2~O (the factor 1.6 converts to conductance t
 
 \
 (3)
-$$ A_n = \frac{a \cdot (C-i - \Gamma^{*})}{C_i + b} - R_d$$
+$$ A_n = \frac{a \cdot (C_i - \Gamma^{*})}{C_i + b} - R_d$$
 
 where a = V~cmax~ or ~J/4~ (where J goes to Jmax at high light) depending on the limitation to photosynthesis, and b also varies. Dependence on temperature enters through V~cmax~, J~max~, R~d~, $\Gamma^{*}$ [@medlyn2002].
+
+Implemented in the *plantecophys* R package [@duursma2015]
 
 
 # Do we need g~0~ in simulations of water and carbon fluxes?
 
 The first Ball-Berry model did not have a g0 
 
+@leuning1995 says "g0 > 0, otherwise ci/ca would be constant for all values of Q. The rate of convergence of ci to ca at low A (low Q) depends on the value of g0; when g0 is large, ci deviates from the asymptotic value at higher values of A than when g0 is small".
+
 [@collatz1992] shows that including g0 affects response of gs to RH in the coupled leaf gas exchange model. And "It seems possible that other conditions such as severe drought stress may affect the minimum value of  g  as well, though we currently have no evidence to support this."
 
 
-[@medlyn_reconciling_2011] does not develop theory for g~0~, instead adds it as a minimum conductance because that's how it is!
+[@medlyn2011] does not develop theory for g~0~, instead adds it as a minimum conductance because that's how it is!
 
 [@hari1986; @hari1999] does not mention it (their Eq 6 assumes g0 = 0)
 
@@ -131,12 +172,20 @@ Also @gleason2014
 
 # g~0~ is poorly estimated from regression
 
+"We have assumed in the following equations that when stomata are closed the leaf conductance is zero because field data are generally inadequate to define a cuticular conductance." [@jarvis1976]
+
+
+The difficulty of this can be seen from the fact that a) many studies set g0 to something rather than fitting it (e.g. @leuning1995 uses 0.01 for all); presumably because unreliable estimates were obtained, b) negative fitted values are common [@leuning1995; @heroult2013; @miner2017].
+
+
 Barnard and Bauerle said so too but gave no details.
 Even in very good datasets, g0 and g1 are strongly correlated (Figure 2).
 Across datasets, g0 increases when the model fits poorly (Figure 3), and the width of the confidence interval increases when less variation in a ball-berry coefficient.
-Often g0 is even negative [@heroult2013; @leuning_modelling_1990], so it is often set to some arbitrary value 
+Often g0 is even negative [@heroult2013; @leuning1990], so it is often set to some arbitrary value 
 
-When fitting a Ball-Berry type model, negative values are quite common. A typical approach is to avoid this by setting some value based on guesswork [e.g. @leuning_modelling_1990], which we assume is quite common when inspecting the many rounded values in the review by 
+When fitting a Ball-Berry type model, negative values are quite common. A typical approach is to avoid this by setting some value based on guesswork [e.g. @leuning1990], which we assume is quite common when inspecting the many rounded values in the review by 
+
+g~0~ fitted is higher than minimum g~s~ from datasets. If we restric the fittings to those were g~0~ had a relatively narrow width of the confidence interval (< 0.03 mol m-2 s-1), then the average was `r with(subset(lin2015coef, g0_uci - g0_lci < 0.03), mean(g0))` compared to `r mean(lin2015coef$g0)` for all. 
 
 
 Water travels more freely across the cuticle than CO2 [@boyer1997; @boyer2015]
@@ -284,7 +333,7 @@ plotfig("output/figure2.png")
 plotfig("output/figure3.png")
 ```
 
-**Figure 3**. Correlation between estimated g~0~ and the R^2^ of the regression. In the left panel, we fitted the linearized form of the Medlyn et al. (2011) model to each of the datasets in the Lin et al. (2015) database. Vertical lines are 95% confidence intervals. In the right panel, a very similar association between g~0~ and R^2^ is presented by the review of Miner et al. (2017), using the Ball-Berry model.
+**Figure 3**. Correlation between estimated g~0~ and the R^2^ of the regression. In the left panel, we fitted the linearized form of the Medlyn et al. (2011) model to each of the datasets in the Lin et al. (2015) database. Vertical lines are 95% confidence intervals. In the right panel, a very similar association between g~0~ and R^2^ is presented by the review of @miner2017, using the Ball-Berry model.
 
 ```{r fig.width=4,echo=FALSE, eval=includefigs}
 plotfig("output/figure4.png")
