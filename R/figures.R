@@ -25,16 +25,16 @@ figure_gmin_review <- function(gdfr){
   
 }
 
-figure_gmin_review_2 <- function(gdfr, minags){
+figure_gmin_review_2 <- function(gdfr){
   par(mar=c(3,5,1,0.5), cex.lab=1.2)
   fit <- lm(log10(gmin) ~ method-1, data=gdfr)
   cis <- confint(fit)
   quans <- sapply(split(gdfr, gdfr$method), function(x)quantile(log10(x$gmin), probs=c(0.05, 0.95)))
   gmins <- with(gdfr, tapply(log10(gmin), method, mean, na.rm=TRUE))
   
-  plot(1:5, 10^gmins, pch=19, cex=1.2, xlab="",
+  plot(1:6, 10^gmins, pch=19, cex=1.2, xlab="",
        axes=FALSE,
-       panel.first=segments(x0=1:5, x1=1:5, y0=10^quans[1,], y1=10^quans[2,], col="grey"),
+       #panel.first=segments(x0=1:5, x1=1:5, y0=10^quans[1,], y1=10^quans[2,], col="grey"),
        ylim=c(0,50),
        xlim=c(0.5,6.5),
        ylab=expression(Conductance~~(mmol~m^-2~s^-1)))
@@ -46,19 +46,15 @@ figure_gmin_review_2 <- function(gdfr, minags){
                            expression(g["s,low A"])))
   axis(2)
   box()
-  arrows(x0=1:5, x1=1:5, y0=10^cis[,1], y1=10^cis[,2], angle=90, length=0.1, code=3)
-  
-  quang <- quantile(minags$gsmin, probs=c(0.05, 0.95))
-  points(6, 1000*mean(minags$gsmin), pch=19, cex=1.2,
-         panel.first=segments(x0=6, x1=6, y0=1000*quang[1], y1=1000*quang[2], col="grey"))
-  cig <- 1000*(mean(minags$gsmin) + c(-2,2)*sd(minags$gsmin)/sqrt(nrow(minags)))
-  arrows(x0=6, x1=6, y0=cig[1], y1=cig[2], angle=90, length=0.1, code=3)
+  arrows(x0=1:6, x1=1:6, y0=10^cis[,1], y1=10^cis[,2], angle=90, length=0.1, code=3)
 }
 
 
-figure_gmin_review_3 <- function(kerst2){
+figure_gmin_review_3 <- function(dat){
   
-  plot_kerst2 <- function(yvar = "PhylogeneticGroup", meth = "gmin", data=kerst2, ...){
+  dat <- as.data.frame(dat)
+  
+  plot_dat <- function(yvar = "PhylogeneticGroup", meth = "gmin", data=dat, ...){
     
     data <- data[data$method == meth,]
     data$yvar <- as.factor(data[,yvar])
@@ -80,22 +76,18 @@ figure_gmin_review_3 <- function(kerst2){
     box()
   }
   
-  # plot_kerst2("PlantGrowthForm", "gmin")
-  # plot_kerst2("PhylogeneticGroup", "gmin", subset(kerst2, PlantGrowthForm == "tree"))
-  # #plot_kerst2("PhylogeneticGroup", "gmin")
-  
   # Combine angio/gymno with growth form
-  kerst2$group <- as.character(kerst2$PlantGrowthForm)
-  kerst2$group[which(kerst2$PlantGrowthForm == "tree")] <- 
-    as.character(kerst2$PhylogeneticGroup)[which(kerst2$PlantGrowthForm == "tree")]
-  kerst2$group <- factor(kerst2$group, levels=c("graminoid","herb","shrub","Angiosperm","Gymnosperm"))
+  dat$group <- as.character(dat$PlantGrowthForm)
+  dat$group[which(dat$PlantGrowthForm == "tree")] <- 
+    as.character(dat$PhylogeneticGroup)[which(dat$PlantGrowthForm == "tree")]
+  dat$group <- factor(dat$group, levels=c("graminoid","herb","shrub","Angiosperm","Gymnosperm"))
+  levels(dat$group) <- c("Graminoid","Herb","Shrub","Tree, Angio.","Tree, Gymno.")
   
   par(mar=c(6.5,4,1,1), mgp=c(2.5,0.5,0), tcl=-0.2, 
       las=3, yaxs="i",
       cex.lab=1.2, cex.axis=0.8)
-  plot_kerst2("group", "gmin",
+  plot_dat("group", "gmin",
               xlab="", ylab=expression(g[min]~~(mmol~m^-2~s^-1)))
-  #mtext(side=1, text="Tree", at=4.5, line=2, cex=1)
   
 }
 

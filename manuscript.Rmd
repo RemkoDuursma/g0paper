@@ -107,6 +107,8 @@ The first Ball-Berry model did not have a g0
 
 [@medlyn_reconciling_2011] does not develop theory for g~0~, instead adds it as a minimum conductance because that's how it is!
 
+[@hari1986; @hari1999] does not mention it (their Eq 6 assumes g0 = 0)
+
 g~0~ modifies not just conductance in zero light, but also low light and high VPD/ high T. It is commonly observed and makes sense that Ci converges to Ca at zero light, but the coupled leaf gas exchange model does not predict that unless a g0 is included [@leuning1995].
 
 similarly at high T. See also Kala. Figure 1.
@@ -121,6 +123,10 @@ similarly at high T. See also Kala. Figure 1.
 @messinger2006 Conclude that Ci response of gs is the same in the dark or when DCMU was applied (which disrupts electron transport). However, Fig5A-B indicate that gs was much higher in the dark than when DCMU was applied (although the ‘response’ was similar). This indicates gs response to low PAR (darkness) is more than just responding to what photosynthesis does.
 
  **Cite Figure 1**
+
+
+We need a non-zero minimum conductance when simulating water fluxes in very dry soil [@blackman2016; @anderegg2012]
+Also @gleason2014
 
 
 # g~0~ is poorly estimated from regression
@@ -157,6 +163,11 @@ g0?
 
 @waldencoleman2013 Very interesting! gdark is different from gmin. Whole-plant WUE correlated with gdark (but not gmin). Lots of references on gdark and gmin and their variation. Closed system to measure gdark+gmin; gmin on detached leaves.
 
+@muchow1989 correlation stomatal density and gmin suggesting leaky stomata
+
+@brodribb2014 59-94% of transpiration during leaf dry down was from stomatal side of the leaf in seven conifer species, suggesting large component of gmin is leaky stomata.
+
+@brodribb2014 gmin across conifer species was correlated with the rainfall of the driest quarter, again suggesting gmin is a plastic trait
 
 
 ## Cuticular permeance
@@ -237,6 +248,10 @@ page 90 few gmin values from drying curves that we can add.
 Sack et al. 2010 protocol for measurement
 
 [@cavenderbares2007] gdark similar to gmin in oaks (unusual!). Lower gmin in droughted oaks. 
+
+[@duarte2016] fitted g0 with BB and BBOpti. Lower g0 in heat wave treatment. Also lower gdark in heat wave treatment. But g1 or m not affected by heat waves (again example where a gmin is a responsive parameter!)
+
+
 
 
 ** cite figures 5,6 and 7**
