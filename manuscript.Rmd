@@ -52,6 +52,8 @@ Prevalence of the Ball-Berry class of stomatal conductance models characterized 
 (1)
 $$ g_s = g_0 + g_1 \frac{A_n}{C_a}f(D)$$
 
+g~0~ usually ignored, for example in recent review of stomatal conductance models [@damour2010]
+
 where f(D) is some function of the vapour pressure deficit D (or relative humidity in case of the model of @ballberry1987), g~1~ the slope parameter, and g~0~ an intercept. The Medlyn model is actually non-linear but can be expressed in an approximate linear form of Eq. 1.
 
 The origin of Eq. 1 is @ball1987 , but no g~0~ was mentioned. It is introduced in the unpublished manuscript of @ball1988, as an 'intercept' without further discussion of the role it plays in the model.
@@ -62,7 +64,7 @@ The origin of Eq. 1 is @ball1987 , but no g~0~ was mentioned. It is introduced i
 
 g~0~ is often defined as g~s~ when A approaches zero when PPFD approaches zero [@leuning1995] but it is clear from Eq. 1 that g~0~ is also attained when A approaches zero due to other environmental drivers, in particular temperature, and drought stress (which may either reduce photosynthetic capacity or g~1~, or both, see Zhou). It is not clear nor obvious whether these various minima should equal each other.
 
-Though the role and potential for estimation using Eq. 1 is clear, it is not clear whether and how g~0~ compares to other estimates of g~s~ when photosynthesis is zero. It is sometimes assumed that g~0~ must equal g~s~ at night, simply since no photosynthesis occurs at night [@lombardozzi2016; @barnard2013]. Other studies assume that g~0~ equals a 'cuticular conductance` [@manzoni2011; @egea2011], but it has yet to be determined how various minimum conductance estimates compare.
+Though the role and potential for estimation using Eq. 1 is clear, it is not clear whether and how g~0~ compares to other estimates of g~s~ when photosynthesis is zero. It is sometimes assumed that g~0~ must equal g~s~ at night, simply since no photosynthesis occurs at night [@lombardozzi2016; @barnard2013; @uddling2005]. Other studies assume that g~0~ equals a 'cuticular conductance` [@baldocchi1997; @manzoni2011; @egea2011], but it has yet to be determined how various minimum conductance estimates compare.
 
 The objective of this paper is to take a closer look at g~0~, its role in modelling fluxes of carbon and water, estimation of g~0~ from regression of Eq. 1 against data. Finally we review the literature for sources of variation in the actual minimum conductance measured in various ways. On the way we try to set straight some common misconceptions about g~0~, and make recommendations for future work. 
 
@@ -72,17 +74,22 @@ The objective of this paper is to take a closer look at g~0~, its role in modell
 
 @leuning1990 and @leuning1995 says "g0 > 0, otherwise ci/ca would be constant for all values of Q. The rate of convergence of ci to ca at low A (low Q) depends on the value of g0; when g0 is large, ci deviates from the asymptotic value at higher values of A than when g0 is small".
 
-
-
 [@medlyn2011] does not develop theory for g~0~, instead adds it as a minimum conductance because that's how it is!
 
 [@hari1986; @hari1999] does not mention it (their Eq 6 assumes g0 = 0)
 
 g~0~ modifies not just conductance in zero light, but also low light and high VPD/ high T. It is commonly observed and makes sense that Ci converges to Ca at zero light, but the coupled leaf gas exchange model does not predict that unless a g0 is included [@leuning1995].
 
-similarly at high T. @kala2016 @urban 
-drake in prep
-duursma2014
+similarly at high T, which is important [@kala2016]
+
+The assumption of Eq. 1 is that g~s~ goes to g~0~ both at low light and very high temperature, when A <-- 0 [@duursma2014]. Some studies however show that stomata don't shut at high T [@urban2017].
+Another thing is that the effect is actually larger than g~0~ because this additional conductance allows slightly more stomatal opening (because photosynthesis occurs more because of higher g~s~). 
+
+
+
+@messinger2006 Conclude that Ci response of gs is the same in the dark or when DCMU was applied (which disrupts electron transport). However, Fig5A-B indicate that gs was much higher in the dark than when DCMU was applied (although the ‘response’ was similar). This indicates gs response to low PAR (darkness) is more than just responding to what photosynthesis does.
+
+@egea2011 Assumes g0 is constant, does not vary with water stress, and that it represents a ‘cuticular conductance’.
 
 
 @lombardozzi2017 puts g0 into CLM, notes in introduction that 'conductance during the night (and at other times when A = 0 ) is thus represented using g0'. 
@@ -90,9 +97,6 @@ duursma2014
 @barnard2013 makes the same assumption, without any discussion of the possibility that daytime g0 might be different from nighttime conductance
 
 
-@messinger2006 Conclude that Ci response of gs is the same in the dark or when DCMU was applied (which disrupts electron transport). However, Fig5A-B indicate that gs was much higher in the dark than when DCMU was applied (although the ‘response’ was similar). This indicates gs response to low PAR (darkness) is more than just responding to what photosynthesis does.
-
-@egea2011 Assumes g0 is constant, does not vary with water stress, and that it represents a ‘cuticular conductance’.
 
 
 \
