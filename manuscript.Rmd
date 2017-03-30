@@ -54,27 +54,24 @@ $$ g_s = g_0 + g_1 \frac{A_n}{C_a}f(D)$$
 
 where f(D) is some function of the vapour pressure deficit D (or relative humidity in case of the model of @ballberry1987), g~1~ the slope parameter, and g~0~ an intercept. The Medlyn model is actually non-linear but can be expressed in an approximate linear form of Eq. 1.
 
-The g~0~ parameter is the intercept, i.e. g~s~ when A is zero. Depending on the form of f(D), it can also represent g~s~ when D is very large. 
+The origin of Eq. 1 is @ball1987 , but no g~0~ was mentioned. It is introduced in the unpublished manuscript of @ball1988, as an 'intercept' without further discussion of the role it plays in the model.
 
-The objective of this paper is to review sources of variation and common misconceptions on the g~0~ parameter.
+@leuning1990 defined g~0~ as g~s~ when A approaches zero as PPFD approaches the light compensation point, and also points out that it plays a role in predicting A/g~s~ (and C~i~) at low light [see also @leuning1995].
+
+[@collatz1992] shows that including g0 affects response of gs to RH in the coupled leaf gas exchange model. And "It seems possible that other conditions such as severe drought stress may affect the minimum value of  g  as well, though we currently have no evidence to support this."
 
 g~0~ is often defined as g~s~ when A approaches zero when PPFD approaches zero [@leuning1995] but it is clear from Eq. 1 that g~0~ is also attained when A approaches zero due to other environmental drivers, in particular temperature, and drought stress (which may either reduce photosynthetic capacity or g~1~, or both, see Zhou). It is not clear nor obvious whether these various minima should equal each other.
 
-One estimate of g~0~ (low PPFD) comes from night-time measurements of conductance, which have been known for a long time to be substantially larger than zero. It is however not clear whether daytime g~0~ at low PPFD, for darkened leaves, is comparable in magnitude to g~0~ in the dark at night. Evidence from experiments where environmental conditions are held constant suggests that g~s~ varies tremendously throughout the day independent of these drivers, and has therefore been attributed to an internal clock (Resco).
+Though the role and potential for estimation using Eq. 1 is clear, it is not clear whether and how g~0~ compares to other estimates of g~s~ when photosynthesis is zero. It is sometimes assumed that g~0~ must equal g~s~ at night, simply since no photosynthesis occurs at night [@lombardozzi2016; @barnard2013]. Other studies assume that g~0~ equals a 'cuticular conductance` [@manzoni2011; @egea2011], but it has yet to be determined how various minimum conductance estimates compare.
 
-@manzoni2011 assumes minimum conductance is cuticular only, because CO2 does not diffuse across it but water does. Seems to work in his modelling context but appears to be in disagreement with the observation that gmin >> gcut. 
+The objective of this paper is to take a closer look at g~0~, its role in modelling fluxes of carbon and water, estimation of g~0~ from regression of Eq. 1 against data. Finally we review the literature for sources of variation in the actual minimum conductance measured in various ways. On the way we try to set straight some common misconceptions about g~0~, and make recommendations for future work. 
 
-@kala2016 g0 effect heat waves etc.
 
 
 # Need for inclusion of g0 in models
 
+@leuning1990 and @leuning1995 says "g0 > 0, otherwise ci/ca would be constant for all values of Q. The rate of convergence of ci to ca at low A (low Q) depends on the value of g0; when g0 is large, ci deviates from the asymptotic value at higher values of A than when g0 is small".
 
-The first Ball-Berry model did not have a g0 
-
-@leuning1995 says "g0 > 0, otherwise ci/ca would be constant for all values of Q. The rate of convergence of ci to ca at low A (low Q) depends on the value of g0; when g0 is large, ci deviates from the asymptotic value at higher values of A than when g0 is small".
-
-[@collatz1992] shows that including g0 affects response of gs to RH in the coupled leaf gas exchange model. And "It seems possible that other conditions such as severe drought stress may affect the minimum value of  g  as well, though we currently have no evidence to support this."
 
 
 [@medlyn2011] does not develop theory for g~0~, instead adds it as a minimum conductance because that's how it is!
@@ -83,14 +80,15 @@ The first Ball-Berry model did not have a g0
 
 g~0~ modifies not just conductance in zero light, but also low light and high VPD/ high T. It is commonly observed and makes sense that Ci converges to Ca at zero light, but the coupled leaf gas exchange model does not predict that unless a g0 is included [@leuning1995].
 
-similarly at high T. See also Kala. Figure 1.
+similarly at high T. @kala2016 @urban 
+drake in prep
+duursma2014
 
 
 @lombardozzi2017 puts g0 into CLM, notes in introduction that 'conductance during the night (and at other times when A = 0 ) is thus represented using g0'. 
 
 @barnard2013 makes the same assumption, without any discussion of the possibility that daytime g0 might be different from nighttime conductance
 
-@dekauwe2015 makes this point as well, their Fig. A2 (can we add that also?)
 
 @messinger2006 Conclude that Ci response of gs is the same in the dark or when DCMU was applied (which disrupts electron transport). However, Fig5A-B indicate that gs was much higher in the dark than when DCMU was applied (although the ‘response’ was similar). This indicates gs response to low PAR (darkness) is more than just responding to what photosynthesis does.
 
@@ -142,14 +140,19 @@ Also @gleason2014, @sinclair2000
 | g~0~       | Intercept in the Ball-Berry-type stomatal conductance model, fitted. |
 
 
-We compare estimates of g~cut~, g~min~, and g~dark~ from the literature. Measurements of g~cut~ and g~min~ were taken from the compilation by @kerstiens1996, with additional g~min~ measurements from @schuster2016, @burghardt2003, @cavenderbares2007, and @phillips2010 (for the latter study, raw data were obtained and g~min~ calculated). It is customary for g~cut~ and g~min~ to be expressed per unit total leaf surface area, however, since we aim a comparison with g~s~ and g~dark~, all values were converted to per unit projected surface area. Units were converted to molar fluxes assuming 41 mol m^-3^ (cf. @kerstiens1996). For g~dark~, we used a recent compilation of measurements from @lombardozzi2017.
+We compare estimates of g~cut~, g~min~, and g~dark~ from the literature. Measurements of g~cut~ and g~min~ were taken from the compilation by @kerstiens1996, with additional g~min~ measurements from @schuster2016, @burghardt2003, @cavenderbares2007, and @phillips2010 (for the latter study, raw data were obtained and g~min~ calculated). We excluded measurements of g~min~ where stomatal leaf sides were sealed, because few data were available and the comparison is not consistent with individual studies where the role of stomata in g~min~ is studied (see SectionXXX).
+
+It is customary for g~cut~ and g~min~ to be expressed per unit total leaf surface area, however, since we aim a comparison with g~s~ and g~dark~, all values were converted to per unit projected surface area. Units were converted to molar fluxes assuming 41 mol m^-3^ (cf. @kerstiens1996). For g~dark~, we used a recent compilation of measurements from @lombardozzi2017.
 
 For the combined dataset, we looked up plant growth form and phylogenetic group (angiosperm or gymnosperm) from the TRY categorical traits database [@kattge2011].
 
 @korner1994 table of minimum conductance. Also points out (without reference) that g0 in droughted leaves is certainly lower than g0 in dark or very high CO2 leaves.
 
+g~s,minA~ calculated from @lin2015 data. Also g0 fitted using the model of Medlyn et al. 2011, and those from @miner2016 (combined all). 
 
-@waldencoleman2013 gdark is much higher than gmin. Whole-plant WUE correlated with gdark (but not gmin). Lots of references on gdark and gmin and their variation. Closed system to measure gdark+gmin; gmin on detached leaves.
+g~s,low A~ much lower than fitted g~0~ or g~dark~ (see also @dekauwe2015, their Fig. A2).
+
+g~dark~ much higher than g~min~, also confirmed by experiments. In soybean, @waldencoleman2013 showed much higher g~dark~  compared to g~min~. 
 
 
 
@@ -157,7 +160,7 @@ For the combined dataset, we looked up plant growth form and phylogenetic group 
 plotfig("output/figure4.png")
 ```
 
-**Figure 4**. Comparison of various estimates of minimum conductance. Error bars are standard errors, grey vertical lines 90% quantiles indicating wide range of variation for any variable. g~cut,isol~ : cuticual permeance measured on isolated cuticles that lack stomata (data from Kerstiens 1996), g~min,seal~ : minimum conductance based on leaf dry-down curves where the side of the leaf that bears stomata is sealed (data from Kerstiens 1996), g~min~ : minimum conductance based on leaf-dry-down curves (data from Kerstiens 1996, with a few extra data points - to be added), g~dark : stomatal conductance in the dark at night, measured in field conditions (data from Lombardozzi et al. 2017), g~0~ : fitted g~0~ in the Medlyn et al. (2011) model with the Lin et al. (2015) database, g~s,low A~ : for the Lin et al. (2015) database, minimum g~s~ when net assimilation rate was less than 2 $mu$ mol m^-2^ s^-1^, calculated once for each dataset. Minimum conductance and cuticular conductance are commonly expressed per all surface area but here projected was used because that's more common for g0, gdark.
+**Figure 4**. Comparison of various estimates of minimum conductance. Error bars are standard errors, grey vertical lines 90% quantiles indicating wide range of variation for any variable. g~cut,isol~ : cuticual permeance measured on isolated cuticles that lack stomata (data from Kerstiens 1996), g~min~ : minimum conductance based on leaf-dry-down curves (data from Kerstiens 1996, with a few extra data points - to be added), g~dark : stomatal conductance in the dark at night, measured in field conditions (data from Lombardozzi et al. 2017), g~0~ : fitted g~0~ in the Medlyn et al. (2011) model with the Lin et al. (2015) database, g~s,low A~ : for the Lin et al. (2015) database, minimum g~s~ when net assimilation rate was less than 2 $mu$ mol m^-2^ s^-1^, calculated once for each dataset. Minimum conductance and cuticular conductance are commonly expressed per all surface area but here projected was used because that's more common for g0, gdark.
 
 
 
@@ -207,6 +210,8 @@ plotfig("output/figure3.png")
 
 
 # Nighttime conductance (v. short)
+
+One estimate of g~0~ (low PPFD) comes from night-time measurements of conductance, which have been known for a long time to be substantially larger than zero. It is however not clear whether daytime g~0~ at low PPFD, for darkened leaves, is comparable in magnitude to g~0~ in the dark at night. Evidence from experiments where environmental conditions are held constant suggests that g~s~ varies tremendously throughout the day independent of these drivers, and has therefore been attributed to an internal clock (Resco).
 
 - gdark is variable during the night
 - gdark is an active process not just a fixed parameter

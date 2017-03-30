@@ -27,26 +27,31 @@ figure_gmin_review <- function(gdfr){
 
 figure_gmin_review_2 <- function(gdfr){
   par(mar=c(3,5,1,0.5), cex.lab=1.2)
+  
+  # get rid of sealed leaves - small sample size and confusing result
+  gdfr <- droplevels(subset(gdfr, method != "gcut_seal"))
+  
   fit <- lm(log10(gmin) ~ method-1, data=gdfr)
   cis <- confint(fit)
   quans <- sapply(split(gdfr, gdfr$method), function(x)quantile(log10(x$gmin), probs=c(0.05, 0.95)))
   gmins <- with(gdfr, tapply(log10(gmin), method, mean, na.rm=TRUE))
+  ng <- nlevels(gdfr$method)
   
-  plot(1:6, 10^gmins, pch=19, cex=1.2, xlab="",
+  plot(1:ng, 10^gmins, pch=19, cex=1.2, xlab="",
        axes=FALSE,
        #panel.first=segments(x0=1:5, x1=1:5, y0=10^quans[1,], y1=10^quans[2,], col="grey"),
        ylim=c(0,50),
-       xlim=c(0.5,6.5),
+       xlim=c(0.5,ng+0.5),
        ylab=expression(Conductance~~(mmol~m^-2~s^-1)))
-  axis(1, at=1:6, labels=c(expression(g["cut,isol"]),
-                           expression(g["min,seal"]),
+  axis(1, at=1:ng, labels=c(expression(g["cut,isol"]),
+                           #expression(g["min,seal"]),
                            expression(g[min]),
                            expression(g[dark]),
                            expression(g[0]),
                            expression(g["s,low A"])))
   axis(2)
   box()
-  arrows(x0=1:6, x1=1:6, y0=10^cis[,1], y1=10^cis[,2], angle=90, length=0.1, code=3)
+  arrows(x0=1:ng, x1=1:ng, y0=10^cis[,1], y1=10^cis[,2], angle=90, length=0.1, code=3)
 }
 
 
@@ -121,6 +126,7 @@ figure_g0g1_cor <- function(lin2015, group, legend=FALSE){
                ylab=expression(g[s]~(mol~m^-2~s^-1)),
                pch=16, cex=0.8, col="dimgrey"))
   box()
+  plotlabel("(a)","topleft")
   
   plot(el, type='l', lty=3, 
        xlab=expression(g[0]~~(mol~m^-2~s^-1)), 
@@ -131,7 +137,7 @@ figure_g0g1_cor <- function(lin2015, group, legend=FALSE){
        # ylim=c(min(b[,2]), max(b[,2])))
   points(b, pch=16, cex=0.3, col="dimgrey")
   points(coef(fit)[1],coef(fit)[2], pch=19)
-  
+  plotlabel("(b)","topleft")
   if(legend)legend("topright", group, bty='n', cex=0.6)
 }
 
@@ -211,7 +217,7 @@ figure_sim <- function(){
                 ))
   with(r1, lines(PPFD, ALEAF/GS, col=col1, lty=lty1))
   with(r2, lines(PPFD, ALEAF/GS, col=col2, lty=lty2))
-  
+  plotlabel("(a)", "topright")
   legend("bottomright", c(expression(g[0] == 0), 
                           expression(g[0] == 0.01),
                           expression(g[0] == 0.03)),
@@ -224,34 +230,39 @@ figure_sim <- function(){
                 ylim=c(250,400)))
   with(r1, lines(PPFD, Ci, col=col1, lty=lty1))
   with(r2, lines(PPFD, Ci, col=col2, lty=lty2))
+  plotlabel("(b)", "topright")
   
   tleafs <- seq(10,45,length=101)
   vpds <- 0.000605 * tleafs^2.39
-  r0 <- Photosyn(PPFD=1500,
+  t0 <- Photosyn(PPFD=1500,
                  g1=g1, g0=0, Vcmax=70, Jmax=140,
                  VPD=vpds, Tleaf=tleafs, Ca=400)
-  r1 <- Photosyn(PPFD=1500,
+  t1 <- Photosyn(PPFD=1500,
                  g1=g1, g0=g0_1, Vcmax=70, Jmax=140,
                  VPD=vpds, Tleaf=tleafs, Ca=400)
-  r2 <- Photosyn(PPFD=1500,
+  t2 <- Photosyn(PPFD=1500,
                  g1=g1, g0=g0_2, Vcmax=70, Jmax=140,
                  VPD=vpds, Tleaf=tleafs, Ca=400)
   
-  with(r0, plot(Tleaf, ELEAF, type='l', 
+  with(t0, plot(Tleaf, 1000*GS, type='l', 
                 xlab=expression(T[leaf]~~(degree*C)),
-                ylab=expression(E[L]~~(mmol~m^-2~s^-1)),
+                ylab=expression(G[S]~~(mmol~m^-2~s^-1)),
                 col=col0, lty=lty0,
-                ylim=c(0,10)))
-  with(r1, lines(Tleaf, ELEAF, col=col1, lty=lty1))
-  with(r2, lines(Tleaf, ELEAF, col=col2, lty=lty2))
+                ylim=c(0,400)))
+  with(t1, lines(Tleaf, GS, col=col1, lty=lty1))
+  with(t2, lines(Tleaf, GS, col=col2, lty=lty2))
+  plotlabel("(c)", "topright")
   
-  with(r0, plot(VPD, Ci, type='l', 
+  with(t0, plot(VPD, Ci, type='l', 
                 xlab="VPD (kPa)",
                 ylab=expression(C[i]~~(mu*mol~mol^-1)),
                 col=col0, lty=lty0,
                 ylim=c(0,400)))
-  with(r1, lines(VPD, Ci, col=col1, lty=lty1))
-  with(r2, lines(VPD, Ci, col=col2, lty=lty2))
+  with(t1, lines(VPD, Ci, col=col1, lty=lty1))
+  with(t2, lines(VPD, Ci, col=col2, lty=lty2))
+  plotlabel("(d)", "topright")
+  
+return(invisible(list(r0=r0, r1=r1, r2=r2, t0=t0, t1=t1, t2=t2)))
 }
 
 
