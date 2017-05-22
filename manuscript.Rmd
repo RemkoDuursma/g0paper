@@ -1,5 +1,5 @@
 ---
-title: "On the minimum leaf conductance g~0~"
+title: "On the minimum leaf conductance"
 author: ''
 date: ''
 output:
@@ -30,8 +30,8 @@ T: +61(0)45701806
 
 
 
-```{r echo=FALSE}
-includefigs <- T
+```{r include=FALSE}
+includefigs <- F
 library(png)
 library(grid)
 
@@ -45,34 +45,43 @@ pval <- function(...)formatPval(..., includeEquality=TRUE)
 
 # Introduction
 
+\
 Stomata exert a strong control on the transpiration rate of leaves. It is well known that stomata respond quickly to changes in light intensity, humidity and CO~2~ concentration at the leaf surface. In doing so, stomata can be thought to balance the uptake of CO~2~ with the loss of water, and thus can be expected to close stomata when photosynthetic rates are low. To avoid dessiccation and ultimate death, stomata can also be expected to close during periods of severe water stress. Plants cannot, however, completely halt water loss even when stomata are closed. In this review, we discuss various aspects of the minimum leaf conductance reached when stomata are essentially closed. We pay special attention to the role that minimum conductance plays in land-surface models, in particular as it forms part of the much-used 'Ball-Berry'-type class of stomatal conductance models.
 
+\
 Most current-generation process-baed global vegetation models (GVMs) use a version of the Ball-Berry class of stomatal conductance (g~s~) models characterized by the dependence on assimilation rate, CO~2~ and humidity.
 
 \
 (1)
 $$ g_s = g_0 + g_1 \frac{A_n}{C_a}f(D)$$
 
-Where g~1~ is a 'slope' parameter, A~n~ the leaf net photosynthetic rate, C~a~ atmospheric CO~2~ concentration, and f(D) is some function of the vapour pressure deficit D (or relative humidity in case of the model of @ballberry1987), and g~0~ is the value of g~s~ when A~n~ is zero. The effects of photosynthetic photon flux density (PPFD) and leaf temperature are both assumed to enter via the dependence of A~n~ on these drivers. The g~0~ parameter is another definition of the minimum conductance, but we keep the notation g~0~ to indicate that it is a parameter in the Ball-Berry model. Much attention has been paid to quantifying and interpreting variation in the g~1~ parameter [@lin2015; @miner2017; @prentice2014; @medlyn2011], but the inocuous g~0~ parameter has been largely ignored. For example, a recent review of stomatal conductance models did not mention the minimum conductance [@damour2010]. The original description of Eq. 1 as published by @ball1987 did not include an intercept term. It was first introduced in the unpublished manuscript of @ball1988, as an 'intercept' without further discussion of the role it plays in the model.
+\
+Where g~1~ is a 'slope' parameter, A~n~ the leaf net photosynthetic rate, C~a~ atmospheric CO~2~ concentration, and f(D) is some function of the vapour pressure deficit D (or relative humidity in case of the model of @ballberry1987), and g~0~ is the value of g~s~ when A~n~ is zero. The effects of photosynthetic photon flux density (PPFD) and leaf temperature are both assumed to enter via the dependence of A~n~ on these drivers. The g~0~ parameter is another definition of the minimum conductance, but we keep the notation g~0~ to indicate that it is a parameter in the Ball-Berry model. Much attention has been paid to quantifying and interpreting variation in the g~1~ parameter [@lin2015; @miner2017; @prentice2014; @medlyn2011], but the inocuous g~0~ parameter has been largely ignored. For example, a recent review of stomatal conductance models did not mention the minimum conductance [@damour2010]. The original description of Eq. 1 as published by @ballberry1987 did not include an intercept term. It was first introduced in the unpublished manuscript of @ball1988, as an 'intercept' without further discussion of the role it plays in the model.
 
+\
 The g~0~ parameter not only sets a minimum value of g~s~ in the model, it also modifies the behaviour of Eq. 1 after it has been coupled to the Farquhar-von Caemmerer-Berry model of photosynthesis (the so-called 'coupled leaf gas exchange model'). @leuning1990 defined g~0~ as g~s~ when A approaches zero as PPFD approaches the light compensation point, and pointed out that g~0~ is necessary to simulate the increase in A/g~s~ (and C~i~) at low light [see also @leuning1995]. Similarly, @collatz1992 showed that including g~0~ affects the response of g~s~ to relative humidity in the coupled leaf gas exchange model. Despite these early reports, the exact role of g~0~ in models is often overlooked.
 
-Within the model framework, g~0~ is reached when photosynthesis (A~n~) goes to zero. Based on this, it is frequently assumed that g~0~ must equal g~s~ at night, simply because no photosynthesis occurs at night [@lombardozzi2016; @barnard2013; @uddling2005]. It is also frequently assumed that g~0~ is the 'cuticular conductance` [@baldocchi1997; @manzoni2011; @egea2011], which technically is the conductance of the cuticle alone - ignoring leaky and incompletely closed stomata [@kerstiens1996]. Another measurement of the minimum conductance is the leaf drying curve: leaves are picked, and gradually dried out and weighed to determine the water loss rate [@hygen1951]. This estimate of minimum conductance (which we refer to as g~min~) probably most closely reflects the dessiccation dynamics of severely droughted plants [@blackman2016], but has rarely been mentioned in the context of the Ball-Berry model. 
+\
+Within the model framework, g~0~ is reached when photosynthesis (A~n~) goes to zero. Based on this, it is frequently assumed that g~0~ must equal g~s~ at night, simply because no photosynthesis occurs at night [@lombardozzi2017; @barnard2013; @uddling2005]. It is also frequently assumed that g~0~ is the 'cuticular conductance` [@baldocchi1997; @manzoni2011; @egea2011], which technically is the conductance of the cuticle alone - ignoring leaky and incompletely closed stomata [@kerstiens1996]. Another measurement of the minimum conductance arises from leaf drying curve: leaves are picked, and gradually dried out and weighed to determine the water loss rate [@hygen1951]. This estimate of minimum conductance (which we refer to as g~min~) probably most closely reflects the dessiccation dynamics of severely droughted plants [@blackman2016], but has rarely been mentioned in the context of the Ball-Berry model. 
 
-In this review, we aim to compare values of the various estimates of minimum conductance, discuss components and mechanisms of minimum conductance. We place additional emphasis on measurements of g~min~, sources of variation in g~min~, and the role that g~min~ can play in models of water use. Before we discuss the various definitions and measurements of minimum conductance, we first review the modelling literature on its use of g~0~ in Eq. 1 (and related approaches), and demonstrate why g~0~ needs to be included in models.
+\
+In this review, we aim to compare values of the various estimates of minimum conductance, discuss components and mechanisms of minimum conductance. We place additional emphasis on sources of variation in g~min~, and the role that g~min~ can play in models of water use. Before we discuss the various definitions and measurements of minimum conductance, we first review the modelling literature on its use of g~0~ in Eq. 1 (and related approaches), and demonstrate why g~0~ needs to be included in models.
 
 
 # The use of g~0~ in models
 
+\
 A popular approach in thinking about how stomata 'should' respond to environmental drivers is the idea that stomatal conductance is varied to optimize the rate of photosynthesis per unit water used [@cowan1977]. The consequence is that stomata tend to open during periods that are favorable for photosynthesis (high light, optimal temperature), and close when photosynthesis drops to zero (darkness, very high temperature). Clearly, in this framework there is no place for g~0~ since it is always sub-optimal to open stomata (i.e. spend water) when there is no photosynthetic gain. Early work on optimal stomatal conductance models completely ignored the possibility of g~s~ > 0 when A~n~ = 0 [@cowan1977; @cowan1978; @hari1986; @hari1999], whereas more recent work derives the optimal g~s~ and then adds on a g~0~ [@medlyn2011].
 
+\
 In the following we discuss three reasons to include g~0~ in models: the response of C~i~ at low PPFD, the response of transpiration to high leaf temperature (T~leaf~), and the dessiccation of leaves in severe drought.
 
+\
 As pointed out by @leuning1990 and @leuning1995, g~0~ needs to be > 0, otherwise the ratio of intercellular CO~2~ concentration to atmospheric (C~i~ / C~a~) is constant with the photon flux density (PPFD). When PPFD approaches the light compensation point, clearly C~i~ needs to approach C~a~, since no photosynthesis is occurring that draws down the C~a~. To see this point, we can rearrange Eq. 1 to give,
 
 \
 (2)
-$$A~n~/g~s~ = {C_a}f(D) / g~1~$$
+$$A_n/g_s = {C_a}f(D) / g_1$$
 
 and using the diffusion constraint $A~n~ = g~s~ / 1.6 \cdot (C~a~ - C~i~)$ we get an expression for C~i~ / C~a~,
 
@@ -82,8 +91,10 @@ $$C_i / C_a = 1 - \frac{f(D)}{1.6 \cdot g_1}$$
 
 Eq. 3 - derived using g~0~ - thus does not give any dependence on PPFD.
 
+\
 The g~0~ parameter also represents g~s~ when T~leaf~ is very high, because A~n~ goes to zero at high T~leaf~. As a result, simulations of vegetation water use during heat waves depends highly on the value of g~0~ used [@kala2016] . It should be pointed out that the response of g~s~ to T~leaf~ is likely poorly modelled with a Ball-Berry model, since a number of studies have shown that g~s~ and A~n~ decouple at high T~leaf~, resulting in high rates of g~s~ when A~n~ is near zero [@urban2017] (Drake et al., unpublished). 
 
+\
 To illustrate the effect of g~0~ on the modelled response of g~s~ to PPFD and T~leaf~, it is necessary to embed the stomatal conductance model in a coupled leaf gas exchange model, which is formed by three equations; Eq. 1 giving the dependence of g~s~ on A~n~ and some environmental drivers, the diffusion constraint,
 
 \
@@ -98,22 +109,11 @@ where g~s~ is the conductance to H~2~O (the factor 1.6 converts to conductance t
 (3)
 $$ A_n = \frac{a \cdot (C_i - \Gamma^{*})}{C_i + b} - R_d$$
 
-where a = V~cmax~ or ~J/4~ (where J goes to Jmax at high light) depending on the limitation to photosynthesis, and b also varies. The dependence on temperature enters through V~cmax~, J~max~, R~d~, $\Gamma^{*}$, and other parameters [@medlyn2002]. 
+\
+where a = V~cmax~ or J/4 (where the electron transport rate J approaches Jmax at high light) depending on the limitation to photosynthesis, and b also varies. The dependence on temperature enters through V~cmax~, J~max~, R~d~, $\Gamma^{*}$, and other parameters [@medlyn2002]. 
 
+\
 Using the coupled leaf gas exchange as implemented in the *plantecophys* R package [@duursma2015], we show how A~n~/g~s~ and C~i~ depend on PPFD with three values of g~0~ (0, 0.01 and 0.03 mol m^-2^ s^-1^). We also demonstrate the effect of g~0~ on modelling the T~leaf~ response. In this simulation, T~leaf~ and D are assumed to co-vary with an empirical relationship as used by @duursma2014. Over the entire range of T~leaf~, inclusion of a non-zero g~0~ obviously increase leaf transpiration E~L~, but at a slightly higher rate than just due to g~0~. This effect arises because the additional conductance allows slightly higher rates of photosynthesis, which in turn increase g~s~ via Eq. 1. 
-
-
-@egea2011 Assumes g0 is constant, does not vary with water stress, and that it represents a ‘cuticular conductance’.
-
-
-@lombardozzi2017 puts g0 into CLM, notes in introduction that 'conductance during the night (and at other times when A = 0 ) is thus represented using g0'. 
-
-@barnard2013 makes the same assumption, without any discussion of the possibility that daytime g0 might be different from nighttime conductance
-
-
-
-
-
 
 
 ```{r fig.height=6,echo=FALSE, eval=includefigs}
@@ -122,19 +122,13 @@ plotfig("output/figure1.png")
 
 **Figure 1**. Simulations  of intrinsic water-use efficiency (A~n~/g~s~), intercellular CO~2~ concentration (C~i~) and leaf transpiration rate (E~L~) with three values of g~0~. For the top two panels, all environmental drivers were held constant except the photosynthetic photon flux density (PPFD), demonstrating that the inclusion of g~0~ is necessary to simulate the decrease in A~n~/g~s~ at low PPFD. For the bottom two panels, VPD and T~air~ were covaried based on an empirical relationship [@duursma2014], reflecting typical covariation in field conditions. For all simulations it is assumed that T~leaf~ is equal to T~air~. Parameters were, etc.
 
-
-
-We need a non-zero minimum conductance when simulating water fluxes in very dry soil [@blackman2016; @anderegg2012]
-Also @gleason2014, @sinclair2000
-
-
+\
+The third reason for inclusion of a g~0~ term in models of stomatal conductance arises during severe drought. When plants are sufficiently water-stressed that stomata are completely closed, water loss still continues through the cuticle and leaky and incompletely closed stomata. Thus models that aim to predict when plants dessiccate and die must include a minimum conductance term [@blackman2016; @sinclair2000]. We return to measurements of g~min~ from leaf drying curves in Section XXX.
 
 
 # Comparison of values for various definitions
 
-
-
-**Table 1.** Definitions of minimum conductance
+**Table 1.** Definitions of minimum conductance.
 
 | Variable   |  Definition |
 | ---------- | ----------- |
@@ -143,20 +137,14 @@ Also @gleason2014, @sinclair2000
 | g~dark~    | Night-time conductance                                  |
 | g~0~       | Intercept in the Ball-Berry-type stomatal conductance model, fitted. |
 
+\
+We identify four distinct definitions of minimum conductance, each of which is measured with its own set of methods. Before discussing each of the minimum conductances in detail in the following sections, we here compile literature values to compare the relative magnitude of each of the conductances.
 
-We compare estimates of g~cut~, g~min~, and g~dark~ from the literature. Measurements of g~cut~ and g~min~ were taken from the compilation by @kerstiens1996, with additional g~min~ measurements from @schuster2016, @burghardt2003, @cavenderbares2007, and @phillips2010 (for the latter study, raw data were obtained and g~min~ calculated). We excluded measurements of g~min~ where stomatal leaf sides were sealed, because few data were available and the comparison is not consistent with individual studies where the role of stomata in g~min~ is studied (see SectionXXX).
+\
+Measurements of conductance of isolated, non-stomatal cuticles (g~cut~) and of minimum conductance from leaf dry-down curves (g~min~) were taken from the compilation by @kerstiens1996, with additional g~min~ measurements from @schuster2016, @burghardt2003, @cavenderbares2007, and @phillips2010 (for the latter study, raw data were obtained and g~min~ re-calculated). We excluded measurements of g~min~ where stomatal leaf sides were sealed, because few data were available and the comparison is not consistent with individual studies where the role of stomata in g~min~ is studied (see SectionXXX). A compilation of night-time (and 'dark') conductance (g~dark~) values was taken from @lombardozzi2017. We also estimated g~0~ from Eq. 1 using the stomatal conductance model of @medlyn2011, using non-linear regression. These estimates were combined with the compilation of g~0~ values from @miner2017, who reported on xxx values from a literature compilation (each of those values was estimated with linear regression of the Ball-Berry model). Finally, we also estimated minimum values of g~s~ attained from a large database of leaf gas exchange data [@lin2015], by taking those data where A~n~ < 2 $mu$ mol m^-2^ s^-1^, and calculating the minimum g~s~ for each of the XXX studies included in that dataset. This estimate was added as it represents actual minimum values measured, rather than a fitted/extrapolated g~0~ term.
 
-It is customary for g~cut~ and g~min~ to be expressed per unit total leaf surface area, however, since we aim a comparison with g~s~ and g~dark~, all values were converted to per unit projected surface area. Units were converted to molar fluxes assuming 41 mol m^-3^ (cf. @kerstiens1996). For g~dark~, we used a recent compilation of measurements from @lombardozzi2017.
-
-For the combined dataset, we looked up plant growth form and phylogenetic group (angiosperm or gymnosperm) from the TRY categorical traits database [@kattge2011].
-
-@korner1994 table of minimum conductance. Also points out (without reference) that g0 in droughted leaves is certainly lower than g0 in dark or very high CO2 leaves.
-
-g~s,minA~ calculated from @lin2015 data. Also g0 fitted using the model of Medlyn et al. 2011, and those from @miner2016 (combined all). 
-
-g~s,low A~ much lower than fitted g~0~ or g~dark~ (see also @dekauwe2015, their Fig. A2).
-
-g~dark~ much higher than g~min~, also confirmed by experiments. In soybean, @waldencoleman2013 showed much higher g~dark~  compared to g~min~. 
+\
+It is customary for g~cut~ and g~min~ to be expressed per unit total leaf surface area, however, since we aim a comparison with g~0~ and g~dark~, all values were converted to per unit projected surface area. Units were converted to molar fluxes assuming 41 mol m^-3^ (cf. @kerstiens1996). For the combined dataset, we looked up plant growth form and phylogenetic group (angiosperm or gymnosperm) from the TRY categorical traits database [@kattge2011].
 
 
 
@@ -164,28 +152,27 @@ g~dark~ much higher than g~min~, also confirmed by experiments. In soybean, @wal
 plotfig("output/figure4.png")
 ```
 
-**Figure 4**. Comparison of various estimates of minimum conductance. Error bars are standard errors, grey vertical lines 90% quantiles indicating wide range of variation for any variable. g~cut,isol~ : cuticual permeance measured on isolated cuticles that lack stomata (data from Kerstiens 1996), g~min~ : minimum conductance based on leaf-dry-down curves (data from Kerstiens 1996, with a few extra data points - to be added), g~dark : stomatal conductance in the dark at night, measured in field conditions (data from Lombardozzi et al. 2017), g~0~ : fitted g~0~ in the Medlyn et al. (2011) model with the Lin et al. (2015) database, g~s,low A~ : for the Lin et al. (2015) database, minimum g~s~ when net assimilation rate was less than 2 $mu$ mol m^-2^ s^-1^, calculated once for each dataset. Minimum conductance and cuticular conductance are commonly expressed per all surface area but here projected was used because that's more common for g0, gdark.
+**Figure 4**. Comparison of various estimates of the minimum conductance. Error bars are standard errors. See Table 1 for definitions of minimum conductance, and text for the data sources. 
 
+
+
+g~s,low A~ much lower than fitted g~0~ or g~dark~ (see also @dekauwe2015, their Fig. A2).
+
+g~dark~ much higher than g~min~, also confirmed by experiments. In soybean, @waldencoleman2013 showed much higher g~dark~  compared to g~min~. 
+
+@korner1994 table of minimum conductance. Also points out (without reference) that g0 in droughted leaves is certainly lower than g0 in dark or very high CO2 leaves.
 
 
 
 # Estimation of g~0~ by fitting 
 
+The standard approach in estimating g~0~ for use in Eq. 1 is to use regression with g~s~ as the response variable, and the right-hand side of Eq. 1 as the predictor. The g~0~ parameter is thus estimated as the intercept. Here we briefly discuss some statistical aspects of this estimation procedure, and draw the general conclusion that g~0~ is poorly estimated in this way. The difficulty of the estimation can already be concluded from the fact that a) many studies set g~0~ to some assumed value rather than fitting it (e.g. @leuning1995 uses 0.01 for all); presumably because unreliable estimates were obtained, b) negative g~0~ estimates (i.e. negative intercepts) are common [@leuning1995; @heroult2013; @miner2017]. In a pioneering publication which presented the Jarvis model of stomatal conductance, @jarvis1976 states that "we have assumed in the following equations that when stomata are closed the  leaf conductance is zero because field data are generally inadequate to define a cuticular conductance." [@jarvis1976]. More recently, @barnard2013 mention the difficulty of fitting Eq. 1 to estimate g~0~ but give no details.
 
-"We have assumed in the following equations that when stomata are closed the leaf conductance is zero because field data are generally inadequate to define a cuticular conductance." [@jarvis1976]
-
-
-The difficulty of this can be seen from the fact that a) many studies set g0 to something rather than fitting it (e.g. @leuning1995 uses 0.01 for all); presumably because unreliable estimates were obtained, b) negative fitted values are common [@leuning1995; @heroult2013; @miner2017].
+The first problem is that generally in linear regression, the intercept and slope are highly correlated. In Fig. 2, we demonstrate this problem. The consequence is that it is more difficult to interpret g~1~ and g~0~ independently, because small errors in g~1~ lead to errors in g~0~. 
 
 
-[@barnard2013] mention difficulty of fitting but give no details.
-
-Even in very good datasets, g0 and g1 are strongly correlated (Figure 2).
 Across datasets, g0 increases when the model fits poorly (Figure 3), and the width of the confidence interval increases when less variation in a ball-berry coefficient.
 
-Often g0 is even negative [@heroult2013; @leuning1990], so it is often set to some arbitrary value 
-
-When fitting a Ball-Berry type model, negative values are quite common. A typical approach is to avoid this by setting some value based on guesswork [e.g. @leuning1990], which we assume is quite common when inspecting the many rounded values in the review by 
 
 g~0~ fitted is higher than minimum g~s~ from datasets. If we restrict the fittings to those were g~0~ had a relatively narrow width of the confidence interval (< 0.03 mol m-2 s-1), then the average was `r with(subset(lin2015coef, g0_uci - g0_lci < 0.03), mean(g0))` compared to `r mean(lin2015coef$g0)` for all. 
 
