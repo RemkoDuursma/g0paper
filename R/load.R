@@ -180,7 +180,8 @@ condreview_ave$LeafPhenology <- as.factor(condreview_ave$LeafPhenology) %>%
 condreview_ave <- ungroup(condreview_ave)
 
 # Miner et al. 2016
-miner <- read.csv("data/Miner_table1.csv")
+miner <- read.csv("data/Miner_table1.csv") %>%
+  mutate(g0 = 1000*g0)
 
 
 # Lombardozzi et al 2017

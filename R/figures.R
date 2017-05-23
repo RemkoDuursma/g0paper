@@ -102,6 +102,7 @@ figure_gmin_review_3 <- function(dat){
 figure_g0g1_cor <- function(lin2015, group, legend=FALSE){
   
   x <- subset(lin2015, fitgroup == group)
+  x$Cond <- 1000*x$Cond
   
   # for bootCase to work
   assign("x",x,envir=.GlobalEnv)
@@ -118,25 +119,25 @@ figure_g0g1_cor <- function(lin2015, group, legend=FALSE){
       cex.lab=1.1, cex.axis=0.9)
   with(x, plot(BBopti, Cond, 
                xlim=c(0,0.04),
-               ylim=c(0,0.15),
+               ylim=c(0,150),
                # ylim=c(0, max(Cond)),
                # xlim=c(0,max(BBopti)),
                panel.first=add_regres_line(fit),
                xlab=expression(A/(C[a]*sqrt(D))),
-               ylab=expression(g[s]~(mol~m^-2~s^-1)),
+               ylab=expression(g[s]~(mmol~m^-2~s^-1)),
                pch=16, cex=0.8, col="dimgrey"))
   box()
   plotlabel("(a)","topleft")
   
-  plot(el, type='l', lty=3, 
-       xlab=expression(g[0]~~(mol~m^-2~s^-1)), 
+  plot(el[,1], el[,2]/1000, type='l', lty=3, 
+       xlab=expression(g[0]~~(mmol~m^-2~s^-1)), 
        ylab=expression(g[1]~~(kPa^-0.5)),
-       xlim=c(0,0.025),
+       xlim=c(0,25),
        ylim=c(3,5))
        # xlim=c(min(b[,1]), max(b[,1])),
        # ylim=c(min(b[,2]), max(b[,2])))
-  points(b, pch=16, cex=0.3, col="dimgrey")
-  points(coef(fit)[1],coef(fit)[2], pch=19)
+  points(b[,1], b[,2]/1000, pch=16, cex=0.3, col="dimgrey")
+  points(coef(fit)[1],coef(fit)[2]/1000, pch=19)
   plotlabel("(b)","topleft")
   if(legend)legend("topright", group, bty='n', cex=0.6)
 }
@@ -146,28 +147,42 @@ figure_g0g1_cor <- function(lin2015, group, legend=FALSE){
 
 figure_R2g0 <- function(lin2015coef, miner){
   
-  par(mfrow=c(1,2), mar=c(5,5,1,1), cex.axis=0.9)
+  par(mfrow=c(1,3), mar=c(5,5,1,1), cex.axis=0.9)
+  l <- loess(g0 ~ R2, data=lin2015coef, span=0.8)
   with(lin2015coef, {
     plot(R2, g0, pch=16,
          xlab=expression(R^2),
-         ylab=expression(g[0]~~(mol~m^-2~s^-1)),
-         ylim=c(-0.1, 0.3),
+         ylab=expression(g[0]~~(mmol~m^-2~s^-1)),
+         ylim=c(-100, 300),
          xlim=c(0,1),
-         panel.first=segments(x0=R2, x1=R2, y0=g0_lci, y1=g0_uci, col="dimgrey")
+         panel.first={
+           plot_loess(l, add=TRUE, band=TRUE, lwd=2, col="darkgrey")
+           panel.last=segments(x0=R2, x1=R2, y0=g0_lci, y1=g0_uci, col="dimgrey")
+         }
+         
     )
   })
   abline(h=0)
-  l <- loess(g0 ~ R2, data=lin2015coef, span=0.8)
-  plot_loess(l, add=TRUE, band=TRUE, lwd=2, col="darkgrey")
+  
+  
   legend("topright", "Lin et al. 2015", bty='n', cex=0.8)
   
-  with(miner,plot(R2, g0, pch=16, ylim=c(-0.1, 0.3), xlim=c(0,1),
-                  xlab=expression(R^2),
-                  ylab=expression(g[0]~~(mol~m^-2~s^-1))))
-  abline(h=0)
   l <- loess(g0 ~ R2, data=miner, span=0.8)
-  plot_loess(l, add=TRUE, band=TRUE, lwd=2, col="darkgrey")
+  with(miner,plot(R2, g0, pch=16, ylim=c(-100, 300), xlim=c(0,1),
+                  xlab=expression(R^2),
+                  ylab=expression(g[0]~~(mmol~m^-2~s^-1)),
+                  panel.first=plot_loess(l, add=TRUE, band=TRUE, lwd=2, col="darkgrey")))
+  abline(h=0)
+  
   legend("topright", "Miner et al. 2017", bty='n', cex=0.8)
+  
+  l <- loess(g0_se ~ cv_bbopti, data=lin2015coef, span=0.9)
+  with(lin2015coef, plot(cv_bbopti, g0_se, pch=16, ylim=c(0,60),
+                         xlab=expression("CV of"~A[n]/(C[a] * sqrt(VPD))),
+                         ylab=expression("SE of"~g[0]~~(mmol~m^-2~s^-1)),
+                         panel.first=plot_loess(l, add=TRUE, band=TRUE, lwd=2, col="darkgrey")
+                         ))
+
   
 }
 

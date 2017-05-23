@@ -16,11 +16,15 @@ fits_lin2015 <- function(lin2015a){
   p <- as.data.frame(coef(fits)) %>% 
     rownames_to_column(var = "fitgroup") %>%  
     rename(g0 = `(Intercept)`, g1 = BBopti) %>% 
-    mutate(R2 = sapply(fits, function(x)summary(x)$adj.r.squared),
+    mutate(g0 = 1000 * g0,
+           R2 = sapply(fits, function(x)summary(x)$adj.r.squared),
            rmse = sapply(fits, function(x)summary(x)$sigma),
            cor = sapply(fits, function(x)summary(x, correlation=T)$correlation[2,1]),
-           g0_lci = sapply(fits, function(x)confint(x)[1,1]),
-           g0_uci = sapply(fits, function(x)confint(x)[1,2])) %>% 
+           g0_lci = 1000 * sapply(fits, function(x)confint(x)[1,1]),
+           g0_uci = 1000 * sapply(fits, function(x)confint(x)[1,2]),
+           g0_se = 1000 * sapply(fits, function(x)summary(x)$coefficients[1,2]),
+           g1_se = sapply(fits, function(x)summary(x)$coefficients[2,2])
+           ) %>% 
     left_join(summarize(lin2015a, 
                         sd_bbopti = sd(BBopti, na.rm=TRUE),
                         cv_bbopti = sd_bbopti/mean(BBopti, na.rm=TRUE),

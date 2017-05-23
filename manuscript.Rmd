@@ -166,19 +166,22 @@ g~dark~ much higher than g~min~, also confirmed by experiments. In soybean, @wal
 
 # Estimation of g~0~ by fitting 
 
-The standard approach in estimating g~0~ for use in Eq. 1 is to use regression with g~s~ as the response variable, and the right-hand side of Eq. 1 as the predictor. The g~0~ parameter is thus estimated as the intercept. Here we briefly discuss some statistical aspects of this estimation procedure, and draw the general conclusion that g~0~ is poorly estimated in this way. The difficulty of the estimation can already be concluded from the fact that a) many studies set g~0~ to some assumed value rather than fitting it (e.g. @leuning1995 uses 0.01 for all); presumably because unreliable estimates were obtained, b) negative g~0~ estimates (i.e. negative intercepts) are common [@leuning1995; @heroult2013; @miner2017]. In a pioneering publication which presented the Jarvis model of stomatal conductance, @jarvis1976 states that "we have assumed in the following equations that when stomata are closed the  leaf conductance is zero because field data are generally inadequate to define a cuticular conductance." [@jarvis1976]. More recently, @barnard2013 mention the difficulty of fitting Eq. 1 to estimate g~0~ but give no details.
+The standard approach in estimating g~0~ for use in Eq. 1 is to use regression with g~s~ as the response variable, and the right-hand side of Eq. 1 as the predictor. The g~0~ parameter is thus estimated as the intercept. Here we briefly discuss some statistical aspects of this estimation procedure, and draw the general conclusion that g~0~ is poorly estimated in this way. The difficulty of the estimation can already be concluded from the fact that a) many studies set g~0~ to some assumed value rather than fitting it (e.g. @leuning1995 uses 0.01 for all); presumably because unreliable estimates were obtained, b) negative g~0~ estimates (i.e. negative intercepts) are common [@leuning1995; @heroult2013; @miner2017]. In a pioneering publication which presented the Jarvis model of stomatal conductance, @jarvis1976 states that "we have assumed in the following equations that when stomata are closed the  leaf conductance is zero because field data are generally inadequate to define a cuticular conductance." [@jarvis1976]. More recently, @barnard2013 mention the difficulty of fitting Eq. 1 to estimate g~0~ but give no details. 
 
-The first problem is that generally in linear regression, the intercept and slope are highly correlated. In Fig. 2, we demonstrate this problem. The consequence is that it is more difficult to interpret g~1~ and g~0~ independently, because small errors in g~1~ lead to errors in g~0~. 
+It is also telling that there are few reports on the plasticity of g~0~, perhaps because it is so poorly estimated. Exceptions are @duarte2016, who found a lower g0 in a heat wave treatment (although g~1~ was unaffected), and @misson2004 who report on a close negative correlation between pre-dawn leaf water potential and g~0~.
+
+\
+Next we demonstrate that the fitting process gives three problems: 1) the estimates of g~0~ and g~1~ are highly correlated, 2) the precision for g~0~ is generally much lower than for g~1~, and 3) for data that have a worse fit overall, the g~0~ estimates are elevated.
+
+\
+In Fig. 2, we demonstrate how g~0~ and g~1~ are statistically correlated via a bootstrap sampling approach. The correlation between slopes and intercepts is a general aspect of linear models [@stapleton1995]. The consequence is that it is more difficult to interpret g~1~ and g~0~ independently, and that confidence intervals on each of the parameters should also not be interpreted independently. See @becker2007 for more discussion. 
 
 
-Across datasets, g0 increases when the model fits poorly (Figure 3), and the width of the confidence interval increases when less variation in a ball-berry coefficient.
+Across datasets, g0 increases when the model fits poorly (Fig. 3 a,b), and the standard error (SE) of g~0~ increases when less variation in a ball-berry coefficient (Fig. 3c). Also, SE is very large compared to the average magnitude of g~0~ across studies (compare Fig. 2 and Fig. 3).
 
 
 g~0~ fitted is higher than minimum g~s~ from datasets. If we restrict the fittings to those were g~0~ had a relatively narrow width of the confidence interval (< 0.03 mol m-2 s-1), then the average was `r with(subset(lin2015coef, g0_uci - g0_lci < 0.03), mean(g0))` compared to `r mean(lin2015coef$g0)` for all. 
 
-Relatively few reports on the plasticity of g~0~, perhaps because it is so poorly estimated. Exceptions:
-
-[@duarte2016] fitted g0 with BB and BBOpti. Lower g0 in heat wave treatment. Also lower gdark in heat wave treatment. But g1 or m not affected by heat waves (again example where a gmin is a responsive parameter!)
 
 
 
@@ -200,53 +203,29 @@ plotfig("output/figure3.png")
 
 
 
-# Nighttime conductance (v. short)
+# Nighttime conductance
 
-One estimate of g~0~ (low PPFD) comes from night-time measurements of conductance, which have been known for a long time to be substantially larger than zero. It is however not clear whether daytime g~0~ at low PPFD, for darkened leaves, is comparable in magnitude to g~0~ in the dark at night. Evidence from experiments where environmental conditions are held constant suggests that g~s~ varies tremendously throughout the day independent of these drivers, and has therefore been attributed to an internal clock (Resco).
+A number of studies have assumed that the g~0~ in the Ball-Berry model equals the night-time conductance (g~dark~). However as our literature comparison showed, g~dark~ is substantially higher compared to g~s~ reached at low photosynthetic rates, and g~min~. Previous work on g~dark~ have confirmed that night-time conductance is generally much higher than g~min~, when measured on the same species [@howard2007; @caird2007]. The idea that g~dark~ is equal to the minimum reached during periods of near-zero PPFD or high temperature during the day can be dismissed based on several observations.
 
-- gdark is variable during the night
-- gdark is an active process not just a fixed parameter
-- gs very early morning is quite high because in many cases gs increases before the sun comes up
-- reviewed extensively elsewhere
-
-@messinger2006 Conclude that Ci response of gs is the same in the dark or when DCMU was applied (which disrupts electron transport). However, Fig5A-B indicate that gs was much higher in the dark than when DCMU was applied (although the ‘response’ was similar). This indicates gs response to low PAR (darkness) is more than just responding to what photosynthesis does.
+\
+First, ample observations suggect that g~dark~ is not a fixed rate but varies tremendously during the night. @caird2007 (and references therein) described how for many species, g~dark~ is not stable throughout the night period. Instead, endogenous, gradual increases in stomatal opening during predawn hours have been reported in many species under natural field conditions as well as in controlled environments. @rescodedios2016 showed that, in Eucalyptus camaldulensis, g~dark~ in the period just after sunset was much lower than pre-dawn g~dark~. Strong evidence for endogenous regulation of g~dark~ was reported by @rescodedios2013, who showed that g~dark~ fluctuated throughout the night despite environmental conditions being held constant in whole-tree chambers.
 
 
-Nighttime conductance not necessarily same as minimum conductance
-We are not reviewing nighttime conductance here, that has been done extensively by others [@caird2007]
 
-gnight not constant 
-@barbour2007 considerable stomatal control during the night; mirrors daytime
-@howard2007 nighttime conductance lower in drought. Nighttime 2-5x higher than cuticular.
+#  Cuticular conductance
 
-@misson2004 g0 decreases with pre-dawn water potential
+The conductance of stomata-free leaf cuticles represents the absolute minimum conductance that leaves can attain. It is clear from our literature review, g~cut~ is very much lower than other definitions of minimum conductance - it is on average twice as low as g~min~. We admit some caution in this conclusion, because g~cut~ is probably too low in the way it is measured (as a permeance), due to low water content of the cuticle in those conditions [@kerstiens1996]. We briefly review a few important aspects of cuticular conductance, and to what extent we expect it to vary with species and environments. We refer to previous in-depth reviews for a more detailed treatment of other aspects of plant cuticles, such as chemical composition and morphology, and modes of water transport across the cuticle [@kerstiens1996; @kerstiens2006; @schreiber1996; @schreiber2001]. We return to the question on what component of g~min~ is due to g~cut~ in the next section.
 
-@rescodedios2016 early night gs much (much) lower than pre-dawn gs, in E. camaldulensis
-@rescodedios2013 nighttime fluctuation gs independent of environment
+Although we use the term cuticular conductance freely, this transport pathway does not represent a true conductance since water does not diffuse as a gas through the cuticle. Instead, it dissolves into the medium of the cuticle, diffuses through the solid matrix, and is desorped at the outer edge of the cuticle. The main barrier to diffusion is actually a very thin layer at the leaf surface. Because most of the resistance is located in such a thin layer, g~cut~ does not depend on the thickness of the cuticle  [@riederer2001; @anfodillo2002]. One may ask why there is so much variation in cuticle thickness between plant species, if it does not affect g~cut~. The answer may lie in mechanical strength rather than water relations, as @onoda2012 reported that thicker cuticles are more resistant to tearing (he force to tear and tensile strength both approx proportional to cuticle thickness).
 
-@caird2007 For many species, gnight is not stable throughout the night period. Endogenous, gradual increases in stomatal opening during predawn hours have been reported in many species under natural field conditions as well as in controlled environments [lots of refs]
-
-@howard2007 gdark much higher than gmin (Helianthus annuus). In general this is the case [@caird2007]
-
-
-#  Cuticular conductance (short)
-
-- true cuticular conductance is that of isolated non-stomatal peels, and is very low compared to other definitions
-- what is it, and is it variable with anything? yes, temperature, humidity.
 
 Water travels more freely across the cuticle than CO2 [@boyer1997; @boyer2015]
+This observation was used by @manzoni2011 to recalculate leaf water-use efficiency for droughted plants, but we caution against this because g~cut~ is only one component of g~min~, and CO~2~ will travel through leaky and incompletely closed stomata.
 
-Details of cuticular composition, modes of transport, and composition has been reviewed 
-[@kerstiens1996; @kerstiens2006; @schreiber1996; @schreiber2001]
-
-Not really a conductance, since water does not diffuse as a gas through the cuticle. Instead it dissolves into the medium of the cuticle, diffuses through the solid matrix, and is desorped at the outer edge of the cuticle. The main barrier to diffusion is actually a thin layer at the leaf surface, and hence gcut does not depend on the thickness of the cuticle  [@riederer2001; @anfodillo2002]. @onoda2012 found that thicker cuticles are more resistant to tearing (force to tear and tensile strength both approx proportional to cuticle thickness)
-
-gcut is probably too low in the way it is measured (as a permeance), due to low water content of the cuticle in those conditions [@kerstiens1996]
+- @riederer2001 @schuster2016 correlation between temperature and gcut (non-stomatal cuticles)
 
 
-@riederer2001 Review on cuticular conductance. gcut is not correlated with cuticle thickness. No reference to stomata. Cuticles are even less permeable than polymers of equivalent thickness used in packaging.
 
-- @riederer2001 correlation between temperature and gcut (non-stomatal cuticles)
 
 # Minimum conductance (longer)
 
