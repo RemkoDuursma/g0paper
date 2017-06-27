@@ -46,6 +46,19 @@ pval <- function(...)formatPval(..., includeEquality=TRUE)
 # Introduction
 
 \
+Notes
+gmin can increase with ozone and or aerosol particles (no ref yet) - potential for interaction with air pollution. Kerstiens?
+
+Hoad et al; strong positive relationship between g0 and RWC - is our segmented linear method hiding changes in gmin over time?
+
+Gardingen & Grace, gcut depends on VPD (and some useful discussion on difference isolated cuticle vs. intact leaf on non-stomatal side)
+
+rawson and clarke 1988; gs increased hours pre-dawn in wheat. Nocturnal gs > cuticular (which was 13-50% of total)
+
+hygen midgaard 1954- no effect of VPD on gmin (eventual decline in RWC is very linear and does not differ with various VPD treatments). "Experiments on the effect of darkening indicated that the stomata may remain partly open even during prolonged dark periods"
+
+
+\
 Stomata exert a strong control on the transpiration rate of leaves. It is well known that stomata respond quickly to changes in light intensity, humidity and CO~2~ concentration at the leaf surface. In doing so, stomata can be thought to balance the uptake of CO~2~ with the loss of water, and thus can be expected to close stomata when photosynthetic rates are low. To avoid dessiccation and ultimate death, stomata can also be expected to close during periods of severe water stress. Plants cannot, however, completely halt water loss even when stomata are closed. In this review, we discuss various aspects of the minimum leaf conductance reached when stomata are essentially closed. We pay special attention to the role that minimum conductance plays in land-surface models, in particular as it forms part of the much-used 'Ball-Berry'-type class of stomatal conductance models.
 
 \
@@ -171,6 +184,7 @@ g~dark~ much higher than g~min~, also confirmed by experiments. In soybean, @wal
 
 The standard approach in estimating g~0~ for use in Eq. 1 is to use regression with g~s~ as the response variable, and the right-hand side of Eq. 1 as the predictor. The g~0~ parameter is thus estimated as the intercept. Here we briefly discuss some statistical aspects of this estimation procedure, and draw the general conclusion that g~0~ is poorly estimated in this way. The difficulty of the estimation can already be concluded from the fact that a) many studies set g~0~ to some assumed value rather than fitting it (e.g. @leuning1995 uses 0.01 for all); presumably because unreliable estimates were obtained, b) negative g~0~ estimates (i.e. negative intercepts) are common [@leuning1995; @heroult2013; @miner2017]. In a pioneering publication which presented the Jarvis model of stomatal conductance, @jarvis1976 states that "we have assumed in the following equations that when stomata are closed the  leaf conductance is zero because field data are generally inadequate to define a cuticular conductance." [@jarvis1976]. More recently, @barnard2013 mention the difficulty of fitting Eq. 1 to estimate g~0~ but give no details. 
 
+\
 It is also telling that there are few reports on the plasticity of g~0~, perhaps because it is so poorly estimated. Exceptions are @duarte2016, who found a lower g0 in a heat wave treatment (although g~1~ was unaffected), and @misson2004 who report on a close negative correlation between pre-dawn leaf water potential and g~0~.
 
 \
@@ -292,6 +306,8 @@ plotfig("output/figure6.png")
 
 **Figure 6**. Minimum conductance measured from leaf dry-down curves on *Eucalyptus parramattensis* grown in whole-tree chambers. Trees were grown following ambient conditions, or in a constant elevated temperature treatment (+3 degrees C). Measurements of g~min~ were carried out at five different temperatures on replicate leaves. There is no effect of measurement T on g~min~, but leaves of trees grown in elevated temperature showed consistently lower g~min~.
 
+
+Lower g~min~ result is consistent with @duarte2016, who reported lower g~0~ and g~dark~ in a heat wave treatment (Douglas-fir), which persisted for some time. This is not due to a direct effect of temperature on in cuticular conductance, which increases with temperature (Schreiber 2001). Our results showed a large  acclimation effect but no evidence for a direct T effect (over the narrow range in T compared to Schreiber).
 
 
 ```{r fig.height=4,echo=FALSE, eval=includefigs}
