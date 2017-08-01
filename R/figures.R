@@ -26,77 +26,34 @@ figure_gmin_review <- function(gdfr){
 }
 
 figure_gmin_review_2 <- function(gdfr){
-  par(mar=c(3,5,1,0.5), cex.lab=1.2)
   
-  # get rid of sealed leaves - small sample size and confusing result
-  gdfr <- droplevels(subset(gdfr, method != "gcut_seal"))
+  par(mar=c(4,4,1.5,1), mgp=c(2.5,0.5,0), tcl=-0.2, 
+      las=3, yaxs="i",
+      cex.lab=1.2)
+  plotCI2(gmin, method, gdfr, transform_log10=TRUE,
+          label_las=1,
+          ylab=expression(Conductance~(mmol~m^-2~s^-1)),
+          labels=c(expression(g["cut,isol"]),
+                   expression(g["cut,seal"]),
+                   expression(g["min"]),
+                   expression(g["dark"]),
+                   expression(g["0"]),
+                   expression(g["s,low A"])))
   
-  fit <- lm(log10(gmin) ~ method-1, data=gdfr)
-  cis <- confint(fit)
-  quans <- sapply(split(gdfr, gdfr$method), function(x)quantile(log10(x$gmin), probs=c(0.05, 0.95)))
-  gmins <- with(gdfr, tapply(log10(gmin), method, mean, na.rm=TRUE))
-  ng <- nlevels(gdfr$method)
   
-  plot(1:ng, 10^gmins, pch=19, cex=1.2, xlab="",
-       axes=FALSE,
-       #panel.first=segments(x0=1:5, x1=1:5, y0=10^quans[1,], y1=10^quans[2,], col="grey"),
-       ylim=c(0,50),
-       xlim=c(0.5,ng+0.5),
-       ylab=expression(Conductance~~(mmol~m^-2~s^-1)))
-  axis(1, at=1:ng, labels=c(expression(g["cut,isol"]),
-                           #expression(g["min,seal"]),
-                           expression(g[min]),
-                           expression(g[dark]),
-                           expression(g[0]),
-                           expression(g["s,low A"])))
-  axis(2)
-  box()
-  arrows(x0=1:ng, x1=1:ng, y0=10^cis[,1], y1=10^cis[,2], angle=90, length=0.1, code=3)
 }
 
 
-figure_gmin_review_3 <- function(dat){
+figure_gmin_bygroup <- function(gmindat){
   
-  dat <- as.data.frame(dat)
-  
-  plot_dat <- function(yvar = "PhylogeneticGroup", meth = "gmin", data=dat, ...){
-    
-    data <- data[data$method == meth,]
-    data$yvar <- as.factor(data[,yvar])
-    
-    fit <- lm(log10(gmin) ~ yvar - 1, data=data)
-    ci <- 10^confint(fit)
-    mn <- 10^coef(fit)
-    
-    g <- glht(fit, linfct=mcp(yvar = "Tukey"))
-    lets <- cld(g)$mcletters$Letters
-    
-    n <- length(mn)
-    plot(1:n, mn, pch=19, cex=1.1, ylim=c(0, max(ci)+0.1*max(ci)), axes=FALSE,
-         xlim=c(0.7, n+0.3), ...)
-    axis(1, at=1:n, labels=capitalize(levels(data$yvar)))
-    arrows(x0=1:n, x1=1:n, y0=ci[,1], y1=ci[,2], angle=90, length=0.05, code=3)
-    text(x=1:n, y=ci[,2], lets, pos=3, cex=0.8)
-    axis(2)
-    box()
-  }
-  
-  # Combine angio/gymno with growth form
-  dat$group <- as.character(dat$PlantGrowthForm)
-  dat$group[which(dat$PlantGrowthForm == "tree")] <- 
-    as.character(dat$PhylogeneticGroup)[which(dat$PlantGrowthForm == "tree")]
-  dat$group <- factor(dat$group, levels=c("graminoid","herb","shrub","Angiosperm","Gymnosperm"))
-  levels(dat$group) <- c("Graminoid","Herb","Shrub","Tree, Angio.","Tree, Gymno.")
-  
-  par(mar=c(6.5,4,1,1), mgp=c(2.5,0.5,0), tcl=-0.2, 
+  par(mar=c(6.5,4,1.5,1), mgp=c(2.5,0.5,0), tcl=-0.2, 
       las=3, yaxs="i",
       cex.lab=1.2, cex.axis=0.8)
-  plot_dat("group", "gmin",
-              xlab="", ylab=expression(g[min]~~(mmol~m^-2~s^-1)))
+  
+  plotCI2(gmin, group2, gmindat, transform_log10=TRUE,
+          ylab=expression(g[min]~~(mmol~m^-2~s^-1)))
   
 }
-
-
 
 
 figure_g0g1_cor <- function(lin2015, group, legend=FALSE){
@@ -410,5 +367,34 @@ figure_hakea_gmin <- function(lopw){
   ch <- toupper(substr(as.character(lopw2$leaf.form),1,1))
   text(x,y,ch, pos=3, font=3, cex=0.7)
 }
+
+
+
+gmin_by_order <- function(gmindat){
+  
+  gmindat3 <- mutate(gmindat, 
+                     Order = fct_lump(Order, n=10),
+                     Order = reorder(Order, gmin, median)) %>%
+    filter(Order != "Other") %>% droplevels
+  
+  par(mar=c(6,4,2,2))
+  plotCI2(gmin, Order, gmindat3, transform_log10=TRUE,
+          ylab=expression(Conductance~(mmol~m^-2~s^-1)))
+
+}
+
+gmin_by_family <- function(gmindat){
+  
+  par(mar=c(7,4,2,2))
+  gmindat4 <- mutate(gmindat, 
+                     Family = fct_lump(Family, n=10),
+                     Family = reorder(Family, gmin, median)) %>%
+    filter(Family != "Other") %>% droplevels
+  
+  plotCI2(gmin, Family, gmindat4, transform_log10=TRUE,
+          ylab=expression(Conductance~(mmol~m^-2~s^-1)))
+
+}
+
 
 

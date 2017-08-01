@@ -5,11 +5,11 @@ to.pdf(figure_g0g1_cor(lin2015, "Nicolas Martin-StPaul_Quercus ilex_StPaul_Puech
 
 to.pdf(figure_R2g0(lin2015coef, miner), "output/figure3.pdf", height=4, width=9)
 
-to.pdf(figure_gmin_review_2(gdfr), "output/figure4.pdf", height=4, width=4.5)
-to.pdf(figure_gmin_review_3(condreview_ave), "output/figure5.pdf", height=4, width=3.5)
-#to.pdf(figure_amings_lin2015), "output/figure5.pdf", height=5, width=5)
+to.pdf(figure_gmin_review_2(gdfr), "output/figure4.pdf", height=5, width=5)
 
-#to.pdf(figure_wtc4_gmin(wtc4gmin, wtc4gdark), "output/figure5.pdf", height=4, width=8)
+to.pdf(figure_gmin_bygroup(gmindat), "output/figure5.pdf", height=4, width=3)
+
+
 to.pdf(figure_wtc4_gmin_2(wtc4gmin), "output/figure6.pdf", height=4, width=3.5)
 
 to.pdf(figure_hakea_gmin(lopw), "output/figure7.pdf", height=5, width=6)

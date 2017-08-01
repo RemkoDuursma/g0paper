@@ -2,7 +2,7 @@
 pacman::p_load(Hmisc, car, dplyr, tidyr, nlme, nlshelper, 
                forcats, tibble, magicaxis, 
                plantecophys, readxl, multcomp,
-               reporttools)
+               reporttools, Taxonstand, taxize)
 
 
 
@@ -10,26 +10,6 @@ if(!dir.exists("download"))dir.create("download")
 if(!dir.exists("output"))dir.create("output")
 source("R/functions.R")
 source("R/figures.R")
-
-
-# You must find TRY categorical traits yourself and place it in /data
-# I cannot share it here (registration required)
-if(!file.exists("data/trydb.rds")){
-  tryfile <- "data/TRY_Categorical_Traits_Lookup_Table_2012_03_17_TestRelease.xlsx"
-  if(!file.exists(tryfile))stop("Place the TRY look up table in data/.")
-  trydb <- read_excel(tryfile) %>% 
-    rename(species = AccSpeciesName)
-  trydb <- trydb[,c("species","PhylogeneticGroup","PlantGrowthForm","LeafType","LeafPhenology")]
-  saveRDS(trydb, "data/trydb.rds")
-} else {
-  trydb <- readRDS("data/trydb.rds")
-}
-
-# Additional growth form / phylogenetic group from googling missing species
-gf_add <- read.csv("data/growthform_additional.csv", stringsAsFactors = FALSE)
-trydb <- bind_rows(trydb, gf_add)
-
-
 
 # Lin et al. 2015
 linfn <- "download/lin2015.csv"
@@ -54,22 +34,13 @@ lin2015a <- group_by(lin2015, fitgroup) %>%
 lin2015coef <- fits_lin2015(lin2015a)
 
 
-
-
-# Riederer and Schreiber 2001
-rieder <- read.csv("data/riederer2001_table1.csv", stringsAsFactors = FALSE) %>%
-  filter(gmin < 10000) %>%
-  mutate(gmin = 2 * 10^5 * 10^-3 * gmin / 41,
-         source = "Riederer and Schreiber 2001",
-         method = "gcut_isol")
-
 # Kerstiens 1996
 kerst <- read.csv("data/kerstiens1996_table1.csv", stringsAsFactors = FALSE) %>%
   filter(gmin > 0,
          species != "Molinia caerulea",
-         method %in% c("A","C","D")) %>%
-  mutate(method = dplyr::recode(method, A="gcut_isol", C="gcut_seal", D="gmin"),
-         gmin = 2 * 10^5 * 10^-3 * gmin / 41,
+         method %in% c("A","C")) %>%
+  mutate(method = dplyr::recode(method, A="gcut_isol", C="gcut_seal"),
+         gmin = 2 * 41 * 10^-5 * 10^3 * gmin,
          source = "Kerstiens 1996")
 # Notes:
 # A - astomatous cuticle, removed from leaf (permeance)
@@ -109,89 +80,21 @@ lopez2 <- read.csv("data/lopez_gmin_hakea.csv") %>% group_by(species, population
   mutate(gmin = 2 * gmin) %>%
   inner_join(lopmet, by=c("species","population"))
 
-# Phillips et al 2010
-phillips <- read.csv("data/Phillips2010_gmin.csv", stringsAsFactors = FALSE) %>% 
-  dplyr::select(species, gmin) %>%
-  mutate(species = gsub("E. ","E.",species),
-         species = gsub("E.","Eucalyptus ",species),
-         source="Phillips et al. 2010") %>%
-  group_by(species) %>%
-  summarize(gmin = mean(gmin)) %>%
-  mutate(species = as.character(species))
-
-# Brodribb 2014
-brodribb <- read.csv("data/brodribb2014_gmin_conifers.csv", stringsAsFactors = FALSE)
-names(brodribb) <- c("family","species","gmin")
-brodribb <- mutate(brodribb, gmin = 1000 * gmin,
-                   source="Brodribb et al. 2014"
-                   )
-
-# gmin from various literature sources. 
-gminrev <- read.csv("data/gmin_review_literature.csv",stringsAsFactors = FALSE) %>% 
-  #mutate(method = "gmin") %>%
-  #dplyr::select(gmin, species) %>% 
-  mutate(gmin = 2 * 10^5 * 10^-3 * gmin / 41)
-
-# Lopez, wet plants only
-lopwet <- filter(lopez, treatment == "w") %>%
-  mutate(source = "Rosana Lopez, unpublished") %>%
-  group_by(species) %>%
-  summarize(gmin = mean(gmin),
-            source = first(source)) %>%
-  mutate(species = as.character(species))
-
-blackamb <- filter(wtc4gmin, growth_T == "amb") %>%
-  dplyr::select(gmin) %>%
-  mutate(species = "Eucalyptus parramattensis",
-         source = "Chris Blackman, unpublished.") %>%
-  group_by(species) %>%
-  summarize(gmin = mean(gmin),
-            source=first(source))
-
-# Add brodribb, phillips, wet plants from Lopez, ambient plants from Blackman
-gminrev <- bind_rows(gminrev, 
-                     dplyr::select(brodribb, species, gmin, source),
-                     phillips,
-                     lopwet,
-                     blackamb) %>%
-  mutate(method = "gmin")
-
-gminrev <- bind_rows(kerst, gminrev)
-
-condreview_ave <- group_by(gminrev, species, method, source) %>%
-  summarize(gmin = mean(gmin))
-
-# Add plant growth form etc.
-condreview_ave <- left_join(condreview_ave, trydb, by="species") %>%
-  filter(!(PhylogeneticGroup %in% "Pteridophytes"))
-
-condreview_ave$PlantGrowthForm <- as.factor(condreview_ave$PlantGrowthForm) %>%
-  fct_collapse(shrub = c("herb/shrub","shrub","shrub/tree"),
-               tree = "tree",
-               herb = "herb",
-               graminoid="graminoid")
-
-condreview_ave$PhylogeneticGroup <- as.factor(condreview_ave$PhylogeneticGroup) %>%
-  fct_collapse(Angiosperm = c("Angiosperm_Eudicotyl","Angiosperm_Magnoliid","Angiosperm_Monocotyl"))
-
-condreview_ave$LeafPhenology <- as.factor(condreview_ave$LeafPhenology) %>%
-  fct_collapse(evergreen = c("deciduous/evergreen","evergreen"))
-
-condreview_ave <- ungroup(condreview_ave)
-
 # Miner et al. 2016
+# Compilation of Ball-Berry parameters.
 miner <- read.csv("data/Miner_table1.csv") %>%
   mutate(g0 = 1000*g0)
 
 
 # Lombardozzi et al 2017
+# Compilation of nighttime conductance.
 lombar <- read.csv("data/lombardozzi_gnight.csv", stringsAsFactors = FALSE) %>%
   rename(gmin = gnight) %>%
   filter(gmin > 0) %>%
   mutate(method="gnight")
 
-
-g0s <- data.frame(gmin=1000 * c(lin2015coef$g0, miner$g0),
+# Combine Lin and Miner's estimate of g0 from 'regression' based.
+g0s <- data.frame(gmin=c(lin2015coef$g0, miner$g0),
                   method="g0", stringsAsFactors = FALSE) %>%
   filter(!is.na(gmin),
          gmin > 0)
@@ -210,7 +113,79 @@ minags <- group_by(lin2015, fitgroup) %>%
   dplyr::select(gmin, method)
 
 
-gdfr <- bind_rows(ungroup(condreview_ave), lombar, g0s, minags) %>%
+#------ gmindatabase
+# Made with TRYDB and manual edits.
+species_classes <- read.csv("data/Species_classifications.csv", stringsAsFactors = FALSE)
+
+# Data from gmindatabase
+# gmindat <- read.csv("https://raw.githubusercontent.com/RemkoDuursma/gmindatabase/master/combined/gmindatabase.csv",
+#                     stringsAsFactors = FALSE) 
+gmindat <- read.csv("c:/repos/gmindatabase/combined/gmindatabase.csv",
+                    stringsAsFactors = FALSE) %>%
+  filter(gmin > 0) %>%
+  group_by(species) %>%
+  summarize(gmin = mean(gmin),
+            source = first(source)) %>%
+  ungroup %>%
+  left_join(species_classes, by="species")
+
+#
+climfile <- "data/species_climate_wcpet.rds"
+if(!file.exists(climfile)){
+  library(speciesmap)
+  set_zomerpet_path("c:/data/zomerpet")
+  ALA4R::ala_config(cache_directory="c:/data/ALAcache")
+  
+  sp <- unique(gmindat$species)
+  nf <- sapply(strsplit(sp, " "), length)
+  sp <- sp[nf == 2]
+  sp <- sort(sp)
+  
+  wc <- worldclim_presence(sp, PET=TRUE, database="both", topath="c:/tmp")
+  
+  saveRDS(wc, climfile)
+} else {
+  wc <- readRDS(climfile)
+}
+
+wc$species <- as.character(wc$species)
+gmindat2 <- left_join(gmindat, wc, by="species")
+
+# New grouping variable.
+gmindat$group2 <- NA
+gmindat$group2[gmindat$Woody] <- "Woody"
+gmindat$group2[gmindat$PlantGrowthForm == "graminoid"] <- "Graminoid"
+gmindat$group2[gmindat$Crop] <- "Crop"
+gmindat$group2[is.na(gmindat$group2)] <- "Other non-woody"
+
+
+# Add Family
+clsfile <- "data/cls_output.rds"
+sp <- unique(gmindat$species)
+if(!file.exists(clsfile)){
+  cls <- classification(sp, db="ncbi")
+  saveRDS(cls, clsfile)
+  } else {
+    cls <- readRDS(clsfile)
+  }
+
+ord <- sapply(cls, function(x)if(!all(is.na(x)))x$name[x$rank == "order"] else NA) %>% unname
+fam <- sapply(cls, function(x)if(!all(is.na(x)))x$name[x$rank == "family"] else NA) %>% unname
+gmindat <- left_join(gmindat, 
+                     data.frame(species=sp, Order=ord, Family=fam, stringsAsFactors = FALSE),
+                     by="species")
+
+
+# Dataframe with comparison methods.
+gmindat_simple <- dplyr::select(gmindat, gmin) %>% 
+  mutate(method = "gmin")
+
+kerst_simple <- group_by(kerst, species, method) %>%
+  summarize(gmin = mean(gmin)) %>% 
+  ungroup %>%
+  dplyr::select(gmin, method)
+
+gdfr <- bind_rows(gmindat_simple, kerst_simple, lombar, g0s, minags) %>%
   mutate(method = factor(method, levels=c("gcut_isol","gcut_seal","gmin","gnight", "g0","gslowA")))
 
 

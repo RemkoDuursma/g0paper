@@ -57,6 +57,12 @@ rawson and clarke 1988; gs increased hours pre-dawn in wheat. Nocturnal gs > cut
 
 hygen midgaard 1954- no effect of VPD on gmin (eventual decline in RWC is very linear and does not differ with various VPD treatments). "Experiments on the effect of darkening indicated that the stomata may remain partly open even during prolonged dark periods"
 
+Mackova (Environmental and Experimental Botany Volume 86, February 2013, Pages 70-75): adding ABA to Lepidium sativum increased the chain length of cuticular waxes (but not total amounts). Other work has shown that the length of the chain decreases cuticular transpiration (they cite Hauke and Schreiber, 1998 Ontogenetic and seasonal development of wax composition and cuticular transpiration of ivy (Hedera helix L.) sun and shade leaves)
+
+
+@rosasanderson2014, (2013, thesis), lower gmin in drought-stressed peanut
+
+
 
 \
 Stomata exert a strong control on the transpiration rate of leaves. It is well known that stomata respond quickly to changes in light intensity, humidity and CO~2~ concentration at the leaf surface. In doing so, stomata can be thought to balance the uptake of CO~2~ with the loss of water, and thus can be expected to close stomata when photosynthetic rates are low. To avoid dessiccation and ultimate death, stomata can also be expected to close during periods of severe water stress. Plants cannot, however, completely halt water loss even when stomata are closed. In this review, we discuss various aspects of the minimum leaf conductance reached when stomata are essentially closed. We pay special attention to the role that minimum conductance plays in land-surface models, in particular as it forms part of the much-used 'Ball-Berry'-type class of stomatal conductance models.
