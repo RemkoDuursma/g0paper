@@ -2,7 +2,7 @@
 pacman::p_load(Hmisc, car, dplyr, tidyr, nlme, nlshelper, 
                forcats, tibble, magicaxis, 
                plantecophys, readxl, multcomp,
-               reporttools, Taxonstand, taxize)
+               reporttools, Taxonstand, taxize, speciesmap)
 
 
 
@@ -132,8 +132,7 @@ gmindat <- read.csv("c:/repos/gmindatabase/combined/gmindatabase.csv",
 #
 climfile <- "data/species_climate_wcpet.rds"
 if(!file.exists(climfile)){
-  library(speciesmap)
-  set_zomerpet_path("c:/data/zomerpet")
+  options(zomerpetpath="c:/data/zomerpet", worldclimpath="c:/data/worldclim")
   ALA4R::ala_config(cache_directory="c:/data/ALAcache")
   
   sp <- unique(gmindat$species)
@@ -141,15 +140,17 @@ if(!file.exists(climfile)){
   sp <- sp[nf == 2]
   sp <- sort(sp)
   
-  wc <- worldclim_presence(sp, PET=TRUE, database="both", topath="c:/tmp")
+  wc <- climate_presence(sp, vars=c("tavg","prec","bio","pet"), database="both")
   
   saveRDS(wc, climfile)
 } else {
   wc <- readRDS(climfile)
 }
 
-wc$species <- as.character(wc$species)
-gmindat2 <- left_join(gmindat, wc, by="species")
+wc2 <- annualize_clim(wc) %>% aggregate_clim %>%
+  mutate(species = as.character(species))
+
+gmindat2 <- left_join(gmindat, wc2, by="species")
 
 # New grouping variable.
 gmindat$group2 <- NA

@@ -54,6 +54,7 @@ rawson and clarke 1988; gs increased hours pre-dawn in wheat. Nocturnal gs > cut
 @mackova2013 adding ABA to Lepidium sativum increased the chain length of cuticular waxes (but not total amounts). 
 
 
+@bi2017 lower residual transpiration rate in drought-acclimated wheat, in 3 out of 4 genotypes. Drought caused a change in cuticular wax production and chemical composition, but in a highly genotype-specific way.
 
 
 @rosasanderson2014, (2013, thesis), lower gmin in drought-stressed peanut

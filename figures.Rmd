@@ -69,11 +69,11 @@ figure_hakea_gmin(lopw)
 ```
 
 
-```{r, fig.width=6, fig.height=5}
+```{r, fig.width=6, fig.height=5, warning=FALSE}
 gmin_by_family(gmindat)
 ```
 
-```{r, fig.width=6, fig.height=5}
+```{r, fig.width=6, fig.height=5, warning=FALSE}
 gmin_by_order(gmindat)
 ```
 
