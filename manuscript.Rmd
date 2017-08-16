@@ -57,8 +57,9 @@ rawson and clarke 1988; gs increased hours pre-dawn in wheat. Nocturnal gs > cut
 @bi2017 lower residual transpiration rate in drought-acclimated wheat, in 3 out of 4 genotypes. Drought caused a change in cuticular wax production and chemical composition, but in a highly genotype-specific way.
 
 
-@rosasanderson2014, (2013, thesis), lower gmin in drought-stressed peanut
+@rosasanderson2014, lower gmin in drought-stressed peanut
 
+@clark1956 lower gmin in drought-stressed soybean
 
 
 \
