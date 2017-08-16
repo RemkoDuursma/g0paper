@@ -397,4 +397,29 @@ gmin_by_family <- function(gmindat){
 }
 
 
+figure_crop_genotypes <- function(cropgmin){
+  
+  # average by genotypes
+  cropgmin2 <- summaryBy(. ~ genotype +crop, data=cropgmin, FUN=mean, na.rm=TRUE, keep.names=TRUE)
+  
+  d2 <- summaryBy(gmin ~ crop, FUN=c(mean, min, max, length), data=cropgmin2)
+  d2 <- d2[order(d2$gmin.mean),]
+  n <- nrow(d2)
+  
+  #windows(4,5)
+  par(mar=c(6,5,1,1), las=2, cex.lab=1.1, mgp=c(2.5, 0.5,0), tcl=-0.1)
+  plot(1, type='n', xlim=c(0.4, n + 0.6), ylim=c(0,35), axes=FALSE,
+       xlab="",
+       ylab=expression(g[min]~~(mmol~m^-2~s^-1)))
+  axis(1, at=1:n, labels=d2$crop)
+  axis(2)
+  box()
+  for(i in 1:n){
+    segments(x0=i,x1=i, y0=d2$gmin.min[i], y1=d2$gmin.max[i])
+  }
+  points(1:n, d2$gmin.mean, pch=19)
+  text(x=1:n, y=34, labels=d2$gmin.length, cex=0.8)
+  text(0.5, 34, "n =", cex=0.8)
+  
+}
 

@@ -2,7 +2,8 @@
 pacman::p_load(Hmisc, car, dplyr, tidyr, nlme, nlshelper, 
                forcats, tibble, magicaxis, 
                plantecophys, readxl, multcomp,
-               reporttools, Taxonstand, taxize, speciesmap)
+               reporttools, Taxonstand, taxize, speciesmap,
+               doBy, stringi)
 
 
 
@@ -125,32 +126,36 @@ gmindat <- read.csv("c:/repos/gmindatabase/combined/gmindatabase.csv",
   filter(gmin > 0) %>%
   group_by(species) %>%
   summarize(gmin = mean(gmin),
-            source = first(source)) %>%
+            datasource = first(datasource)) %>%
   ungroup %>%
   left_join(species_classes, by="species")
 
+cropgmin <- read.csv("c:/repos/gmindatabase/combined/cropgmindatabase.csv",
+                    stringsAsFactors = FALSE)
 #
-climfile <- "data/species_climate_wcpet.rds"
-if(!file.exists(climfile)){
-  options(zomerpetpath="c:/data/zomerpet", worldclimpath="c:/data/worldclim")
-  ALA4R::ala_config(cache_directory="c:/data/ALAcache")
+if(FALSE){
+  climfile <- "data/species_climate_wcpet.rds"
+  if(!file.exists(climfile)){
+    options(zomerpetpath="c:/data/zomerpet", worldclimpath="c:/data/worldclim")
+    ALA4R::ala_config(cache_directory="c:/data/ALAcache")
+    
+    sp <- unique(gmindat$species)
+    nf <- sapply(strsplit(sp, " "), length)
+    sp <- sp[nf == 2]
+    sp <- sort(sp)
+    
+    wc <- climate_presence(sp, vars=c("tavg","prec","bio","pet"), database="both")
+    
+    saveRDS(wc, climfile)
+  } else {
+    wc <- readRDS(climfile)
+  }
   
-  sp <- unique(gmindat$species)
-  nf <- sapply(strsplit(sp, " "), length)
-  sp <- sp[nf == 2]
-  sp <- sort(sp)
+  wc2 <- annualize_clim(wc) %>% aggregate_clim %>%
+    mutate(species = as.character(species))
   
-  wc <- climate_presence(sp, vars=c("tavg","prec","bio","pet"), database="both")
-  
-  saveRDS(wc, climfile)
-} else {
-  wc <- readRDS(climfile)
+  gmindat2 <- left_join(gmindat, wc2, by="species")
 }
-
-wc2 <- annualize_clim(wc) %>% aggregate_clim %>%
-  mutate(species = as.character(species))
-
-gmindat2 <- left_join(gmindat, wc2, by="species")
 
 # New grouping variable.
 gmindat$group2 <- NA
@@ -162,19 +167,16 @@ gmindat$group2[is.na(gmindat$group2)] <- "Other non-woody"
 
 # Add Family
 clsfile <- "data/cls_output.rds"
-sp <- unique(gmindat$species)
+sp_dfr <- data.frame(species=unique(gmindat$species), stringsAsFactors = FALSE)
 if(!file.exists(clsfile)){
   cls <- classification(sp, db="ncbi")
   saveRDS(cls, clsfile)
-  } else {
-    cls <- readRDS(clsfile)
-  }
+} else {
+  cls <- readRDS(clsfile)
+}
+cls <- as_dataframe_cls(cls)
 
-ord <- sapply(cls, function(x)if(!all(is.na(x)))x$name[x$rank == "order"] else NA) %>% unname
-fam <- sapply(cls, function(x)if(!all(is.na(x)))x$name[x$rank == "family"] else NA) %>% unname
-gmindat <- left_join(gmindat, 
-                     data.frame(species=sp, Order=ord, Family=fam, stringsAsFactors = FALSE),
-                     by="species")
+gmindat <- left_join(gmindat,  cls, by="species")
 
 
 # Dataframe with comparison methods.

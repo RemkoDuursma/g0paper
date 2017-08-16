@@ -77,4 +77,7 @@ gmin_by_family(gmindat)
 gmin_by_order(gmindat)
 ```
 
+```{r, fig.width=6, fig.height=5, warning=FALSE}
+figure_crop_genotypes(cropgmin)
+```
 

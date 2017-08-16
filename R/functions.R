@@ -144,3 +144,24 @@ plotCI2 <- function(yvar, group, data, transform_log10=FALSE,
 }
 
 
+as_dataframe_cls <- function(cls){
+  
+  fun <- function(x){
+    if(all(is.na(x))){
+      return(NULL)
+    } else {
+      vec <- c(species = x$name[x$rank == 'species'],
+               Family = x$name[x$rank == 'family'],
+               Order = x$name[x$rank == 'order'])
+      if(!"species" %in% names(vec)){
+        return(NULL)
+      } else {
+        return(vec)
+      }
+    }
+  }
+  
+  m <- do.call(rbind, lapply(cls, fun))
+return(as.data.frame(m, stringsAsFactors = FALSE))
+}
+
