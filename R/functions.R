@@ -99,7 +99,9 @@ plotlabel <- function(txt, where, inset=0.08, inset.x=inset, inset.y=inset,...){
 
 
 plotCI2 <- function(yvar, group, data, transform_log10=FALSE, 
-                    ylab=NULL, labels=NULL, label_las=3, ...){
+                    ylab=NULL, ylim=NULL, labels=NULL, label_las=3, add_data=TRUE, 
+                    jit=0.6, datacex=0.4, datacol="lightgrey", 
+                    ...){
   
   if(is.null(ylab))ylab <- substitute(yvar)
   
@@ -107,6 +109,8 @@ plotCI2 <- function(yvar, group, data, transform_log10=FALSE,
   
   data$Y <- eval(substitute(yvar), data)
   data$G <- as.factor(eval(substitute(group), data))
+  
+  datl <- split(data, data$G)
   
   if(is.null(labels)){
     labels <- levels(data$G)
@@ -122,15 +126,20 @@ plotCI2 <- function(yvar, group, data, transform_log10=FALSE,
     mn <- coef(fit)
   }
   
+  if(is.null(ylim))ylim <- c(0, max(ci)+0.1*max(ci))
   g <- glht(fit, linfct=mcp(G = "Tukey"))
   lets <- cld(g)$mcletters$Letters
   
   n <- length(mn)
   
-  plot(1:n, mn, pch=19, cex=1.1, ylim=c(0, max(ci)+0.1*max(ci)), axes=FALSE,
+  plot(1:n, mn, pch=19, cex=1.1, ylim=ylim, axes=FALSE,
        xlab="",
+       panel.first={
+         if(add_data)with(data, points(jitter(as.numeric(G), factor=jit), gmin, pch=16, col=datacol, cex=datacex))
+       },
        xlim=c(0.7, n+0.3), ylab=ylab, ...)
   axis(1, at=1:n, labels=labels, las=label_las)
+  
   arrows(x0=1:n, x1=1:n, y0=ci[,1], y1=ci[,2], angle=90, length=0.05, code=3)
   text(x=1:n, y=ci[,2], lets, pos=3, cex=0.8)
   par(las=1)
@@ -139,7 +148,7 @@ plotCI2 <- function(yvar, group, data, transform_log10=FALSE,
   
   tb <- unname(table(data$G))
   mtext(side=3, at=1:n, line=0.4, text=tb, las=1, cex=0.7)
-  mtext(side=3, at=0.5, line=0.4, text="n = ", las=1, cex=0.7)
+  mtext(side=3, at=0.25, line=0.4, text="n = ", las=1, cex=0.7)
   
 }
 

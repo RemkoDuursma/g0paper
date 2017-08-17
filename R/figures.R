@@ -32,6 +32,7 @@ figure_gmin_review_2 <- function(gdfr){
       cex.lab=1.2)
   plotCI2(gmin, method, gdfr, transform_log10=TRUE,
           label_las=1,
+          ylim=c(0,80),
           ylab=expression(Conductance~(mmol~m^-2~s^-1)),
           labels=c(expression(g["cut,isol"]),
                    expression(g["cut,seal"]),
@@ -369,6 +370,22 @@ figure_hakea_gmin <- function(lopw){
 }
 
 
+gmin_loghist <- function(gmindat){
+  v <- log10(gmindat$gmin)
+  par(yaxs="i", mgp=c(3,1,0), cex.lab=1.2)
+  hist(v, breaks=30, main="", freq=FALSE,
+       #ylim=c(0,0.15),
+       xlim=c(-1,2),
+       col="lightgrey",
+       axes=FALSE,
+       xlab=expression(g[min]~~(mmol~m^-2~s^-1)))
+  magaxis(side=1, unlog=1, usepar=TRUE)
+  axis(2)
+  curve(dnorm(x, mean=mean(v), sd=sd(v)), add=TRUE,
+        n=101)
+  
+}
+
 
 gmin_by_order <- function(gmindat){
   
@@ -377,11 +394,25 @@ gmin_by_order <- function(gmindat){
                      Order = reorder(Order, gmin, median)) %>%
     filter(Order != "Other") %>% droplevels
   
-  par(mar=c(6,4,2,2))
+  par(mar=c(6,5,2,2))
   plotCI2(gmin, Order, gmindat3, transform_log10=TRUE,
-          ylab=expression(Conductance~(mmol~m^-2~s^-1)))
+          jit=0.5, datacex=0.5, datacol="grey",
+          ylim=c(0,25),
+          ylab=expression(g[min]~(mmol~m^-2~s^-1)))
 
 }
+
+gmin_3panel <- function(gmindat, cropgmin){
+  par(mfrow=c(1,3), mar=c(6,5,1,1), cex.lab=1.1, mgp=c(2.5, 0.5,0), tcl=-0.1)
+  gmin_loghist(gmindat)
+  par(las=2)
+  gmin_by_order(gmindat)
+  figure_crop_genotypes(cropgmin)
+}
+
+
+
+
 
 gmin_by_family <- function(gmindat){
   
@@ -398,6 +429,9 @@ gmin_by_family <- function(gmindat){
 
 
 figure_crop_genotypes <- function(cropgmin){
+  par(mar=c(6,5,2,2), las=2, cex.lab=1.1, mgp=c(2.5, 0.5,0), tcl=-0.1)
+  
+  set.seed(1)
   
   # average by genotypes
   cropgmin2 <- summaryBy(. ~ genotype +crop, data=cropgmin, FUN=mean, na.rm=TRUE, keep.names=TRUE)
@@ -406,8 +440,10 @@ figure_crop_genotypes <- function(cropgmin){
   d2 <- d2[order(d2$gmin.mean),]
   n <- nrow(d2)
   
+  cropgmin2$crop <- with(cropgmin2, reorder(crop, gmin, mean, na.rm=TRUE))
+  cropl <- split(cropgmin2, cropgmin2$crop)
+  
   #windows(4,5)
-  par(mar=c(6,5,1,1), las=2, cex.lab=1.1, mgp=c(2.5, 0.5,0), tcl=-0.1)
   plot(1, type='n', xlim=c(0.4, n + 0.6), ylim=c(0,35), axes=FALSE,
        xlab="",
        ylab=expression(g[min]~~(mmol~m^-2~s^-1)))
@@ -415,11 +451,13 @@ figure_crop_genotypes <- function(cropgmin){
   axis(2)
   box()
   for(i in 1:n){
+    with(cropl[[i]], points(jitter(rep(i, nrow(cropl[[i]]))), gmin, pch=16, col="grey", cex=0.6))
     segments(x0=i,x1=i, y0=d2$gmin.min[i], y1=d2$gmin.max[i])
   }
   points(1:n, d2$gmin.mean, pch=19)
-  text(x=1:n, y=34, labels=d2$gmin.length, cex=0.8)
-  text(0.5, 34, "n =", cex=0.8)
+  
+  mtext(side=3, at=1:n, line=0.4, text=d2$gmin.length, las=1, cex=0.7)
+  mtext(side=3, at=0.25, line=0.4, text="n = ", las=1, cex=0.7)
   
 }
 
