@@ -37,24 +37,25 @@ includefigs <- F
 library(png)
 library(grid)
 
-plotfig <- function(...)grid.raster(readPNG(...))
 
 source("R/load.R")
-
-pval <- function(...)formatPval(..., includeEquality=TRUE)
 ```
+
+
+# Abstract
+
+
+
+
 
 
 # Introduction
 
-
-
+\
+Stomata exert a strong control on the transpiration rate of leaves [@bange1953]. It is well known that stomata respond quickly to changes in light intensity, humidity and CO~2~ concentration at the leaf surface. In doing so, stomata can be thought to balance the uptake of CO~2~ with the loss of water, and thus can be expected to close stomata when photosynthetic rates are low. To avoid desiccation and ultimate death, stomata can also be expected to close during periods of severe water stress. Plants cannot, however, completely halt water loss even when stomata are closed. In this review, we discuss various aspects of the minimum leaf conductance reached when stomata are essentially closed. We pay special attention to the role that minimum conductance plays in land-surface models, in particular as it forms part of the much-used 'Ball-Berry'-type class of stomatal conductance models.
 
 \
-Stomata exert a strong control on the transpiration rate of leaves. It is well known that stomata respond quickly to changes in light intensity, humidity and CO~2~ concentration at the leaf surface. In doing so, stomata can be thought to balance the uptake of CO~2~ with the loss of water, and thus can be expected to close stomata when photosynthetic rates are low. To avoid desiccation and ultimate death, stomata can also be expected to close during periods of severe water stress. Plants cannot, however, completely halt water loss even when stomata are closed. In this review, we discuss various aspects of the minimum leaf conductance reached when stomata are essentially closed. We pay special attention to the role that minimum conductance plays in land-surface models, in particular as it forms part of the much-used 'Ball-Berry'-type class of stomatal conductance models.
-
-\
-Most current-generation process-baed global vegetation models (GVMs) use a version of the Ball-Berry class of stomatal conductance (g~s~) models characterized by the dependence on assimilation rate, CO~2~ and humidity.
+Most current-generation process-based global vegetation models (GVMs) use a version of the Ball-Berry class of stomatal conductance (g~s~) models characterized by the dependence on assimilation rate, CO~2~ and humidity.
 
 \
 (1)
@@ -201,7 +202,12 @@ Actual measured stomatal conductance during conditions when photosynthesis was l
 
 Literature values of g~cut~, especially when measured on isolated cuticles (g~cut,isol~) were much lower than any other estimate of conductance, even compared to measurements based on MLD with stomatal side sealed (g~mld,seal~). The conductance of stomata-free leaf cuticles represents the absolute minimum conductance that leaves can attain. This result should be viewed with caution as @kerstiens1996 argued that measurements of g~cut~ maybe too low due to low water content of the cuticle after detachment from the leaf, and storage in often dry-air conditions. A review of cuticular transport mechanisms, biochemical composition, and formation of cuticular waxes is well outside the scope of this review, as these processes have been well described elsewhere [@kerstiens1996; @kerstiens2006; @shepherd2006; @schreiber1996; @schreiber2001; @schuster2016b]. However, a few key points should be reiterated as they are relevant to the current discussion.
 
-Although we use the term cuticular conductance freely, this transport pathway does not represent a true conductance since water does not diffuse as a gas through the cuticle. Instead, it dissolves into the medium of the cuticle, diffuses through the solid matrix, and is desorped at the outer edge of the cuticle [@kerstiens1996; @riederer2001; @schreiber1996]. The main barrier to diffusion is actually a very thin layer at the leaf surface. Because most of the resistance is located in such a thin layer, g~cut~ does not correlate with the thickness of the cuticle  [@priestley1943; @riederer2001; @anfodillo2002; @schuster2016b]. Nonetheless there is considerable variation in cuticle thickness between plant species [@schuster2016a], as well as within species in response to drought (cite), along altitudinal transects [@delucia1984], and even with increasing height in the canopy of very tall trees [@woordruff2010]. If the cuticle thickness does not directly affect its conductance, what is the value of increasing the cuticle? Perhaps the answer lies in mechanical strength rather than water loss per se, as @onoda2012 reported that thicker cuticles are more resistant to tearing (the force to tear and tensile strength both approx proportional to cuticle thickness). 
+Although we use the term cuticular conductance freely, this transport pathway does not represent a true conductance since water does not diffuse as a gas through the cuticle. Instead, it dissolves into the medium of the cuticle, diffuses through the solid matrix, and is desorped at the outer edge of the cuticle [@kerstiens1996; @riederer2001; @schreiber1996]. The main barrier to diffusion is actually a very thin layer at the leaf surface. Because most of the resistance is located in such a thin layer, g~cut~ does not correlate with the thickness of the cuticle  [@priestley1943; @riederer2001; @anfodillo2002; @schuster2016b]. Nonetheless there is considerable variation in cuticle thickness between plant species [@schuster2016a], as well as within species in response to drought (cite), along altitudinal transects [@delucia1984], and even with increasing height in the canopy of very tall trees [@woordruff2010]. If the cuticle thickness does not directly affect its conductance, what is the value of increasing the cuticle? 
+
+Perhaps the answer lies in mechanical strength rather than water loss per se, as @onoda2012 reported that thicker cuticles are more resistant to tearing (the force to tear and tensile strength both approx proportional to cuticle thickness). Providing support for the mechanical strength rather than water loss idea, thick cuticles may be useful because  exposure to wind has been shown to dislodge cuticular compounds by absrasion [@rogge1993], thereby dramatically increasing the conductance of the cuticle [@hadley1983;@grace1974;@vangardingen1991]. Similarly, exposure to simulated rain damages the cuticle and increases its conductance [@baker1986].
+
+It is also important to bear in mind other functions of the cuticle, particularly as a barrier for fungal pathogens, and insect herbivory [@kerstiens1996c].
+
 
 Despite considerable work on the topic, no clear relationship between chemical composition or structure of the cuticle and its conductance has emerged. Recently, @schuster2016a presented a comprehensive study of cuticle chemical composition, but this variation could not explain variation in g~cut~. Similarly, @hauke1998 found no relationship between the gradual decrease in g~cut~ in *Hedera helix* during leaf maturation and cuticle wax amount, mean chain lengths, or cuticle weight. 
 
@@ -252,12 +258,18 @@ Very few studies have found meaningful correlations. Exception is @brodribb2014,
 
 Comparing all available data, we did not find significant relationships between rainfall, aridity, or temperature and g~min~. There is, however, a substantial acclimatory response of g~min~ to water availability. 
 
+@bengtson1978 lower g~min~ in six oat varieties, and increase in cuticular waxes, but no overall relationship between the two and very different responses between different oat genotypes.
+
 
 ## Minimum conductance acclimates to growing conditions
 
 
 
 @bi2017 lower residual transpiration rate in drought-acclimated wheat, in 3 out of 4 genotypes. Drought caused a change in cuticular wax production and chemical composition, but in a highly genotype-specific way.
+
+@paje1988 lower gmin in droughted soybean genotypes
+
+@saneoka1987 lower g~min~ (but different technique!) in three crop species exposed to low soil water conditions for a month.
 
 
 @rosasanderson2014, lower gmin in drought-stressed peanut

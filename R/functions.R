@@ -8,6 +8,8 @@ to.pdf <- function(expr, filename, ..., verbose=TRUE) {
   eval.parent(substitute(expr))
 }
 
+plotfig <- function(...)grid.raster(readPNG(...))
+pval <- function(...)formatPval(..., includeEquality=TRUE)
 
 
 fits_lin2015 <- function(lin2015a){
