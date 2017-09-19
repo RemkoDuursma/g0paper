@@ -45,6 +45,8 @@ figure_gmin_review_2 <- function(gdfr){
 }
 
 
+
+
 figure_gmin_bygroup <- function(gmindat){
   
   par(mar=c(6.5,4,1.5,1), mgp=c(2.5,0.5,0), tcl=-0.2, 
