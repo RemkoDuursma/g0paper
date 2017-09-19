@@ -169,7 +169,7 @@ gmindat$group2[is.na(gmindat$group2)] <- "Other non-woody"
 clsfile <- "data/cls_output.rds"
 sp_dfr <- data.frame(species=unique(gmindat$species), stringsAsFactors = FALSE)
 if(!file.exists(clsfile)){
-  cls <- classification(sp, db="ncbi")
+  cls <- classification(sp_dfr$species, db="ncbi")
   saveRDS(cls, clsfile)
 } else {
   cls <- readRDS(clsfile)

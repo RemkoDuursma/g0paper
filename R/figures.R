@@ -5,7 +5,8 @@ figure_gmin_review <- function(gdfr){
   par(mar=c(3,5,1,0.5), cex.lab=1.2)
   fit <- lm(log10(gmin) ~ method-1, data=gdfr)
   cis <- confint(fit)
-  quans <- sapply(split(gdfr, gdfr$method), function(x)quantile(log10(x$gmin), probs=c(0.05, 0.95)))
+  quans <- sapply(split(gdfr, gdfr$method), 
+                  function(x)quantile(log10(x$gmin), probs=c(0.05, 0.95)))
   gmins <- with(gdfr, tapply(log10(gmin), method, mean, na.rm=TRUE))
   
   plot(1:5, gmins, pch=19, cex=1.2, axes=FALSE, xlab="",
@@ -80,8 +81,6 @@ figure_g0g1_cor <- function(lin2015, group, legend=FALSE){
   with(x, plot(BBopti, Cond, 
                xlim=c(0,0.04),
                ylim=c(0,150),
-               # ylim=c(0, max(Cond)),
-               # xlim=c(0,max(BBopti)),
                panel.first=add_regres_line(fit),
                xlab=expression(A/(C[a]*sqrt(D))),
                ylab=expression(g[s]~(mmol~m^-2~s^-1)),
@@ -94,8 +93,6 @@ figure_g0g1_cor <- function(lin2015, group, legend=FALSE){
        ylab=expression(g[1]~~(kPa^-0.5)),
        xlim=c(0,25),
        ylim=c(3,5))
-       # xlim=c(min(b[,1]), max(b[,1])),
-       # ylim=c(min(b[,2]), max(b[,2])))
   points(b[,1], b[,2]/1000, pch=16, cex=0.3, col="dimgrey")
   points(coef(fit)[1],coef(fit)[2]/1000, pch=19)
   plotlabel("(b)","topleft")
@@ -242,8 +239,6 @@ return(invisible(list(r0=r0, r1=r1, r2=r2, t0=t0, t1=t1, t2=t2)))
 
 
 
-
-
 figure_wtc4_gmin <- function(wtc4gmin, wtc4gdark){
   
   l <- layout(matrix(c(1,2), ncol=2), widths=c(2,1))
@@ -267,18 +262,15 @@ figure_wtc4_gmin <- function(wtc4gmin, wtc4gdark){
          xlab=expression(Measurement~T~~(degree*C)),
          ylab=expression(g[min]~~(mmol~m^-2~s^-1)),
          xlim=c(17,28), axes=FALSE)
-    arrows(x0=ch_temp, x1=ch_temp, y0=gmin_mean - se, y1=gmin_mean + se, angle=90, code=3, length=0.07, col=growth_T)
+    arrows(x0=ch_temp, x1=ch_temp, y0=gmin_mean - se, y1=gmin_mean + se, 
+           angle=90, code=3, length=0.07, col=growth_T)
   })
   axis(2)
   axis(1, at=seq(17.5, 27.5, by=2.5))
   box()
-  legend("topleft", c("Ambient",expression(Ambient~+~3~degree*C)), pch=19, pt.cex=1.1, col=palette(), 
+  legend("topleft", c("Ambient",expression(Ambient~+~3~degree*C)), 
+         pch=19, pt.cex=1.1, col=palette(), 
          title="Growth T", bty='n')
-  
-  
-  # library(lme4)
-  # fit <- lmer(gmin ~ ch_temp + growth_T -1 + (1|chamber), data=wtc4gmin)
-  # Anova(fit, test="F")
   
   wtc4gdarka <- group_by(wtc4gdark, chamber, surface) %>%
     summarize(gdark = mean(g_night),
@@ -295,7 +287,8 @@ figure_wtc4_gmin <- function(wtc4gmin, wtc4gdark){
          ylab=expression(g[dark]~~(mmol~m^-2~s^-1)),
          xlim=c(0.65, 2.45),
          xlab="")
-    arrows(x0=xv, x1=xv, y0=gdark_mean - se, y1=gdark_mean + se, angle=90, code=3, length=0.07, col=growth_T)
+    arrows(x0=xv, x1=xv, y0=gdark_mean - se, y1=gdark_mean + se, 
+           angle=90, code=3, length=0.07, col=growth_T)
   })
   axis(2)
   par(mgp=c(2.5,1.5, 0))
@@ -307,8 +300,6 @@ figure_wtc4_gmin <- function(wtc4gmin, wtc4gdark){
 
 
 figure_wtc4_gmin_2 <- function(wtc4gmin){
-  
-  #l <- layout(matrix(c(1,2), ncol=2), widths=c(2,1))
   
   par(mar=c(4,4,1,1), mgp=c(2.5, 0.5, 0), tcl=0.2, cex.axis=0.9, 
       cex.lab=1.2, yaxs="i")
@@ -396,7 +387,6 @@ gmin_by_order <- function(gmindat){
                      Order = reorder(Order, gmin, median)) %>%
     filter(Order != "Other") %>% droplevels
   
-  par(mar=c(6,5,2,2))
   plotCI2(gmin, Order, gmindat3, transform_log10=TRUE,
           jit=0.5, datacex=0.5, datacol="grey",
           ylim=c(0,25),
@@ -405,14 +395,13 @@ gmin_by_order <- function(gmindat){
 }
 
 gmin_3panel <- function(gmindat, cropgmin){
-  par(mfrow=c(1,3), mar=c(6,5,1,1), cex.lab=1.1, mgp=c(2.5, 0.5,0), tcl=-0.1)
+  par(mfrow=c(1,3), mar=c(6,5,1,1), cex.lab=1.1, mgp=c(2.5, 0.5,0), tcl=-0.2)
   gmin_loghist(gmindat)
-  par(las=2)
+  par(mar=c(6,5,2,2), las=2, cex.lab=1.1, mgp=c(2.5, 0.5,0), tcl=-0.2)
   gmin_by_order(gmindat)
+  par(las=3)
   figure_crop_genotypes(cropgmin)
 }
-
-
 
 
 
@@ -431,7 +420,6 @@ gmin_by_family <- function(gmindat){
 
 
 figure_crop_genotypes <- function(cropgmin){
-  par(mar=c(6,5,2,2), las=2, cex.lab=1.1, mgp=c(2.5, 0.5,0), tcl=-0.1)
   
   set.seed(1)
   
@@ -445,7 +433,6 @@ figure_crop_genotypes <- function(cropgmin){
   cropgmin2$crop <- with(cropgmin2, reorder(crop, gmin, mean, na.rm=TRUE))
   cropl <- split(cropgmin2, cropgmin2$crop)
   
-  #windows(4,5)
   plot(1, type='n', xlim=c(0.4, n + 0.6), ylim=c(0,35), axes=FALSE,
        xlab="",
        ylab=expression(g[min]~~(mmol~m^-2~s^-1)))
@@ -453,7 +440,8 @@ figure_crop_genotypes <- function(cropgmin){
   axis(2)
   box()
   for(i in 1:n){
-    with(cropl[[i]], points(jitter(rep(i, nrow(cropl[[i]]))), gmin, pch=16, col="grey", cex=0.6))
+    with(cropl[[i]], points(jitter(rep(i, nrow(cropl[[i]]))), 
+                            gmin, pch=16, col="grey", cex=0.6))
     segments(x0=i,x1=i, y0=d2$gmin.min[i], y1=d2$gmin.max[i])
   }
   points(1:n, d2$gmin.mean, pch=19)
