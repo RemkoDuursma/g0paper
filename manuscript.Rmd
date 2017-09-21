@@ -31,15 +31,42 @@ E: remkoduursma@gmail.com
 T: +61(0)45701806
 
 
-
 ```{r include=FALSE}
 includefigs <- F
 library(png)
 library(grid)
-
+library(knitr)
 
 source("R/load.R")
 ```
+
+
+
+**Contents:**
+
+```{r, echo=FALSE}
+tab <- read.csv(text="I. Introduction
+II. Comparison of various definitions of minimum conductance
+III. Problems with estimating minimum conductance from cuvette data
+IV. Use of minimum conductance in models
+\t1. Models of water-use efficiency
+\t2. Models of drought response of stomatal conductance
+V. Cuticular conductance
+VI. Nighttime conductance
+VII. Environmental and ecological variation in minimum conductance 
+\t1. Contribution of stomata to minimum conductance
+\t2. Minimum conductance shows little meaningful interspecific variation
+\t3. Acclimation to drought
+\t4. Acclimation and instantaneous response to temperature
+\t5. Other factors
+VIII. Conclusions", header=F)
+
+knitr::kable(tab[[1]], col.names="")
+
+
+```
+
+
 
 
 # Summary
@@ -66,10 +93,10 @@ $$ g_s = g_0 + g_1 \frac{A_n}{C_a}f(D)$$
 Where g~1~ is a 'slope' parameter, A~n~ the leaf net photosynthetic rate, C~a~ atmospheric CO~2~ concentration, and f(D) is some function of the vapour pressure deficit D (or relative humidity in case of the model of @ballberry1987), and g~0~ is the value of g~s~ when A~n~ is zero. In this paper, we refer to Eq. 1 as 'the Ball-Berry model', thus including all model formulations that include different f(D) functions besides the one proposed by Ball & Berry (1987) (they used relative humidity). It should be clear from Eq. 1 that the Ball-Berry model is actually a model of water-use efficiency, since both g~s~ and A~n~ appear in the equation. Much attention has been paid to quantifying and interpreting variation in the g~1~ parameter [@lin2015; @miner2017; @prentice2014; @medlyn2011], but the g~0~ parameter has been largely ignored. For example, a recent review of stomatal conductance models did not mention the minimum conductance [@damour2010]. The original description of Eq. 1 as published by @ballberry1987 did not include an intercept term. It was first introduced in the unpublished manuscript of @ball1988, as an 'intercept' without further discussion of the role it plays in the model. Discuss @barnard2013 briefly (in a positive way :)
 
 \
-The absolute minimum attainable water loss rate through the cuticle only, which is typically measured on isolated cuticles of the adaxial (non-stomatal) side of the leaf. Other measurements allow for the estimation of water loss through incompletely closed and broken stomata. Of particular interest is the method where leaves are detached from the plant, and their weight loss monitored over time. This method (mass loss of detached leaves, MLD) is interesting because it more closely simulates actual field conditions for plants that are severely droughted, and includes all surfaces of the leaf. Since the seminal review by @kerstiens1996, no attempt has been made to synthesize the literature for values of g~min~, which is timely as models start to incorporate more detailed drought dynamics all the way to the point of mortality by desiccation (Xu, Blackman, Martin-StPaul, Sperry?). Instead, many models rely on inaccurately estimated 'minimum' conductance from cuvette data, by applying regression techniques. We critically examine this method in Section III. 
+The absolute minimum attainable water loss rate through the cuticle only, which is typically measured on isolated cuticles of the adaxial (non-stomatal) side of the leaf. Other measurements allow for the estimation of water loss through incompletely closed and broken stomata. Of particular interest is the method where leaves are detached from the plant, and their weight loss monitored over time. This method (mass loss of detached leaves, MLD) is interesting because it more closely simulates actual field conditions for plants that are severely droughted, and includes all surfaces of the leaf. Since the seminal review by @kerstiens1996, no attempt has been made to synthesize the literature for values of g~min~, which is timely as models start to incorporate more detailed drought dynamics all the way to the point of mortality by desiccation (Xu, Blackman, Martin-StPaul, Sperry?). Instead, many models rely on inaccurately estimated 'minimum' conductance from cuvette data, by applying regression techniques.
 
 \
-Previews reviews have focused on the biology of the plant cuticle, and detailed physiology and anatomy of water transport across cuticles (riederer, kerstiens). Thus there is a disconnect between dizzying level of detailed understanding of the plant cuticle [@riederer2008], and the very simple  assumptions made when applying ecosystem models. We aim to improve the connection somewhat, and point at obvious gaps in understanding. 
+(*expand*) Previews reviews have focused on the biology of the plant cuticle, and detailed physiology and anatomy of water transport across cuticles (riederer, kerstiens). Thus there is a disconnect between dizzying level of detailed understanding of the plant cuticle [@riederer2008], and the very simple  assumptions made when applying ecosystem models. We aim to improve the connection somewhat, and point at obvious gaps in understanding. Throughout our review, we discuss both the practical implementation of a 'minimum' conductance g~0~ as implemented in e.g. Ball-Berry models of stomatal conductance (Eq. 1) and similar, and a 'true' minimum conductance as estimated on detached leaves (g~min~).
 
 
 
@@ -87,18 +114,18 @@ Previews reviews have focused on the biology of the plant cuticle, and detailed 
 | g~s,low A~ | Cuvette measurements of g~s~ when photosynthesis rates are very low. |
 
 
-Measurements of (presumed) minimum conductance, after stomatal closure is either induced or assumed, can be broadly divided into the following categories. The absolute minimum conductance attained by leaves is that through the cuticle only. Measurements of cuticular conductance (g~cut~) are typically made on isolated cuticles [@riederer2001] (g~cut,isol~), or on the side of the leaf that lacks stomata ('adaxial' side), or by sealing the side with stomata (g~cut,seal~). Another measurement is to detach leaves, and measure leaf weight over time as the leaf dries out. After some time, a constant minimum transpiration rate is attained (sometimes described as the 'residual transpiration rate'), from which minimum conductance (g~min~) can be inferred using measured vapour pressure deficit [@sinclair1986]. This method most closely resembles conditions that plants may experience during a dry-down or periods of extreme stress. 
+Measurements of (presumed) minimum conductance, after stomatal closure is either induced or assumed, can be broadly divided into the following categories. The absolute minimum conductance attained by leaves is that through the cuticle only. Measurements of cuticular conductance (g~cut~) are typically made on isolated non-stomatal cuticles [@riederer2001] (g~cut,isol~), or via gas exchange techniques, or mass loss of detached leaves vby sealing the side with stomata (g~cut,seal~). The method we here refer to as minimum conductance is that of mass loss of detached leaves (MLD). In this method, leaves are detached and leaf mass is monitored over time as the leaf dries out. After some time, a constant minimum transpiration rate is attained (sometimes described as the 'residual transpiration', or 'epidermal transpiration'), from which minimum conductance (g~min~) can be inferred using measured vapour pressure deficit [@sinclair1986]. This method most closely resembles conditions that plants may experience during a dry-down or periods of extreme stress. The g~0~ parameter, which is a *modelled* minimum conductance reached when photosynthesis rate is zero, is typically estimated by applying regression to Eq. 1 (of which various forms exist). 
+
+\ 
+We quantitatively compared each of these different 'minimum' codnductance values by synthesizing existing data. To estimate g~0~ from regression, we used the @lin2015 database to fit the model of @medlyn2011 using non-linear regression, and data presented by @miner2017 on the linear regression of the @ballberry1987 model. Measurements of conductance of isolated, non-stomatal cuticles (g~cut,isol~), and of conductance of detached leaves with the stomatal side sealed (g~cut,seal~) were taken from the compilation by @kerstiens1996.  Data on minimum conductance (g~min~) from MLD was compiled from 44+ original papers (see SuppInfo A for a list of papers and additional figures describing this new compilation). For the compilation, we returned to all original papers mentioned in the review by @kerstiens1996, and added many newer sources. All conductance values were converted to per unit projected surface area. Units were converted to molar fluxes assuming 41 mol m^-3^ (cf. @kerstiens1996). Although it is quite clear that night-time conductance (g~dark~) is much larger than a true 'minimum' conductance, it is frequently used as an independent measurement of g~0~ [@lombardozzi2017], and thus a comparison of magnitudes is useful. A compilation of night-time conductance (g~dark~) values was taken from @lombardozzi2017, who compiled cuvette (and sometimes sap flow-based) measurements of ca. 150 species during night-time. Actual minimum daytime values were estimated from the Lin et al. database, by taking those data where A~n~ < 2 $mu$ mol m^-2^ s^-1^, and calculating the minimum g~s~ for each of the XXX studies included in that dataset. This estimate was added as a reference as it represents an actual minimum values measured, rather than a fitted/extrapolated g~0~ term.
 
 \
-For the @lin2015 database, we fit the model of @medlyn2011 using non-linear regression, while @miner2017 presented results from linear regression of the @ballberry1987 model. Measurements of conductance of isolated, non-stomatal cuticles (g~cut,isol~), and of conductance of detached leaves with the stomatal side sealed (g~cut,seal~) were taken from the compilation by @kerstiens1996.  Data on minimum conductance (g~min~) from weight loss of detached leaves was compiled from 44+ original papers, see SuppInfo A for a list of papers and additional figures describing this new compilation. For the compilation, we returned to all original papers mentioned in the review by @kerstiens1996, and added many newer sources. All conductance values were converted to per unit projected surface area. Units were converted to molar fluxes assuming 41 mol m^-3^ (cf. @kerstiens1996). Although it is quite clear that night-time conductance (g~dark~) is much larger than a true 'minimum' conductance, it is frequently used as an independent measurement of g~0~ [@lombardozzi2017], and thus a comparison of magnitudes is useful. A compilation of night-time conductance (g~dark~) values was taken from @lombardozzi2017, who compiled cuvette (and sometimes sap flow-based) measurements of ca. 150 species during night-time. Actual minimum daytime values were estimated from the Lin et al. database, by taking those data where A~n~ < 2 $mu$ mol m^-2^ s^-1^, and calculating the minimum g~s~ for each of the XXX studies included in that dataset. This estimate was added as a reference as it represents an actual minimum values measured, rather than a fitted/extrapolated g~0~ term.
-
-\
-Conductance in the dark was on average eight-fold higher than g~min~. It is no new observation that stomata do not close in the dark, but do close on detached leaves, as already demonstrated by @hygen1954 in Scots pine, and described by @koerner1994. More recently, @walden-coleman2013 showed much higher g~dark~ compared to g~min~ in Cotton. However, @cavender-bares2007 gdark similar to gmin in oaks. Actual measured stomatal conductance during conditions when photosynthesis was low (g~s,low A~) was also much lower than fitted g~0~ or g~dark~. In other words, actual daytime conductance is much lower than the presumed minimum estimated from fitted g~0~. A similar result was already presented by @dekauwe2015 (their  Fig. A2). 
+(*expand*) The results are presented in Fig. 1. Conductance in the dark was on average eight-fold higher than g~min~. It is no new observation that stomata do not close in the dark, but do close on detached leaves, as already demonstrated by @hygen1954 in Scots pine, and described by @koerner1994. More recently, @walden-coleman2013 showed much higher g~dark~ compared to g~min~ in Cotton. However, @cavender-bares2007 gdark similar to gmin in oaks. Actual measured stomatal conductance during conditions when photosynthesis was low (g~s,low A~) was also much lower than fitted g~0~ or g~dark~. In other words, actual daytime conductance is much lower than the presumed minimum estimated from fitted g~0~. A similar result was already presented by @dekauwe2015 (their  Fig. A2). 
 
 
-# III. Estimating minimum conductance from cuvette data
+# III. Problems with estimating minimum conductance from cuvette data
 
-The standard approach in estimating g~0~ for use in Eq. 1 is to use regression with g~s~ as the response variable, and the right-hand side of Eq. 1 as the predictor. The g~0~ parameter is thus estimated as the intercept. Here we briefly discuss some statistical aspects of this estimation procedure, and draw the general conclusion that g~0~ is poorly estimated in this way. The difficulty of the estimation can already be concluded from the fact that a) many studies set g~0~ to some assumed value rather than fitting it (e.g. @leuning1995 uses 0.01 mol m^-2^ s^-1^ for all species); presumably because unreliable estimates were obtained, b) negative g~0~ estimates from regression are commonly reported [@leuning1995; @heroult2013; @miner2017], though nonsensical. 
+The standard approach in estimating g~0~ for use in Eq. 1 is to use regression with g~s~ as the response variable, and the right-hand side of Eq. 1 as the predictor. The g~0~ parameter is thus estimated as the intercept. Here we briefly discuss some statistical aspects of this estimation procedure, and draw the general conclusion that g~0~ is poorly estimated by this method. The difficulty of the estimation can already be concluded from the fact that a) many studies set g~0~ to some assumed value rather than fitting it (e.g. @leuning1995 uses 0.01 mol m^-2^ s^-1^ for all species); presumably because unreliable estimates were obtained, b) negative g~0~ estimates from regression are commonly reported [@leuning1995; @heroult2013; @miner2017], though it is clearly non-sensical to suggest negative conductance values. 
 
 \
 It is also telling that there are few reports on the plasticity (intra- or interspecific) of g~0~, perhaps because it is so poorly estimated. Exceptions are @duarte2016, who found a lower g~0~ in a heat wave treatment in Douglas-fir (although g~1~ was unaffected), but in their case g~0~ was very accurately estimated by careful multi-point light response curves. Another exception is @misson2004, who report on a close negative correlation between pre-dawn leaf water potential and g~0~ in Ponderosa pine (again, the slope was unaffected).
@@ -149,10 +176,11 @@ The g~0~ parameter also represents g~s~ when T~leaf~ is very high, because A~n~ 
 \
 Using the coupled leaf gas exchange model, we show how A~n~/g~s~ and C~i~ depend on PPFD with three values of g~0~ (0, 0.01 and 0.03 mol m^-2^ s^-1^). We also demonstrate the effect of g~0~ on modelling the T~leaf~ response. In this simulation, T~leaf~ and D are assumed to co-vary with an empirical relationship as used by @duursma2014. Over the entire range of T~leaf~, inclusion of a non-zero g~0~ obviously increase leaf transpiration E~L~, but at a slightly higher rate than just due to g~0~. This effect arises because the additional conductance allows slightly higher rates of photosynthesis, which in turn increase g~s~ via Eq. 1. 
 
-
 ## 2. Models of drought response of stomatal conductance
 
 Another reason to include a non-zero g~0~ term in models of stomatal conductance arises during severe drought. When plants are sufficiently water-stressed that stomata are completely closed, water loss still continues through the cuticle and leaky and incompletely closed stomata. Thus models that aim to predict when plants desiccate and die must include a minimum conductance term [@blackman2016; @sinclair2000]. 
+
+Various new models that aim to simulate desiccation have a g~min~ term in it, but it is not yet well constrained by data.
 
 @pisekwinkler1953, early calculation of the length of time needed to desiccate leaves to some water content, given the minimum transpiration rate, and the water content of the leaves. 
 
@@ -160,13 +188,13 @@ Another reason to include a non-zero g~0~ term in models of stomatal conductance
 
 Refined by @blackman2016, incorporating more well-known hydraulics traits into the framework. 
 
-Discuss Martin-StPaul (2017); key role of minimum conductance in a model of desiccation dynamics
+Discuss Martin-StPaul (2017); key role of minimum conductance in a model of desiccation dynamics.
 
-Various new models that aim to simulate desiccation have a g~min~ term in it, but it is not yet well constrained by data.
+**Could we have a figure showing time to mortality as a function of gmin? I know Nico wants to use this in a separate paper, but it might draw some attention here.**
 
 
 
-# VI. Cuticular conductance
+# V. Cuticular conductance
 
 Literature values of g~cut~, especially when measured on isolated cuticles (g~cut,isol~) were much lower than any other estimate of conductance, even compared to measurements based on MLD with stomatal side sealed (g~mld,seal~). The conductance of stomata-free leaf cuticles represents the absolute minimum conductance that leaves can attain. This result should be viewed with caution as @kerstiens1996 argued that measurements of g~cut~ maybe too low due to low water content of the cuticle after detachment from the leaf, and storage in often dry-air conditions. A review of cuticular transport mechanisms, biochemical composition, and formation of cuticular waxes is well outside the scope of this review, as these processes have been well described elsewhere [@kerstiens1996; @kerstiens2006; @shepherd2006; @schreiber1996; @schreiber2001; @schuster2016b]. However, a few key points should be reiterated as they are relevant to the current discussion.
 
@@ -174,7 +202,7 @@ Literature values of g~cut~, especially when measured on isolated cuticles (g~cu
 Although we use the term cuticular conductance freely, this transport pathway does not represent a true conductance since water does not diffuse as a gas through the cuticle. Instead, it dissolves into the medium of the cuticle, diffuses through the solid matrix, and is desorped at the outer edge of the cuticle [@kerstiens1996; @riederer2001; @schreiber1996]. The main barrier to diffusion is actually a very thin layer at the leaf surface. Because most of the resistance is located in such a thin layer, g~cut~ does not correlate with the thickness of the cuticle  [@priestley1943; @riederer2001; @anfodillo2002; @schuster2016b]. Nonetheless there is considerable variation in cuticle thickness between plant species [@schuster2016a], as well as within species in response to drought (cite), along altitudinal transects [@delucia1984], and even with increasing height in the canopy of very tall trees [@woodruff2010]. If the cuticle thickness does not directly affect its conductance, what is the value of increasing the cuticle? 
 
 \
-It is important to bear in mind other functions of the cuticle, including attenuation of radiation, as a barrier for fungal pathogens, and various interactions with insects [@mueller2008] [@kerstiens1996c;@riederer2008]. The thickness of the cuticle per se may also have to do with mechanical strength, as @onoda2012 reported that thicker cuticles are more resistant to tearing (the force to tear and tensile strength both approx proportional to cuticle thickness). Thick cuticles may also be useful because  exposure to wind has been shown to dislodge cuticular compounds by absrasion [@rogge1993], thereby dramatically increasing the conductance of the cuticle [@hadley1983;@grace1974;@vangardingen1991]. Similarly, exposure to simulated rain damages the cuticle and increases its conductance [@baker1986]. Such exposure to the elements may be responsible for the typical gradual increase in g~min~ with leaf age in field-grown plants [@jordan2007].
+It is important to bear in mind other functions of the cuticle, including attenuation of radiation, as a barrier for fungal pathogens, and various interactions with insects [@mueller2008] [@kerstiens1996c;@riederer2008]. The thickness of the cuticle per se may also have to do with mechanical strength, as @onoda2012 reported that thicker cuticles are more resistant to tearing (the force to tear and tensile strength both approx proportional to cuticle thickness). Thick cuticles may also be useful because  exposure to wind has been shown to dislodge cuticular compounds by absrasion [@rogge1993], thereby dramatically increasing the conductance of the cuticle [@hadley1983;@grace1974;@vangardingen1991]. Similarly, exposure to simulated rain damages the cuticle and increases its conductance [@baker1986], most dramatically demonstrated in an ice storm, leading to much higher g~min~ [@boyce2003]. Such exposure to the elements may be responsible for the typical gradual increase in g~min~ with leaf age in field-grown plants [@jordan2007].
 
 \
 Despite considerable work on the topic, no clear relationship between chemical composition or structure of the cuticle and its conductance has emerged. Recently, @schuster2016a presented a comprehensive study of cuticle chemical composition, but this variation could not explain variation in g~cut~. Similarly, @hauke1998 found no relationship between the gradual decrease in g~cut~ in *Hedera helix* during leaf maturation and cuticle wax amount, mean chain lengths, or cuticle weight. 
@@ -185,17 +213,16 @@ Water travels more freely across the cuticle than CO2 [@boyer1997; @boyer2015]. 
 
 
 
-# VII. Nighttime conductance
+# VI. Nighttime conductance
 
 
 A number of studies have assumed that the g~0~ in the Ball-Berry model equals the night-time conductance (g~dark~). However as our literature comparison showed, g~dark~ is substantially higher compared to g~s~ reached at low photosynthetic rates, and g~min~. Previous work on g~dark~ have confirmed that night-time conductance is generally much higher than g~min~, when measured on the same species [@howard2007; @caird2007]. The idea that g~dark~ is equal to the minimum reached during periods of near-zero PPFD or high temperature during the day can be dismissed based on several observations.
 
 \
-First, ample observations suggect that g~dark~ is not a fixed rate but varies tremendously during the night. @caird2007 (and references therein) described how for many species, g~dark~ is not stable throughout the night period. Instead, endogenous, gradual increases in stomatal opening during predawn hours have been reported in many species under natural field conditions as well as in controlled environments [@rawson1988]. @rescodedios2016 showed that, in *Eucalyptus camaldulensis*, g~dark~ in the period just after sunset was much lower than pre-dawn g~dark~. Strong evidence for endogenous regulation of g~dark~ was reported by @rescodedios2013, who showed that g~dark~ fluctuated throughout the night despite environmental conditions being held constant in whole-tree chambers. Clearly g~dark~ is an actively controlled process that cannot be adequately summarized by a single constant g~0~.
+First, ample observations suggect that g~dark~ is not a fixed rate but varies tremendously during the night. @caird2007 (and references therein) described how for many species, g~dark~ is not stable throughout the night period. Instead, endogenous, gradual increases in stomatal opening during predawn hours have been reported in many species under natural field conditions as well as in controlled environments [@rawson1988]. @rescodedios2016 showed that, in *Eucalyptus camaldulensis*, g~dark~ in the period just after sunset was much lower than pre-dawn g~dark~. Strong evidence for endogenous regulation of g~dark~ was reported by @rescodedios2013, who showed that g~dark~ fluctuated throughout the night despite environmental conditions being held constant in whole-tree chambers. In addition, g~dark~ can show a clear response to vapour pressure deficit [@barbour2007] during night-time conditions. Clearly g~dark~ is an actively controlled process that cannot be adequately summarized by a single constant g~0~.
 
 
-
-# VIII. Environmental and ecological variation in minimum conductance 
+# VII. Environmental and ecological variation in minimum conductance 
 
 ## 1. Contribution of stomata to minimum conductance
 
@@ -213,7 +240,6 @@ We found not so much! Grasses have a higher gmin. So do crops, and within crops 
 Very few studies have found meaningful correlations. Exception is @brodribb2014, showing a correlation between rainfall at species origin (of the driest quarter), and g~min~. 
 
 Comparing all available data, we did not find significant relationships between rainfall, aridity, or temperature and g~min~ (see SuppInfo 2).
-
 
 
 
@@ -240,8 +266,6 @@ knitr::kable(dat,
              col.names= c("Study","Species","Experiment","Reduction in g~min~"))
 ```
 
-
-
 ## 4. Acclimation and instantaneous response to temperature
 
 
@@ -257,7 +281,6 @@ Lower g~min~ result is consistent with @duarte2016, who reported lower g~0~ and 
 
 A case study on *Eucalyptus parramattensis* growing in twelve whole-tree chambers (see Drake for methods), either tracking ambient conditions or exposed to a constant +3 C air temperature. Our results showed a large  acclimation effect but no evidence for a direct T effect (over the narrow range in T compared to Schreiber).
 
-
 ## 5. Other factors
 
 Also discussed above in Section~(cuticular conductance), the cuticle is constantly exposed to physical (wind, rain) and biotic (insects, fungi) agents which damage the cuticle over time. 
@@ -271,8 +294,7 @@ Also discussed above in Section~(cuticular conductance), the cuticle is constant
 @fanourakis2013 gmin (MLD) much higher in high RH grown plants, at any value of leaf water content (Table 1). This may suggest that gmin is useful for the plant, and is reduced actively in response to water loss (Hypothesis 2).
 
 
-
-# Conclusions
+# VIII. Conclusions
 
 In a pioneering publication which presented the Jarvis model of stomatal conductance, @jarvis1976 states that "we have assumed in the following equations that when stomata are closed the leaf conductance is zero because field data are generally inadequate to define a cuticular conductance." Similarly, given the poor statistical properties of g~0~ estimated from regression, the very high values compared to minimum conductance reached for detached leaves, we conclude that g~0~ should not be estimated from regression on leaf gas exchange data for use in models.
 
