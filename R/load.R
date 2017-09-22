@@ -189,7 +189,8 @@ kerst_simple <- group_by(kerst, species, method) %>%
   dplyr::select(gmin, method)
 
 gdfr <- bind_rows(gmindat_simple, kerst_simple, lombar, g0s, minags) %>%
-  mutate(method = factor(method, levels=c("gcut_isol","gcut_seal","gmin","gnight", "g0","gslowA")))
+  filter(method != "gcut_seal") %>%  # I keep changing my mind!!
+  mutate(method = factor(method, levels=c("gcut_isol","gmin","gnight", "g0","gslowA")))
 
 
 

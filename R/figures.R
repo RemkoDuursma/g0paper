@@ -2,27 +2,18 @@
 
 figure_gmin_review <- function(gdfr){
   
-  par(mar=c(3,5,1,0.5), cex.lab=1.2)
-  fit <- lm(log10(gmin) ~ method-1, data=gdfr)
-  cis <- confint(fit)
-  quans <- sapply(split(gdfr, gdfr$method), 
-                  function(x)quantile(log10(x$gmin), probs=c(0.05, 0.95)))
-  gmins <- with(gdfr, tapply(log10(gmin), method, mean, na.rm=TRUE))
-  
-  plot(1:5, gmins, pch=19, cex=1.2, axes=FALSE, xlab="",
-       panel.first=segments(x0=1:5, x1=1:5, y0=quans[1,], y1=quans[2,], col="grey"),
-       ylim=c(0,2),
-       xlim=c(0.5,5.5),
-       ylab=expression(Conductance~~(mmol~m^-2~s^-1)))
-  axis(1, at=1:5, labels=c(expression(g["cut,isol"]), 
-                           expression(g["min,seal"]), 
-                           expression(g[min]), 
-                           expression(g[dark]),
-                           expression(g[0])))
-  magaxis(side=2, unlog=2)
-  box()
-  arrows(x0=1:5, x1=1:5, y0=cis[,1], y1=cis[,2], angle=90, length=0.1, code=3)
-  
+  par(mar=c(4,4,1.5,1), mgp=c(2.5,0.5,0), tcl=-0.2, 
+      las=3, yaxs="i",
+      cex.lab=1.2)
+  plotCIlog(gmin, method, gdfr, 
+            ylim=c(-1,2.2),
+            label_las=1,
+            ylab=expression(Conductance~(mmol~m^-2~s^-1)),
+            labels=c(expression(g["cut,isol"]),
+                     expression(g["min"]),
+                     expression(g["dark"]),
+                     expression(g["0"]),
+                     expression(g["s,low A"])))
   
 }
 
@@ -36,7 +27,7 @@ figure_gmin_review_2 <- function(gdfr){
           ylim=c(0,80),
           ylab=expression(Conductance~(mmol~m^-2~s^-1)),
           labels=c(expression(g["cut,isol"]),
-                   expression(g["cut,seal"]),
+                   #expression(g["cut,seal"]),
                    expression(g["min"]),
                    expression(g["dark"]),
                    expression(g["0"]),
@@ -44,6 +35,8 @@ figure_gmin_review_2 <- function(gdfr){
   
   
 }
+
+
 
 
 
@@ -399,7 +392,7 @@ gmin_3panel <- function(gmindat, cropgmin){
   gmin_loghist(gmindat)
   par(mar=c(6,5,2,2), las=2, cex.lab=1.1, mgp=c(2.5, 0.5,0), tcl=-0.2)
   gmin_by_order(gmindat)
-  par(las=3)
+  par(las=2)
   figure_crop_genotypes(cropgmin)
 }
 
