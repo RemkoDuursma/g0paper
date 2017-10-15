@@ -1,4 +1,5 @@
 
+if(!require("pacman"))install.packages("pacman")
 pacman::p_load(Hmisc, car, dplyr, tidyr, nlme, nlshelper, 
                forcats, tibble, magicaxis, 
                plantecophys, readxl, multcomp,
@@ -51,6 +52,12 @@ kerst <- read.csv("data/kerstiens1996_table1.csv", stringsAsFactors = FALSE) %>%
 # E1 - gnight / gdark
 # E2 - minimum conductance measured during the day (vague!)
 # E3 - presumed stomatal closure (v high CO2, ABA, drought, VPD) (vague!)
+
+# Shuster et al. 2017 (JXB), only for gcut.
+schuster2017 <- read.csv("data/schuster2017_tableS1.csv", stringsAsFactors = FALSE) %>%
+  filter(parameter == "p") %>%
+  rename(method = parameter, gmin = value) %>%
+  mutate(method = "gcut_isol")
 
 
 # Blackman, WTC4
@@ -188,7 +195,7 @@ kerst_simple <- group_by(kerst, species, method) %>%
   ungroup %>%
   dplyr::select(gmin, method)
 
-gdfr <- bind_rows(gmindat_simple, kerst_simple, lombar, g0s, minags) %>%
+gdfr <- bind_rows(gmindat_simple, kerst_simple, schuster2017, lombar, g0s, minags) %>%
   filter(method != "gcut_seal") %>%  # I keep changing my mind!!
   mutate(method = factor(method, levels=c("gcut_isol","gmin","gnight", "g0","gslowA")))
 
