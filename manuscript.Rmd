@@ -42,6 +42,12 @@ source("R/load.R")
 ```
 
 
+```{r, include=FALSE}
+# TODO
+# - gmin vs. p50 and pgs50 (data from nico martin), for suppinfo
+
+```
+
 
 **Contents:**
 
