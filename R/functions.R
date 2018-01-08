@@ -27,7 +27,7 @@ fits_lin2015 <- function(lin2015a){
            g0_se = 1000 * sapply(fits, function(x)summary(x)$coefficients[1,2]),
            g1_se = sapply(fits, function(x)summary(x)$coefficients[2,2])
            ) %>% 
-    left_join(summarize(lin2015a, 
+    left_join(dplyr::summarize(lin2015a, 
                         sd_bbopti = sd(BBopti, na.rm=TRUE),
                         cv_bbopti = sd_bbopti/mean(BBopti, na.rm=TRUE),
                         sd_cond = sd(Cond, na.rm=TRUE),

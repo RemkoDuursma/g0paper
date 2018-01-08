@@ -1,12 +1,17 @@
 
+
+
+
 if(!require("pacman"))install.packages("pacman")
 pacman::p_load(Hmisc, car, dplyr, tidyr, nlme, nlshelper, 
                forcats, tibble, magicaxis, 
                plantecophys, readxl, multcomp,
-               reporttools, Taxonstand, taxize, speciesmap,
+               reporttools, Taxonstand, taxize, 
                doBy, stringi, rmarkdown)
 
 
+#devtools::install_github("remkoduursma/speciesmap")
+library(speciesmap)
 
 if(!dir.exists("download"))dir.create("download")
 if(!dir.exists("output"))dir.create("output")
@@ -69,8 +74,9 @@ wtc4gmin <- read.csv("data/wtc4_gmin_detached.csv") %>%
 wtc4gdark <- read.csv("data/wtc4_gnight.csv")
 
 # Rosana Lopez Hakea data
-lopez <- read.csv("data/lopez_gmin_hakea.csv") %>% group_by(species, treatment) %>%
-  summarize(gmin = mean(gmin)) %>%
+lopez <- read.csv("data/lopez_gmin_hakea.csv") %>% 
+  group_by(species, treatment) %>%
+  dplyr::summarize(gmin = mean(gmin)) %>%
   mutate(gmin = 2*gmin)  # to convert - badly - to projected area
 
 # some meta data for this dataset (leaf form, MAP)
@@ -84,7 +90,7 @@ lopw <- dplyr::select(lopmet, species, leaf.form) %>% distinct() %>%
 
 # Version 2; by population merged with lopmet (because MAP varies by population)
 lopez2 <- read.csv("data/lopez_gmin_hakea.csv") %>% group_by(species, population, treatment) %>%
-  summarize(gmin = mean(gmin)) %>% 
+  dplyr::summarize(gmin = mean(gmin)) %>% 
   mutate(gmin = 2 * gmin) %>%
   inner_join(lopmet, by=c("species","population"))
 
@@ -110,7 +116,7 @@ g0s <- data.frame(gmin=c(lin2015coef$g0, miner$g0),
 
 # From Lin2015, data where A < threshold.
 minags <- group_by(lin2015, fitgroup) %>%
-  summarize(
+  dplyr::summarize(
     Amin = min(Photo, na.rm=TRUE),
     gmin = 1000 * min(Cond, na.rm=TRUE),
     Qrange = max(PARin) - min(PARin),
@@ -132,7 +138,7 @@ gmindat <- read.csv("c:/repos/gmindatabase/combined/gmindatabase.csv",
                     stringsAsFactors = FALSE) %>%
   filter(gmin > 0) %>%
   group_by(species) %>%
-  summarize(gmin = mean(gmin),
+  dplyr::summarize(gmin = mean(gmin),
             datasource = first(datasource)) %>%
   ungroup %>%
   left_join(species_classes, by="species")
@@ -191,7 +197,7 @@ gmindat_simple <- dplyr::select(gmindat, gmin) %>%
   mutate(method = "gmin")
 
 kerst_simple <- group_by(kerst, species, method) %>%
-  summarize(gmin = mean(gmin)) %>% 
+  dplyr::summarize(gmin = mean(gmin)) %>% 
   ungroup %>%
   dplyr::select(gmin, method)
 
