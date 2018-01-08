@@ -12,3 +12,4 @@ output/
 *.rds
 *.xlsx
 *.bib.sav
+.$*

@@ -3,7 +3,6 @@ source("R/load.R")
 
 
 to.pdf(figure_gmin_review(gdfr), "output/figure1.pdf", height=5, width=5)
-to.pdf(figure_gmin_review_2(gdfr), "output/figure1_unlog.pdf", height=5, width=5)
 
 to.pdf(figure_g0g1_cor(lin2015, "Nicolas Martin-StPaul_Quercus ilex_StPaul_Puechabon"), 
        "output/figure2.pdf", height=4, width=8)

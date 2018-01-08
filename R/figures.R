@@ -97,7 +97,7 @@ figure_g0g1_cor <- function(lin2015, group, legend=FALSE){
 
 figure_R2g0 <- function(lin2015coef, miner){
   
-  par(mfrow=c(1,3), mar=c(5,5,1,1), cex.axis=0.9)
+  par(mfrow=c(1,3), mar=c(5,5,1,1), cex.axis=0.9, cex.lab=1.2)
   l <- loess(g0 ~ R2, data=lin2015coef, span=0.8)
   with(lin2015coef, {
     plot(R2, g0, pch=16,
@@ -116,6 +116,7 @@ figure_R2g0 <- function(lin2015coef, miner){
   
   
   legend("topright", "Lin et al. 2015", bty='n', cex=0.8)
+  plotlabel("(a)", "topleft")
   
   l <- loess(g0 ~ R2, data=miner, span=0.8)
   with(miner,plot(R2, g0, pch=16, ylim=c(-100, 300), xlim=c(0,1),
@@ -125,6 +126,7 @@ figure_R2g0 <- function(lin2015coef, miner){
   abline(h=0)
   
   legend("topright", "Miner et al. 2017", bty='n', cex=0.8)
+  plotlabel("(b)", "topleft")
   
   l <- loess(g0_se ~ cv_bbopti, data=lin2015coef, span=0.9)
   with(lin2015coef, plot(cv_bbopti, g0_se, pch=16, ylim=c(0,60),
@@ -132,7 +134,7 @@ figure_R2g0 <- function(lin2015coef, miner){
                          ylab=expression("SE of"~g[0]~~(mmol~m^-2~s^-1)),
                          panel.first=plot_loess(l, add=TRUE, band=TRUE, lwd=2, col="darkgrey")
                          ))
-
+  plotlabel("(c)", "topleft")
   
 }
 
@@ -375,9 +377,11 @@ gmin_loghist <- function(gmindat){
 
 gmin_by_order <- function(gmindat){
   
+  logmean <- function(x)mean(log(x), na.rm=TRUE)
+  
   gmindat3 <- mutate(gmindat, 
                      Order = fct_lump(Order, n=10),
-                     Order = reorder(Order, gmin, median)) %>%
+                     Order = reorder(Order, gmin, logmean)) %>%
     filter(Order != "Other") %>% droplevels
   
   plotCI2(gmin, Order, gmindat3, transform_log10=TRUE,
@@ -390,10 +394,13 @@ gmin_by_order <- function(gmindat){
 gmin_3panel <- function(gmindat, cropgmin){
   par(mfrow=c(1,3), mar=c(6,5,1,1), cex.lab=1.1, mgp=c(2.5, 0.5,0), tcl=-0.2)
   gmin_loghist(gmindat)
+  plotlabel("(a)", "topleft")
   par(mar=c(6,5,2,2), las=2, cex.lab=1.1, mgp=c(2.5, 0.5,0), tcl=-0.2)
   gmin_by_order(gmindat)
+  plotlabel("(b)", "topleft")
   par(las=2)
   figure_crop_genotypes(cropgmin)
+  plotlabel("(c)", "topleft")
 }
 
 

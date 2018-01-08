@@ -4,7 +4,7 @@ pacman::p_load(Hmisc, car, dplyr, tidyr, nlme, nlshelper,
                forcats, tibble, magicaxis, 
                plantecophys, readxl, multcomp,
                reporttools, Taxonstand, taxize, speciesmap,
-               doBy, stringi)
+               doBy, stringi, rmarkdown)
 
 
 
