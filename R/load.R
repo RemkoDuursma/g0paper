@@ -145,6 +145,9 @@ gmindat <- read.csv("c:/repos/gmindatabase/combined/gmindatabase.csv",
 
 cropgmin <- read.csv("c:/repos/gmindatabase/combined/cropgmindatabase.csv",
                     stringsAsFactors = FALSE)
+
+gminall <- dget("c:/repos/gmindatabase/combined/gminall.rdput")
+
 #
 if(FALSE){
   climfile <- "data/species_climate_wcpet.rds"
