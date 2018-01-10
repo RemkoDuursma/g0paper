@@ -213,7 +213,7 @@ figure_sim <- function(){
   
   with(t0, plot(Tleaf, 1000*GS, type='l', 
                 xlab=expression(T[leaf]~~(degree*C)),
-                ylab=expression(G[S]~~(mmol~m^-2~s^-1)),
+                ylab=expression(g[S]~~(mmol~m^-2~s^-1)),
                 col=col0, lty=lty0,
                 ylim=c(0,400)))
   with(t1, lines(Tleaf, GS, col=col1, lty=lty1))
@@ -478,7 +478,12 @@ figure_sureau <- function(planta, plantb){
   legend("topright", c("leaf","soil"), lty=c(1, 5), lwd=2, bty='n', cex=1.2)
   
   # panel c
-  with(planta, plot(days, PLC*100, xlim=c(0,100), ylab="PLC (%)", type='l', lwd=2, xlab="Days", col=cols[1]))
+  with(planta, 
+       plot(days, PLC*100, xlim=c(0,100), 
+            ylab="PLC (%)", type='l', lwd=2, 
+            xlab="Days", col=cols[1],
+            panel.first= abline(h = 88, lty=2, col="darkgrey"))
+  )
   with(plantb, lines(days, PLC*100, xlim=c(0,100), type='l', lwd=2, col=cols[2]))
   plotlabel("(c)", "bottomright")
   
