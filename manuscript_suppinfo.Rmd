@@ -21,26 +21,10 @@ source("R/load.R")
 # 1. Literature compilation of g~min~ estimates
 
 \
-Data on minimum conductance (g~min~) from MLD was compiled from 40 original papers. For the compilation, we returned to all original papers mentioned in the review by @kerstiens1996, and added many newer sources. All conductance values were converted to per unit projected surface area. Total surface area for conifer leaves was converted to projected area following @barclay2000. Units were converted to molar fluxes assuming 41 mol m^-3^ (cf. @kerstiens1996). In many cases, minimum transpiration rates were reported instead of a conductance (termed 'residual transpiration', 'epidermal transpiration', 'minimum transpiration', etc.). For all papers included in the compilation, we were able to convert these transpiration rates to conductances, but unfortunately dozens of papers could not be included because of missing information on vapour pressure deficit during measurements. All g~min~ estimates from original papers were entered in the database, but for this paper we only used 'control' treatments (filtering for drought, elevated temperature, and various other treatments). Where practical, other reported variables were also entered for each study. The complete database is available from github.com/remkoduursma/gmindatabase.
+Data on minimum conductance (g~min~) from MLD was compiled from 40 original papers. For the compilation, we returned to all original papers mentioned in the review by @kerstiens1996, and added many newer sources. All conductance values were converted to per unit projected surface area. Total surface area for conifer leaves was converted to projected area following @barclay2000. Units were converted to molar fluxes assuming 41 mol m^-3^ (cf. @kerstiens1996). In many cases, minimum transpiration rates were reported instead of a conductance (termed 'residual transpiration', 'epidermal transpiration', 'minimum transpiration', etc.). For all papers included in the compilation, we were able to convert these transpiration rates to conductances, but unfortunately dozens of papers could not be included because of missing information on vapour pressure deficit or relative humidity / air temperature during measurements. All g~min~ estimates from original papers were entered in the database, but for this paper we only used 'control' treatments (filtering for drought, elevated temperature, and various other treatments). Where practical, other reported variables were also entered for each study. The complete database is available from github.com/remkoduursma/gmindatabase.
 
 \
 Taxonomic order and family was looked up with the taxize R package [@taxize2013]. Climate variables across the species range were extracted from WorldClim, using species occurrence records from ALA and GBIF. The speciesmap R package was used for this extraction (github.com/remkoduursma/speciesmap).
-
-
-```{r gminfig1, echo=FALSE, dpi=300, fig.width=6, fig.height=5}
-figure_gmin_bygroup(gmindat)
-```
-**Figure S1**.
-
-
-
-```{r gminfig2, echo=FALSE, dpi=300, fig.width=6, fig.height=5}
-# climate plot
-```
-**Figure S2**.
-
-
-## References
 
 ```{r echo=FALSE, eval=FALSE}
  library(RefManageR)
@@ -48,7 +32,23 @@ r <- ReadBib("c:/repos/gmindatabase/references/references.bib")
 paste(paste0("@", names(r)), collapse="; ")
 ```
 
-[@anfodillo2002; @araus1991; @arnold2007; @bengtson1978; @boyce2003; @boyce2000; @brodribb2014; @burghardt2003; @cavender-bares2007; @cornwell2007; @drake2013; @vangardingen1991; @grace1974; @hamerlynck1996; @hao2010; @heinsoo1998; @holbrook1992; @iogna2013; @james2008; @jordan2007; @kerstiens1995; @kerstiens1989; @li2012; @muchow1989; @nagarajah1979; @nazrul-islam1983; @pasquet-kok2010; @phillips2010; @pisekberger1938; @rawson1988; @sack2003; @saito2010; @schuster2016; @scoffoni2011; @sinclair1986; @smith2006; @vilagrosa2003; @villar-salvador1999; @walden-coleman2013; @warren2011; @pallardy1993; @newton1996; @fish2009; @rosas-anderson2014]
+\
+The complete list of references used to construct the database can be found at the end of this document [@anfodillo2002; @araus1991; @arnold2007; @bengtson1978; @boyce2003; @boyce2000; @brodribb2014; @burghardt2003; @cavender-bares2007; @cornwell2007; @drake2013; @vangardingen1991; @grace1974; @hamerlynck1996; @hao2010; @heinsoo1998; @holbrook1992; @iogna2013; @james2008; @jordan2007; @kerstiens1995; @kerstiens1989; @li2012; @muchow1989; @nagarajah1979; @nazrul-islam1983; @pasquet-kok2010; @phillips2010; @pisekberger1938; @rawson1988; @sack2003; @saito2010; @schuster2016a; @scoffoni2011; @sinclair1986; @smith2006; @vilagrosa2003; @villar-salvador1999; @walden-coleman2013; @warren2011; @pallardy1993; @newton1996; @fish2009; @rosas-anderson2014].
+
+
+```{r gminfig1, echo=FALSE, dpi=300, fig.width=6, fig.height=5}
+figure_gmin_bygroup(gmindat)
+```
+**Figure S1**. Average minimum conductance (g~min~) for crops, graminoids, woody and other non-woody plant species. Grey symbols are original datapoints. Numbers above the figure refer to the number of species in each group. Different letters indicate significant differences. Error bars are 95% confidence intervals for the mean (calculated for log-transformed g~min~, and back-transformed).
+
+
+
+```{r gminfig2, echo=FALSE, dpi=300, fig.width=6, fig.height=5}
+figure_pet(gmindat2)
+```
+**Figure S2**. No relationship between g~min~ and potential evapotranspiration across the range of the species. Climate variables were calculated across the distribution of each species; we tested many other variables (precipitation, temperature, etc.), but no relationship with climate could be determined.
+
+
 
 
 # 2. Effects of drought stress on g~min~
@@ -68,7 +68,7 @@ knitr::kable(dat,
 figure_leafage(gminall)
 ```
 
-**Figure S3**. Correlation between g~min~ and leaf age for six studies in the g~min~ database. Leaf age is expressed in years (0 = current year), with the exception of @phillips2010, who measured juvenile and adult foliage on *Eucalyptus*. Citations with species studied are @boyce2000 (*Abies lasiocarpa*, *Picea engelmanii*), @boyce2003 (*Tsuga canadensis*, *Pinus strobus*, *Pinus resinosa*, *Picea rubens*), @heinsoo1998 (*Picea abies*), @jordan2007 (*Agastachys odorata*), @phillips2010 (*Eucalyptus saligna*, *E. sideroxylon*, *E. cladocalyx*). 
+**Figure S3**. Correlation between g~min~ and leaf age for five studies in the g~min~ database. Leaf age is expressed in years (0 = current year), with the exception of @phillips2010, who measured juvenile and adult foliage on *Eucalyptus*. Citations with species studied are @boyce2000 (*Abies lasiocarpa*, *Picea engelmanii*), @boyce2003 (*Tsuga canadensis*, *Pinus strobus*, *Pinus resinosa*, *Picea rubens*), @heinsoo1998 (*Picea abies*), @jordan2007 (*Agastachys odorata*), @phillips2010 (*Eucalyptus saligna*, *E. sideroxylon*, *E. cladocalyx*). 
 
 
 

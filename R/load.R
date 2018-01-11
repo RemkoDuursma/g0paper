@@ -149,7 +149,7 @@ cropgmin <- read.csv("c:/repos/gmindatabase/combined/cropgmindatabase.csv",
 gminall <- dget("c:/repos/gmindatabase/combined/gminall.rdput")
 
 #
-if(FALSE){
+if(TRUE){
   climfile <- "data/species_climate_wcpet.rds"
   if(!file.exists(climfile)){
     options(zomerpetpath="c:/data/zomerpet", worldclimpath="c:/data/worldclim")

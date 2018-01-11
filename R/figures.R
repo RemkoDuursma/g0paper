@@ -529,3 +529,17 @@ figure_leafage <- function(gminall){
   
 }
 
+figure_pet <- function(gmindat2){
+  
+  par(mar=c(4,4,1,1), cex.lab=1.2, mgp=c(2.5, 1, 0), tcl=0.2)
+  with(gmindat2, plot(PET_mean, gmin, 
+                      ylim=c(0,40),
+                      xlim=c(500,2000),
+                      xlab="Potential evapotranspiration (mm)",
+                      ylab=expression(g[min]~~(mmol~m^-2~s^-1)),
+                      pch=c(1,19)[as.factor(Woody)]))
+  legend("topright", c("Non-woody","Woody"), pch=c(1, 19), inset=0.01)
+
+}
+
+
