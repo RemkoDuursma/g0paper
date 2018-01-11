@@ -7,7 +7,7 @@ pacman::p_load(Hmisc, car, dplyr, tidyr, nlme, nlshelper,
                forcats, tibble, magicaxis, 
                plantecophys, readxl, multcomp,
                reporttools, Taxonstand, taxize, 
-               doBy, stringi, rmarkdown)
+               doBy, stringi, rmarkdown, ggplot2)
 
 
 #devtools::install_github("remkoduursma/speciesmap")

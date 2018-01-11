@@ -132,7 +132,7 @@ Measurements of minimum conductance, after stomatal closure is either induced or
 The minimum conductance of intact leaves is typically measured by mass loss of detached leaves (MLD). In this method, leaves are detached and leaf mass is monitored over time as the leaf dries out. Early work by @hygen1951 showed that after a leaf is detached, initial water loss rates are high, but after a while a constant low rate is achieved. From this minimum transpiration rate (sometimes described as the 'residual transpiration', or 'epidermal transpiration'), the minimum conductance (g~min~) can be estimated using measured vapour pressure deficit [@sinclair1986]. This method most closely resembles conditions that plants may experience during a dry-down or periods of extreme stress. 
 
 \ 
-We quantitatively compared each of the different 'minimum' conductance (Table 1) values by synthesizing existing data. To estimate g~0~ (Eq. 1) from regression, we used the @lin2015 database to fit the model of @medlyn2011 using non-linear regression, and data presented by @miner2017 on the linear regression of the @ballberry1987 model. Measurements of conductance of isolated, non-stomatal cuticles (g~cut~) were taken from the compilations by @kerstiens1996 and @schuster2017.  Data on minimum conductance (g~min~) from MLD was compiled from 44+ original papers (see SuppInfo 2 for a list of papers). For the compilation, we returned to all original papers mentioned in the review by @kerstiens1996, and added many newer sources. All conductance values were converted to per unit projected surface area. Units were converted to molar fluxes assuming 41 mol m^-3^ (cf. @kerstiens1996). Although it is quite clear that night-time conductance (g~dark~) is much larger than a true 'minimum' conductance (discussed further in Section VI), it is frequently used as an independent measurement of g~0~ [@lombardozzi2017], and thus a comparison of magnitudes is useful. A compilation of night-time conductance (g~dark~) values was taken from @lombardozzi2017, who compiled cuvette (and sometimes sap flow-based) measurements of ca. 150 species during night-time. Actual minimum daytime values were estimated from the @lin2015 database, by taking those data where A~n~ < 2 $mu$ mol m^-2^ s^-1^, and calculating the minimum g~s~ for each of the XXX studies included in that dataset. This estimate was added as a reference as it represents an actual minimum values measured, rather than a fitted/extrapolated g~0~ term.
+We quantitatively compared each of the different 'minimum' conductance (Table 1) values by synthesizing existing data. To estimate g~0~ (Eq. 1) from regression, we used the @lin2015 database to fit the model of @medlyn2011 using non-linear regression, and data presented by @miner2017 on the linear regression of the @ballberry1987 model. Measurements of conductance of isolated, non-stomatal cuticles (g~cut~) were taken from the compilations by @kerstiens1996 and @schuster2017.  Data on minimum conductance (g~min~) from MLD was compiled from 40 original papers (see SuppInfo 2 for references). For the compilation, we returned to all original papers mentioned in the review by @kerstiens1996, and added many newer sources. All conductance values were converted to per unit projected surface area. Units were converted to molar fluxes assuming 41 mol m^-3^ (cf. @kerstiens1996). Although it is quite clear that night-time conductance (g~dark~) is much larger than a true 'minimum' conductance (discussed further in Section VI), it is frequently used as an independent measurement of g~0~ [@lombardozzi2017], and thus a comparison of magnitudes is useful. A compilation of night-time conductance (g~dark~) values was taken from @lombardozzi2017, who compiled cuvette (and sometimes sap flow-based) measurements of ca. 150 species during night-time. Actual minimum daytime values were estimated from the @lin2015 database, by taking those data where A~n~ < 2 $mu$ mol m^-2^ s^-1^, and calculating the minimum g~s~ for each of the XXX studies included in that dataset. This estimate was added as a reference as it represents an actual minimum values measured, rather than a fitted/extrapolated g~0~ term.
 
 \
 The results of the quantitative comparison are presented in Fig. 1. From this compilation, a few striking differences between estimates are apparent. Cuticular conductance averaged 0.45 mmol m^-2^ s^-1^, ten-fold lower compared to g~min~ (4.9 mmol m^-2^ s^-1^). This result is in line with the methods comparison of @kerstiens1996. More recently, @schuster2017 argued, based on a data for 8 species, that g~min~ from MLD is comparable to g~cut~. However in the same study, a literature compilation of hundreds of values showed that g~cut~ was on 10-fold lower compared to g~min~, though this finding was not reported by @schuster2017 [see also @fernandez2017], and instead g~min~ and g~cut~ were pooled in their analysis. Nonetheless, the comparison between g~cut~ and g~min~ should be viewed with some caution as @kerstiens1996 argued that measurements of g~cut~ maybe too low due to low water content of the cuticle after detachment from the leaf, and storage in often dry-air conditions. @boyer1997 suggested that this decline of the cuticular permeability could be due to stretching of the wax layer at full saturation and tightening of the wax structure as the turgor releases.
@@ -295,19 +295,14 @@ plotfig("output/figure6.png")
 ## 3. Acclimation to drought
 
 \
-From the literature we found a general acclimatory response of g~min~ to drought stress, nearly always leading to a significant  decrease in g~min~ (see Table 2 for a summary of the literature), with just one exception. In each of the studies summarized, plants were grown in well-watered or droughted conditions, and in one case a difference in g~min~ was demonstrated after just four days of drought exposure [@bengtson1978]. We also demonstrate drought acclimation via a case study on 11 *Hakea* species grown in two watering treatments (Fig. 7). 
+From the literature we found a general acclimatory response of g~min~ to drought stress, nearly always leading to a significant  decrease in g~min~ (see Table S2 for a quantitative summary of the literature), with just one exception. The magnitude of the decrease of g~min~ with acclimation to drought stress varied from -4 to -70%; no attempt at a meta analysis was made since no drought is created equal. In each of the studies summarized, plants were grown in well-watered or droughted conditions, and in one case a difference in g~min~ was demonstrated after just four days of drought exposure [@bengtson1978]. We also demonstrate drought acclimation via a case study on 11 *Hakea* species grown in two watering treatments (Fig. 7).
 
 \
 A number of studies have attempted to attribute this drought acclimation in g~min~ to a change in the chemical composition of the cuticle. @bengtson1978 reported lower g~min~ in six oat varieties in response to drought, and increase in cuticular waxes, but no overall relationship between the two and very different responses between different oat genotypes. However, @premachandra1992 found that epicuticular wax load increased on leaves of non-irrigated Sorghum cultivars and was positively correlated with cuticular conductance and cell membrane stability. @mackova2013 found that adding ABA (simulating drought stress) to *Lepidium sativum* increased the chain length of cuticular waxes (but not total amounts). @bi2017 also reported that drought caused a change in cuticular wax production and chemical composition, but again in a highly genotype-specific way. Thus it can be concluded that the cuticle indeed changes substantially after a change in plant available water, but in a complex, species-specific manner that is yet to be connected directly to g~min~.
 
-
-```{r, echo=FALSE}
-dat <- read.csv("data/drought_gmin_table.csv", stringsAsFactors = FALSE)
-
-knitr::kable(dat, 
-             caption="**Table 2.** Summary of studies demonstrating a decrease in g~min~ after an acclimation period to low soil water availability",
-             col.names= c("Study","Species","Experiment","Reduction in g~min~"))
-```
+\
+atmospheric drought
+@fanourakis2013 gmin (MLD) much higher in high RH grown plants, at any value of leaf water content. This may suggest that gmin is useful for the plant, and is reduced actively in response to water loss.
 
 
 ```{r fig.height=4,echo=FALSE, eval=includefigs}
@@ -319,6 +314,8 @@ plotfig("output/figure7.png")
 
 
 ## 4. Acclimation and instantaneous response to temperature
+
+
 
 The response of minimum conductance to temperature is also striking; it shows both an instantaneous response to increased temperature, as well as an acclimatory response to growth temperatures. @riederer2001 and @schuster2016b have both demonstrated a steep non-linear instantaneous response of g~cut~ to temperature, with the response becoming especially steep at higher temperatures. 
 
@@ -337,15 +334,16 @@ plotfig("output/figure8.png")
 
 
 
-## 5. Other factors
+## 5. Increased minimum conductance with leaf age
 
-Also discussed above in Section~(cuticular conductance), the cuticle is constantly exposed to physical (wind, rain) and biotic (insects, fungi) agents which damage the cuticle over time. 
 
-@jordan2007 large increase gmin in the herb Agastachys odorata with leaf age. (*Several studies in database that have leaf age effects; summarize?*).
+@jordan2007 large increase gmin in the herb Agastachys odorata with leaf age. See SuppInfo 3 for a summary of six studies on leaf age effects. All but one species show an increase in g~min~ with leaf age. Also discussed above in Section~(cuticular conductance), the cuticle is constantly exposed to physical (wind, rain) and biotic (insects, fungi) agents which damage the cuticle over time. 
 
-@anfodillo2002 gmin high altitude. Four-fold increase gmin from February (winter) to August in Picea abies, probably due to incomplete stomatal closure not changes in cuticle properties. Cite common finding that gmin increases with altitude [e.g. @delucia1984; @herrick1991].
+- do any of those papers say why? summarize
 
-@fanourakis2013 gmin (MLD) much higher in high RH grown plants, at any value of leaf water content (Table 1). This may suggest that gmin is useful for the plant, and is reduced actively in response to water loss (Hypothesis 2). (*could go to temperature section, as T and RH are correlated in field conditions*).
+@anfodillo2002 gmin high altitude. Four-fold increase gmin from February (winter) to August in Picea abies, probably due to incomplete stomatal closure not changes in cuticle properties. Cite common finding that gmin increases with altitude [e.g. @delucia1984; @herrick1991]. @fernandez2017 summarized the literature on this topic and argue that the short growing seasons at high altitude cause 'unripe' cuticles.
+
+
 
 
 # VIII. Conclusions

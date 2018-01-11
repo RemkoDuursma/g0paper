@@ -6,5 +6,6 @@ source("R/load.R")
 # Conversion to png relies on an installation of ImageMagick (and GhostScript); may fail on your system.
 source("R/make_figures.R")
 
-# Convert manuscript (output is manuscript.docx).
+# Convert manuscript (output is manuscript.docx & manuscript_suppinfo.docx).
 rmarkdown::render("manuscript.Rmd", encoding = "utf8")
+rmarkdown::render("manuscript_suppinfo.Rmd", encoding = "utf8")
