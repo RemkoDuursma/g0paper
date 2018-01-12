@@ -68,19 +68,6 @@ knitr::kable(tab, col.names="")
 ```
 
 
-# Notes
-
-@fernandez2017 : more discussion of cuticular composition, increase of gmin with altitude ('unripe' cuticles due to short growing season), foliar uptake of water (and adaptation of the cuticle to facilitate that)
-
-Relationship between gmin and yield (to mention in the text???):
-Clarke et al. 1989 . Genotypes with low gmin yielded 40-150% more in 4 out of 5 driest enviroments in 9 years of study.
-Clarke and McCaig (1982 ) low order but significant positive correlation between yield and water retention (low gmin) in genotypes of Triticum
-
-Perhaps include here changes with ontogeny is species with different juvenile and adult leaves?
-Climent et al. 2006  and Pardos et al. 2009 - juvenile needles in some pines have higher rate of water loss than adult needles of the same individuals. Darrow et al. 2002  found also that in some New Zealand heteroblastic sp juveniles had a higher gmin than adults but other sp no significant differences.
-
-
-
 
 # Summary
 
@@ -292,17 +279,16 @@ plotfig("output/figure6.png")
 
 
 
-## 3. Acclimation to drought
+## 3. Acclimation to the environment
 
 \
-From the literature we found a general acclimatory response of g~min~ to drought stress, nearly always leading to a significant  decrease in g~min~ (see Table S2 for a quantitative summary of the literature), with just one exception. The magnitude of the decrease of g~min~ with acclimation to drought stress varied from -4 to -70%; no attempt at a meta analysis was made since no drought is created equal. In each of the studies summarized, plants were grown in well-watered or droughted conditions, and in one case a difference in g~min~ was demonstrated after just four days of drought exposure [@bengtson1978]. We also demonstrate drought acclimation via a case study on 11 *Hakea* species grown in two watering treatments (Fig. 7).
+While there is clearly plenty of variation in g~min~ between species, a number of lines of evidence suggest that g~min~ also has great potential to vary within species *wow rewrite*. Here we summarize the literature on the acclimation of g~min~ to drought conditions, to changes in temperature and humidity, and the change in g~min~ with leaf age and with altitude. This discussion is directly relevant to the use of g~min~ in models, because if intra-specific variation is large, it complicates model parameterization. 
 
 \
-A number of studies have attempted to attribute this drought acclimation in g~min~ to a change in the chemical composition of the cuticle. @bengtson1978 reported lower g~min~ in six oat varieties in response to drought, and increase in cuticular waxes, but no overall relationship between the two and very different responses between different oat genotypes. However, @premachandra1992 found that epicuticular wax load increased on leaves of non-irrigated Sorghum cultivars and was positively correlated with cuticular conductance and cell membrane stability. @mackova2013 found that adding ABA (simulating drought stress) to *Lepidium sativum* increased the chain length of cuticular waxes (but not total amounts). @bi2017 also reported that drought caused a change in cuticular wax production and chemical composition, but again in a highly genotype-specific way. Thus it can be concluded that the cuticle indeed changes substantially after a change in plant available water, but in a complex, species-specific manner that is yet to be connected directly to g~min~.
+There is a general tendency for a decreased g~min~ in plants acclimated to drought stress. The magnitude of the decrease of g~min~ with acclimation to drought stress varied from -4 to -70% (across 10 studies, see Table S2), with a typical decrease in the order of 30-40%. In each of the studies summarized, plants were grown in well-watered or droughted conditions, and in one case a difference in g~min~ was demonstrated after just four days of drought exposure [@bengtson1978]. In a similar vein, @fanourakis2013 reported much lower g~min~ in plants grown in low vs. high relative humidity, again demonstrating that g~min~ is reduced in response to conditions that cause water limitation. We also demonstrate drought acclimation via a case study on 11 *Hakea* species grown in two watering treatments (Fig. 7) - all 11 species showed a decrease in g~min~ in the drought treatment. This significant change in g~min~ with drought acclimation is likely an important component of the overall drought hardening of plants.
 
 \
-atmospheric drought
-@fanourakis2013 gmin (MLD) much higher in high RH grown plants, at any value of leaf water content. This may suggest that gmin is useful for the plant, and is reduced actively in response to water loss.
+A number of studies have attempted to attribute the drought-induced acclimation in g~min~ to a change in the chemical composition of the cuticle. @bengtson1978 reported lower g~min~ in six oat varieties in response to drought, and an increase in the amount of cuticular waxes, but could not find a relationship between the two and the response was highly genotype-specific. However, @premachandra1992 found that epicuticular wax load increased on leaves of non-irrigated Sorghum cultivars and was positively correlated with cuticular conductance and cell membrane stability. @mackova2013 found that adding ABA (simulating drought stress) to *Lepidium sativum* increased the chain length of cuticular waxes (but not total amounts). @bi2017 also reported that drought caused a change in cuticular wax production and chemical composition, but again in a highly genotype-specific way. Thus it can be concluded that the cuticle indeed changes substantially after a change in plant available water, but in a complex, species-specific manner that is yet to be connected directly to changes g~min~. This opens the possibility that leaky stomata are a significant component of the drought response, not just the cuticular composition.
 
 
 ```{r fig.height=4,echo=FALSE, eval=includefigs}
@@ -312,19 +298,16 @@ plotfig("output/figure7.png")
 **Figure 7**. Minimum conductance (g~min~) measured by mass loss of detached leaves on a variety *Hakea* species, a genus native to Australia. Plants were grown in containers in a grow house, and supplied with ample water or subjected to long-term (8 months) mild drought stress. Bars are labelled by leaf form : broadleaf (B) or needle-like (N), and ordered by g~min~ in the  well-watered treatment. For droughted plants, g~min~ was higher for species with needle-like leaves (Wilcoxon test, p `r pval(wilcox.test(gmin.d ~ leaf.form, data=lopw)$p.value)`)), but not for well-watered plants (p `r pval(wilcox.test(gmin.w ~ leaf.form, data=lopw)$p.value)`).
 
 
+\
+The response of g~min~ to temperature is more complex; it shows both a response to instantaneous changes in temperature, as well as an acclimatory response to growth temperature. @riederer2001 and @schuster2016b have both demonstrated a steep non-linear instantaneous response of g~cut~ to temperature, with the response becoming especially steep at higher temperatures (> 40C). This high temperature increase may well be a crucial component of the ability of plants to tolerate heat waves [@drake]. In support of this idea, @schuster2016a reported on a correlation between thermal tolerance and g~min~ across nine species. The mechanism of the temperature response is complex, highly species-specific, and we refer to @schuster2016b for a detailed investigation. 
 
-## 4. Acclimation and instantaneous response to temperature
-
-
-
-The response of minimum conductance to temperature is also striking; it shows both an instantaneous response to increased temperature, as well as an acclimatory response to growth temperatures. @riederer2001 and @schuster2016b have both demonstrated a steep non-linear instantaneous response of g~cut~ to temperature, with the response becoming especially steep at higher temperatures. 
-
-@schuster2016a reported on a correlation between thermal tolerance and g~min~ relationship across nine species. 
-
-Also see @paje1988 for more complex response to temperature (figure out what he really showed).
+\
+Less well established is the acclimatory potential of g~min~ to changes in growth temperature. We present a case study on *Eucalyptus parramattensis* grown in whole-tree chambers. The chambers either tracked ambient conditions, or were subjected to a persistent +3C warming treatment. After months of growth in the treatments, g~min~ was measured at various instantaneous temperatures, ranging from 17.5 to 27.5C. We found a 56% decrease in g~min~ in the elevated temperature trees, but there was no clear pattern with measurement temperature (Fig. 8). This decrease in g~min~ is consistent with the drought response, because again g~min~ is reduced in leaves that are subjected to conditions that increase evaporative demand (vapour pressure deficit was higher in the elevated temperature treatment, see @drake). The direction of this response is consistent with @duarte2016, who reported lower g~0~ and g~dark~ in a heat wave treatment (Douglas-fir), which persisted for some time. Responses across temperature gradients are more complex, in particular the change in g~min~ with altitude has been well studied. Commonly it is reported that g~min~ increases with altitude [e.g. @delucia1984; @herrick1991; @anfodillo2002]. @fernandez2017 discuss altitude responses in detail. and argue that the short growing seasons at high altitude are insufficient for complete maturation of leaf cuticles.
 
 
-Lower g~min~ in the trees acclimated to high temperature is consistent with @duarte2016, who reported lower g~0~ and g~dark~ in a heat wave treatment (Douglas-fir), which persisted for some time. Note that this response is not due to a direct effect of temperature on in cuticular conductance, which increases with temperature (Schreiber 2001). 
+\
+Finally we mention the striking effect of leaf age on g~min~. We have summarized five studies in Fig. S3, all of which reported on increased g~min~ for older leaves (but not for all species studied). The data reported by @jordan2007 is particularly impressive, as g~min~ in the herb *Agastachys odorata* gradually increased as leaves age. The most likely explanation for this change in g~min~ is the continued exposure to wind, rain, and abrasives, which have been shown to damage the cuticle and increase its conductance (see Section III). In plants that maintain several cohorts of leaves, finding an appropriate value of g~min~ for use in models will have to take into account the leaf age effect.
+
 
 ```{r fig.height=4,echo=FALSE, eval=includefigs}
 plotfig("output/figure8.png")
@@ -334,52 +317,23 @@ plotfig("output/figure8.png")
 
 
 
-## 5. Increased minimum conductance with leaf age
-
-
-@jordan2007 large increase gmin in the herb Agastachys odorata with leaf age. See SuppInfo 3 for a summary of six studies on leaf age effects. All but one species show an increase in g~min~ with leaf age. Also discussed above in Section~(cuticular conductance), the cuticle is constantly exposed to physical (wind, rain) and biotic (insects, fungi) agents which damage the cuticle over time. 
-
-- do any of those papers say why? summarize
-
-@anfodillo2002 gmin high altitude. Four-fold increase gmin from February (winter) to August in Picea abies, probably due to incomplete stomatal closure not changes in cuticle properties. Cite common finding that gmin increases with altitude [e.g. @delucia1984; @herrick1991]. @fernandez2017 summarized the literature on this topic and argue that the short growing seasons at high altitude cause 'unripe' cuticles.
-
-
-
-
 # VIII. Conclusions
 
-In a pioneering publication which presented the Jarvis model of stomatal conductance, @jarvis1976 states that "we have assumed in the following equations that when stomata are closed the leaf conductance is zero because field data are generally inadequate to define a cuticular conductance." Similarly, given the poor statistical properties of g~0~ estimated from regression, the very high values compared to minimum conductance reached for detached leaves, we conclude that g~0~ should not be estimated from regression on leaf gas exchange data for use in models.
-
-Then, how should g~0~ be estimated? It is clear from our comparisons that there is no single minimum conductance. Leaves maintain much higher g~dark~ (itself an actively controlled process) than the minimum obtained for detached leaves. Thus when modelling night-time or low-light conductance, a different g~0~ should be used than when modelling the drought response of plants. Likewise, as briefly mentioned in the introduction, yet a different g~0~ is reached when temperature is so high that photosynthesis does not take place. It is not our intention to make models more complex, but certainly we cannot avoid the conclusion that g~0~ should be replaced with a more complicated expression.
+\
+In a pioneering publication which presented the Jarvis model of stomatal conductance, @jarvis1976 states that "we have assumed in the following equations that when stomata are closed the leaf conductance is zero because field data are generally inadequate to define a cuticular conductance." Similarly, given the poor statistical properties of g~0~ estimated from regression, the very high values compared to minimum conductance reached for detached leaves, we conclude that g~0~ should not be estimated from regression on leaf gas exchange data for use in models. Then, how should g~0~ be estimated? It is clear from our comparisons that there is no single minimum conductance. Leaves maintain much higher g~dark~ (itself an actively controlled process) than the minimum obtained for detached leaves. Thus when modelling night-time or low-light conductance, a different g~0~ should be used than when modelling the drought response of plants. 
 
 \
-It is probably unavoidable to improve the Ball-Berry model with an expression like,
+Our first conclusion is that g~0~, g~min~ and g~dark~ should not be assumed equal in any modelling study. Indeed, a productive way forward is to view each of these conductances as distinct, and they should be parameterized separately. For example, when considering modelling stomatal conductance with Eq. 1, we suggest that g~min~ and g~0~ can be combined: 
 
 $$ g_s = g_{min} + (g_0 - g_{min}) + g_1 \frac{A_n}{C_a}f(D)$$
 
-where g~min~ is estimated via MLD, representing a true whole-leaf minimum that is reached under drought conditions, and g~0~ is the minimum reached in darkness for well-watered plants (which itself should be a function of soil water availability, e.g.@misson2004).
+where g~min~ is parameterized with data obtained from mass loss of detached leaves (Fig. 6), representing a true whole-leaf minimum that is reached under drought conditions, and g~0~ is the minimum reached during low photosynthesis (due to low light or other factors) for well-watered plants. During drought, g~0~ will decrease [@misson2004], so that the true minimum reached for Eq. 1 is g~min~. 
 
-
-Our review of g~min~ of detached leaves shows remarkable plasticity to growing conditions. The lack of clear species trends, when comparing growing conditions, climate of origin, or growth habit, can perhaps be explained by the very large acclimatory potential of g~min~ to growing conditions. We conclude as a result that g~min~ is not a "trait" in the sense that it can be meaningfully summarized for a given species, but has to be linked to growing conditions. Future studies should compare g~min~ on many species grown in the same conditions to better understand the adaptive value of the minimum water loss rate of leaves.
-
-
-- Also: there is little information on water loss rate of non-leaf surfaces [@oren2001], should be focus of more research
-
-
-# SuppInfo
-
-
-E. parramattensis:
-We determined g~min~ from detached leaves collected before sunrise from each of 6 *Eucalyptus parramattensis* trees grown under ambient and ambient+3C temperature conditions, respectively. Leaves were scanned for leaf area determination before being weighed using a precision balance and attached to a ‘clothesline’ suspended inside controlled chambers set at different temperatures (17.5, 20, 22.5, 25, 27.5°C) and common low light (~200 umol m^-2^ s^-1^) and a relative humidity of 60%. Inbuilt fans in each chamber blew air gently across the leaf surfaces. Leaves were allowed to slowly dehydrate over a period of 7-8 hours during which time leaf mass was measured roughly every hour. For each leaf, transpiration was calculated from the slope of the linear part of the leaf mass vs time relationship, and converted to g~min~ following @sinclair1986.
-
-Hakeas:
-After 8 months of water stress treatment, the epidermal conductance of detached leaves of three plants per species and treatment was estimated by using the rate of water loss. Leaves were collected in the early morning and subsequently recut under distilled water, rehydrated in darkness for 6 h at 4 °C and scanned to determine leaf area. Leaves were then moved to a controlled environment chamber set at 25 °C, 50% relative humidity and low light (~200 umol) and weighed using a precision balance. They were attached to a ‘clothesline’ and allowed to dehydrated slowly. Leaves were weighted every 15 min for 3 h and then every hour for 3h more. For each sample, the time of stomatal closure was determined as the inflection point of the relationship between leaf mass vs time, and gmin from the slope of the linear part of the curve after stomatal closure, normalized by 2-sided leaf area and adjusted for temperature and humidity within the chamber.
-
+\
+It is however an open question on how g~min~ should be parameterized for different species, as we found both large variation between species that could not be explained by traits, and remarkable plasticity to growing conditions. Perhaps this plasticity is the reason that g~min~ did not vary predictably between species. We conclude as a result that g~min~ is not a "trait" in the sense that it can be meaningfully summarized for a given species, but has to be linked to growing conditions. Future studies should compare g~min~ on many species grown in the same conditions to better understand the adaptive value of the minimum water loss rate of leaves.
 
 
 
 # References {.unnumbered}
-
-Sack, L., Scoffoni, C., PrometheusWiki contributors, 2010. "Minimum epidermal conductance (gmin, a.k.a. cuticular conductance)," PrometheusWiki, http://www.publish.csiro.au/prometheuswiki/tiki-pagehistory.php?page=Minimum epidermal conductance (gmin, a.k.a. cuticular conductance)&preview=7 (accessed March 23, 2017).
 
 

@@ -49,9 +49,18 @@ figure_pet(gmindat2)
 **Figure S2**. No relationship between g~min~ and potential evapotranspiration across the range of the species. Climate variables were calculated across the distribution of each species; we tested many other variables (precipitation, temperature, etc.), but no relationship with climate could be determined.
 
 
+# 2. Methods description for case studies
+
+**combine and edit**
+
+E. parramattensis:
+We determined g~min~ from detached leaves collected before sunrise from each of 6 *Eucalyptus parramattensis* trees grown under ambient and ambient+3C temperature conditions, respectively. Leaves were scanned for leaf area determination before being weighed using a precision balance and attached to a ‘clothesline’ suspended inside controlled chambers set at different temperatures (17.5, 20, 22.5, 25, 27.5°C) and common low light (~200 umol m^-2^ s^-1^) and a relative humidity of 60%. Inbuilt fans in each chamber blew air gently across the leaf surfaces. Leaves were allowed to slowly dehydrate over a period of 7-8 hours during which time leaf mass was measured roughly every hour. For each leaf, transpiration was calculated from the slope of the linear part of the leaf mass vs time relationship, and converted to g~min~ following @sinclair1986.
+
+Hakeas:
+After 8 months of water stress treatment, the epidermal conductance of detached leaves of three plants per species and treatment was estimated by using the rate of water loss. Leaves were collected in the early morning and subsequently recut under distilled water, rehydrated in darkness for 6 h at 4 °C and scanned to determine leaf area. Leaves were then moved to a controlled environment chamber set at 25 °C, 50% relative humidity and low light (~200 umol) and weighed using a precision balance. They were attached to a ‘clothesline’ and allowed to dehydrated slowly. Leaves were weighted every 15 min for 3 h and then every hour for 3h more. For each sample, the time of stomatal closure was determined as the inflection point of the relationship between leaf mass vs time, and gmin from the slope of the linear part of the curve after stomatal closure, normalized by 2-sided leaf area and adjusted for temperature and humidity within the chamber.
 
 
-# 2. Effects of drought stress on g~min~
+# 3. Effects of drought stress on g~min~
 
 ```{r, echo=FALSE}
 dat <- read.csv("data/drought_gmin_table.csv", stringsAsFactors = FALSE)
@@ -62,7 +71,7 @@ knitr::kable(dat,
 ```
 
 
-# 2. Effects of leaf age on g~min~
+# 4. Effects of leaf age on g~min~
 
 ```{r leafagefig, echo=FALSE, dpi=300, fig.width=8, fig.height=6}
 figure_leafage(gminall)
