@@ -24,7 +24,8 @@ source("R/load.R")
 Data on minimum conductance (g~min~) from MLD was compiled from 40 original papers. For the compilation, we returned to all original papers mentioned in the review by @kerstiens1996, and added many newer sources. All conductance values were converted to per unit projected surface area. Total surface area for conifer leaves was converted to projected area following @barclay2000. Units were converted to molar fluxes assuming 41 mol m^-3^ (cf. @kerstiens1996). In many cases, minimum transpiration rates were reported instead of a conductance (termed 'residual transpiration', 'epidermal transpiration', 'minimum transpiration', etc.). For all papers included in the compilation, we were able to convert these transpiration rates to conductances, but unfortunately dozens of papers could not be included because of missing information on vapour pressure deficit or relative humidity / air temperature during measurements. All g~min~ estimates from original papers were entered in the database, but for this paper we only used 'control' treatments (filtering for drought, elevated temperature, and various other treatments). Where practical, other reported variables were also entered for each study. The complete database is available from github.com/remkoduursma/gmindatabase.
 
 \
-Taxonomic order and family was looked up with the taxize R package [@taxize2013]. Climate variables across the species range were extracted from WorldClim, using species occurrence records from ALA and GBIF. The speciesmap R package was used for this extraction (github.com/remkoduursma/speciesmap).
+Taxonomic order and family was looked up with the taxize R package [@taxize2013]. Climate variables across the species range were extracted from WorldClim, using species occurrence records from ALA and GBIF. The speciesmap R package was used for this extraction (github.com/remkoduursma/speciesmap). We found no significant relationships between g~min~ and any climate variable. See Fig. S2 for an example relationship, using here the average potential evapotranspiration across the native range of the species as the predictor variable. We also tested leaf traits including leaf mass per area and leaf lifespan (both extracted from TRY), but found no significant relationships (and only 30% of the species overlapped between databases).
+
 
 ```{r echo=FALSE, eval=FALSE}
  library(RefManageR)
@@ -51,13 +52,17 @@ figure_pet(gmindat2)
 
 # 2. Methods description for case studies
 
-**combine and edit**
+## Drought acclimation in *Hakea*
 
-E. parramattensis:
-We determined g~min~ from detached leaves collected before sunrise from each of 6 *Eucalyptus parramattensis* trees grown under ambient and ambient+3C temperature conditions, respectively. Leaves were scanned for leaf area determination before being weighed using a precision balance and attached to a ‘clothesline’ suspended inside controlled chambers set at different temperatures (17.5, 20, 22.5, 25, 27.5°C) and common low light (~200 umol m^-2^ s^-1^) and a relative humidity of 60%. Inbuilt fans in each chamber blew air gently across the leaf surfaces. Leaves were allowed to slowly dehydrate over a period of 7-8 hours during which time leaf mass was measured roughly every hour. For each leaf, transpiration was calculated from the slope of the linear part of the leaf mass vs time relationship, and converted to g~min~ following @sinclair1986.
+\
+After 8 months of water stress treatment, the epidermal conductance of detached leaves of three plants per species and treatment was estimated by using the rate of water loss. Leaves were collected in the early morning and subsequently recut under distilled water, rehydrated in darkness for 6 h at 4 °C and scanned to determine leaf area. Leaves were then moved to a controlled environment chamber set at 25 °C, 50% relative humidity and low light (~200 umol) and weighed using a precision balance. They were attached to a ‘clothesline’ and allowed to dehydrated slowly. Leaves were weighted every 15 min for 3 h and then every hour for 3h more. For each sample, the time of stomatal closure was determined as the inflection point of the relationship between leaf mass vs time, and g~min~ from the slope of the linear part of the curve after stomatal closure.
 
-Hakeas:
-After 8 months of water stress treatment, the epidermal conductance of detached leaves of three plants per species and treatment was estimated by using the rate of water loss. Leaves were collected in the early morning and subsequently recut under distilled water, rehydrated in darkness for 6 h at 4 °C and scanned to determine leaf area. Leaves were then moved to a controlled environment chamber set at 25 °C, 50% relative humidity and low light (~200 umol) and weighed using a precision balance. They were attached to a ‘clothesline’ and allowed to dehydrated slowly. Leaves were weighted every 15 min for 3 h and then every hour for 3h more. For each sample, the time of stomatal closure was determined as the inflection point of the relationship between leaf mass vs time, and gmin from the slope of the linear part of the curve after stomatal closure, normalized by 2-sided leaf area and adjusted for temperature and humidity within the chamber.
+## Temperature acclimation in *Eucalyptus parramattensis*
+
+\
+We determined g~min~ from detached leaves collected before sunrise from each of 6 *Eucalyptus parramattensis* trees grown under ambient and ambient+3C temperature conditions, respectively. Leaves were scanned for leaf area determination before being weighed using a precision balance and attached to a ‘clothesline’ suspended inside controlled chambers set at different temperatures (17.5, 20, 22.5, 25, 27.5°C) and common low light (~200 umol m^-2^ s^-1^) and a relative humidity of 60%. Inbuilt fans in each chamber blew air gently across the leaf surfaces. Leaves were allowed to slowly dehydrate over a period of 7-8 hours during which time leaf mass was measured roughly every hour. For each leaf, transpiration was calculated from the slope of the linear part of the leaf mass vs time relationship, and converted to g~min~.
+
+
 
 
 # 3. Effects of drought stress on g~min~
