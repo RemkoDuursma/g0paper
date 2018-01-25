@@ -543,3 +543,26 @@ figure_pet <- function(gmindat2){
 }
 
 
+figure_goodandbad <- function(dat){
+  par(mfrow=c(1,2), mar=c(4,4,1,1), 
+      mgp=c(2.5, 0.5, 0), cex.lab=1.1, cex.axis=0.9)
+  
+  with(dat, plot(time_mins, RWC_good.leaf, 
+                 ylim=c(0,1),
+                 xlab="Time (mins)",
+                 panel.first={
+                   datsub <- subset(dat, time_mins > 200)
+                   abline(lm(RWC_good.leaf ~ time_mins, data=datsub), lty=5)
+                 },
+                 ylab="Relative water content",
+                 type='o', pch=21, bg="white"))
+  
+  title(main="Good quality curve", font.main=3, adj=0, cex.main=0.8)
+  with(dat, plot(time_mins, RWC_bad.leaf, 
+                 xlab="Time (mins)",
+                 ylab="Relative water content",
+                 ylim=c(0,1),
+                 type='o', pch=21, bg="white"))
+  title(main="Poor quality curve", font.main=3, adj=0, cex.main=0.8)
+
+}

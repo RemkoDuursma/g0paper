@@ -216,6 +216,8 @@ planta$days <- (1:nrow(planta))/10
 plantb$days <- (1:nrow(plantb))/10
 
 
+# Chris's example drying curves.
+goodbadcurves <- read.csv("data/good and bad gmin.csv")
 
 
 

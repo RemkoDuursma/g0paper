@@ -1,0 +1,11 @@
+Species,temp_C,RH_%,light_umol,time_mins,RWC_bad leaf,RWC_good leaf
+E.camaldulensis,20,60,200,0,1,1
+E.camaldulensis,20,60,200,30,0.950446791,0.985472155
+E.camaldulensis,20,60,200,56,0.839561332,0.957492602
+E.camaldulensis,20,60,200,102,0.755077173,0.879203659
+E.camaldulensis,20,60,200,138,0.704305443,0.833736885
+E.camaldulensis,20,60,200,184,0.656783103,0.802528921
+E.camaldulensis,20,60,200,221,0.626320065,0.780468119
+E.camaldulensis,20,60,200,314,0.549959383,0.742534302
+E.camaldulensis,20,60,200,432,0.459382616,0.707021792
+E.camaldulensis,20,60,200,560,0.25,0.665
