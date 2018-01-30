@@ -369,9 +369,13 @@ $$ g_s = g_{min} + (g_0 - g_{min}) + g_1 \frac{A_n}{C_a}f(D)$$
 where g~min~ is parameterized with data obtained from mass loss of detached leaves (Fig. 6), representing a true whole-leaf minimum that is reached under drought conditions, and g~0~ is the minimum reached during low photosynthesis (due to low light or other factors) for well-watered plants. During drought, g~0~ will decrease [@misson2004], so that the true minimum reached for Eq. 1 is g~min~. 
 
 \
-It is however an open question on how g~min~ should be parameterized for different species, as we found both large variation between species that could not be explained by traits, and remarkable plasticity to growing conditions. Perhaps this plasticity is the reason that g~min~ did not vary predictably between species. We conclude as a result that g~min~ is not a "trait" in the sense that it can be meaningfully summarized for a given species, but has to be linked to growing conditions. Future studies should compare g~min~ on many species grown in the same conditions to better understand the adaptive value of the minimum water loss rate of leaves.
+It is however an open question on how g~min~ should be parameterized for different species, as we found both large variation between species that could not be explained by traits, and remarkable plasticity to growing conditions. Perhaps this plasticity is the reason that g~min~ did not vary predictably between species. Future studies should compare g~min~ on many species grown in the same conditions to better understand the adaptive value of the minimum water loss rate of leaves.
 
 
+
+# Acknowledgments 
+
+This work was made possible by the ARC Linkage Project LP140100232.
 
 
 # References {.unnumbered}
