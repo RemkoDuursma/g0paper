@@ -209,11 +209,9 @@ gdfr <- bind_rows(gmindat_simple, kerst_simple, schuster2017, lombar, g0s, minag
   mutate(method = factor(method, levels=c("gcut_isol","gmin","gnight", "g0","gslowA")))
 
 
-# Nico's simulations with Sureau
-planta <- read.csv2("data/PlantA-DiurnalOut.csv", dec=".")
-plantb <- read.csv2("data/PlantB-DiurnalOut.csv", dec=".")
-planta$days <- (1:nrow(planta))/10
-plantb$days <- (1:nrow(plantb))/10
+# Herve's simulations with Sureau
+planta <- read.csv("data/plant_a_sureau.csv", skip=1)
+plantb <- read.csv("data/plant_b_sureau.csv", skip=1)
 
 
 # Chris's example drying curves.

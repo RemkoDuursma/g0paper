@@ -461,30 +461,30 @@ figure_sureau <- function(planta, plantb){
   cols <- c(rgb(230, 159, 0, maxColorValue = 255), rgb(0, 114, 178, maxColorValue = 255))
   
   # panel a
-  with(planta, plot(days, REW, lwd=2, ylim=c(0,1), xlim=c(0,100), type='l', xlab="Days", col=cols[1]))
-  with(plantb, lines(days, REW, lwd=2, ylim=c(0,1), xlim=c(0,100), col=cols[2]))
+  with(planta, plot(Days, REW, lwd=2, ylim=c(0,1), xlim=c(0,80), type='l', xlab="Days", col=cols[1]))
+  with(plantb, lines(Days, REW, lwd=2, ylim=c(0,1), xlim=c(0,80), col=cols[2]))
   plotlabel("(a)", "bottomright")
-  legend("topright", c("3.3", "1.6"), title=expression(g[min]), bty='n', lty=1, col=cols, lwd=2, cex=1.2)
+  legend("topright", c("2", "4"), title=expression(g[min]), bty='n', lty=1, col=cols, lwd=2, cex=1.2)
   
   # panel b
-  with(planta, plot(days, Pmin, ylim=c(-7,0), xlim=c(0,100), 
+  with(planta, plot(Days, P_leaf_symplasmic, ylim=c(-7,0), xlim=c(0,80), 
                     col=cols[1],
                     ylab= "Water potential (MPa)",
                     type='l', lwd=2, lty=1, xlab="Days"))
-  with(planta, lines(days, Psoil, lwd=2, col=cols[1], lty=5))
-  with(plantb, lines(days, Pmin, type='l', lwd=2, lty=1, col=cols[2]))
-  with(plantb, lines(days, Psoil, lwd=2, col=cols[2], lty=5))
+  with(planta, lines(Days, P_soil, lwd=2, col=cols[1], lty=5))
+  with(plantb, lines(Days, P_leaf_s, type='l', lwd=2, lty=1, col=cols[2]))
+  with(plantb, lines(Days, P_soil, lwd=2, col=cols[2], lty=5))
   plotlabel("(b)", "bottomright")
   legend("topright", c("leaf","soil"), lty=c(1, 5), lwd=2, bty='n', cex=1.2)
   
   # panel c
   with(planta, 
-       plot(days, PLC*100, xlim=c(0,100), 
+       plot(Days, PLC_branch, xlim=c(0,80), 
             ylab="PLC (%)", type='l', lwd=2, 
             xlab="Days", col=cols[1],
             panel.first= abline(h = 88, lty=2, col="darkgrey"))
   )
-  with(plantb, lines(days, PLC*100, xlim=c(0,100), type='l', lwd=2, col=cols[2]))
+  with(plantb, lines(Days, PLC_branch, xlim=c(0,80), type='l', lwd=2, col=cols[2]))
   plotlabel("(c)", "bottomright")
   
 }
