@@ -75,7 +75,7 @@ figure_g0g1_cor <- function(lin2015, group, legend=FALSE){
                xlim=c(0,0.04),
                ylim=c(0,150),
                panel.first=add_regres_line(fit),
-               xlab=expression(A/(C[a]*sqrt(D))),
+               xlab=expression(A[n]/(C[a]*sqrt(D))),
                ylab=expression(g[s]~(mmol~m^-2~s^-1)),
                pch=16, cex=0.8, col="dimgrey"))
   box()
@@ -211,13 +211,13 @@ figure_sim <- function(){
                  g1=g1, g0=g0_2, Vcmax=70, Jmax=140,
                  VPD=vpds, Tleaf=tleafs, Ca=400)
   
-  with(t0, plot(Tleaf, 1000*GS, type='l', 
+  with(t0, plot(Tleaf, ELEAF, type='l', 
                 xlab=expression(T[leaf]~~(degree*C)),
-                ylab=expression(g[S]~~(mmol~m^-2~s^-1)),
+                ylab=expression(E[L]~~(mmol~m^-2~s^-1)),
                 col=col0, lty=lty0,
-                ylim=c(0,400)))
-  with(t1, lines(Tleaf, GS, col=col1, lty=lty1))
-  with(t2, lines(Tleaf, GS, col=col2, lty=lty2))
+                ylim=c(0,8)))
+  with(t1, lines(Tleaf, ELEAF, col=col1, lty=lty1))
+  with(t2, lines(Tleaf, ELEAF, col=col2, lty=lty2))
   plotlabel("(c)", "topright")
   
   with(t0, plot(VPD, Ci, type='l', 

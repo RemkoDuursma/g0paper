@@ -40,6 +40,7 @@ lin2015a <- group_by(lin2015, fitgroup) %>%
 # Lin 2015 fits
 lin2015coef <- fits_lin2015(lin2015a)
 
+lin2015coef <- subset(lin2015coef, R2 > 0.5)
 
 # Kerstiens 1996
 kerst <- read.csv("data/kerstiens1996_table1.csv", stringsAsFactors = FALSE) %>%
