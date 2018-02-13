@@ -2,16 +2,17 @@
 
 
 
-if(!require("pacman"))install.packages("pacman")
-pacman::p_load(Hmisc, car, dplyr, tidyr, nlme, nlshelper, 
+if(!require("pacman", quietly=TRUE))install.packages("pacman")
+suppressPackageStartupMessages(
+  pacman::p_load(Hmisc, car, dplyr, tidyr, nlme, nlshelper, 
                forcats, tibble, magicaxis, 
                plantecophys, readxl, multcomp,
                reporttools, Taxonstand, taxize, 
                doBy, stringi, rmarkdown, ggplot2)
-
+)
 
 #devtools::install_github("remkoduursma/speciesmap")
-library(speciesmap)
+suppressPackageStartupMessages(library(speciesmap))
 
 if(!dir.exists("download"))dir.create("download")
 if(!dir.exists("output"))dir.create("output")
@@ -39,8 +40,6 @@ lin2015a <- group_by(lin2015, fitgroup) %>%
 
 # Lin 2015 fits
 lin2015coef <- fits_lin2015(lin2015a)
-
-lin2015coef <- subset(lin2015coef, R2 > 0.5)
 
 # Kerstiens 1996
 kerst <- read.csv("data/kerstiens1996_table1.csv", stringsAsFactors = FALSE) %>%

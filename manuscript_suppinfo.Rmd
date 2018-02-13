@@ -18,7 +18,7 @@ source("R/load.R")
 ```
 
 
-# 1. Literature compilation of g~min~ estimates
+# Methods S1. Literature compilation of g~min~ estimates
 
 \
 Data on minimum conductance (g~min~) from MLD was compiled from 40 original papers. For the compilation, we returned to all original papers mentioned in the review by @kerstiens1996, and added many newer sources. All conductance values were converted to per unit projected surface area. Total surface area for conifer leaves was converted to projected area following @barclay2000. Units were converted to molar fluxes assuming 41 mol m^-3^ (cf. @kerstiens1996). In many cases, minimum transpiration rates were reported instead of a conductance (termed 'residual transpiration', 'epidermal transpiration', 'minimum transpiration', etc.). For all papers included in the compilation, we were able to convert these transpiration rates to conductances, but unfortunately dozens of papers could not be included because of missing information on vapour pressure deficit or relative humidity / air temperature during measurements. All g~min~ estimates from original papers were entered in the database, but for this paper we only used 'control' treatments (filtering for drought, elevated temperature, and various other treatments). Where practical, other reported variables were also entered for each study. The complete database is available from github.com/remkoduursma/gmindatabase.
@@ -40,16 +40,17 @@ The complete list of references used to construct the database can be found at t
 ```{r gminfig1, echo=FALSE, dpi=300, fig.width=6, fig.height=5}
 figure_gmin_bygroup(gmindat)
 ```
-**Figure S1**. Average minimum conductance (g~min~) for crops, graminoids, woody and other non-woody plant species. Grey symbols are original datapoints. Numbers above the figure refer to the number of species in each group. Different letters indicate significant differences. Error bars are 95% confidence intervals for the mean (calculated for log-transformed g~min~, and back-transformed).
+**Figure 1**. Average minimum conductance (g~min~) for crops, graminoids, woody and other non-woody plant species. Grey symbols are original datapoints. Numbers above the figure refer to the number of species in each group. Different letters indicate significant differences. Error bars are 95% confidence intervals for the mean (calculated for log-transformed g~min~, and back-transformed).
 
 
 
 ```{r gminfig2, echo=FALSE, dpi=300, fig.width=6, fig.height=5}
 figure_pet(gmindat2)
 ```
-**Figure S2**. No relationship between g~min~ and potential evapotranspiration across the range of the species. Climate variables were calculated across the distribution of each species; we tested many other variables (precipitation, temperature, etc.), but no relationship with climate could be determined.
+**Figure 2**. No relationship between g~min~ and potential evapotranspiration across the range of the species. Climate variables were calculated across the distribution of each species; we tested many other variables (precipitation, temperature, etc.), but no relationship with climate could be determined.
 
-# 2. Methodological issues with measurement of g~min~
+
+# Methods S2. Methodological issues with measurement of g~min~
 
 For measurements of gmin in detached leaves, the relationship between the change in mass (due to water loss) and time is typically curvilinear and characterised by three phases: 1)the rate of water loss initially increases as stomata temporally open in response to being placed under light; 2) the rate of water loss declines as stomata begin to close in response to increasing leaf water deficit; and 3) once stomata have closed (as much as possible) the rate of water loss is at minimum and is constant over time until leaf relative water content nears zero. In this case, g~min~ is calculated from the linear portion of the curve during phase 3. To achieve this type of response, it is important to ensure that the environmental conditions under which g~min~ is measured are conducive to stomatal closure. From experience, leaves placed under high light and/or high VPD conditions are often unable to effectively close stomata in response to desiccation, possibly as a result of rapid epidermal drying and hydro-passive stomatal opening [@buckley2005]. These conditions lead to a rapid decline in leaf water status and an overestimation of g~min~, as compared to control leaves from the same species.
 
@@ -59,12 +60,14 @@ Additionally, sometimes the stomatal response of replicate leaves from the same 
 ```{r goodbadfig, echo=FALSE, dpi=300, fig.width=8, fig.height=4}
 figure_goodandbad(goodbadcurves)
 ```
-**Figure S3**. Two example curves for determination of minimum conductance (g~min~) via mass loss of detached leaves (MLD). Leaf weights are expressed as relative water content (RWC). The good quality curve shows a distinct linear portion at the end of the drying curve, from which minimum transpiration can be calculated (using actual leaf weight, and leaf area). The poor quality curve shows a quicker decrease towards the end of the drying curve (> 400min), indicating an *increased* transpiration rate despite the low water content. We speculate that this increase - which we have observed in a number of curves - is due to the epidermis drying so quickly that the stomata are 'pulled open', increasing water loss.
+
+**Figure 3**. Two example curves for determination of minimum conductance (g~min~) via mass loss of detached leaves (MLD). Leaf weights are expressed as relative water content (RWC). The good quality curve shows a distinct linear portion at the end of the drying curve, from which minimum transpiration can be calculated (using actual leaf weight, and leaf area). The poor quality curve shows a quicker decrease towards the end of the drying curve (> 400min), indicating an *increased* transpiration rate despite the low water content. We speculate that this increase - which we have observed in a number of curves - is due to the epidermis drying so quickly that the stomata are 'pulled open', increasing water loss.
 
 
-# 3. Methods description for case studies
 
-## Drought acclimation in *Hakea*
+# Methods S3. Methods description for case studies
+
+## Drought acclimation in *Hakea* spp.
 
 \
 After 8 months of water stress treatment, the epidermal conductance of detached leaves of three plants per species and treatment was estimated by using the rate of water loss. Leaves were collected in the early morning and subsequently recut under distilled water, rehydrated in darkness for 6 h at 4 °C and scanned to determine leaf area. Leaves were then moved to a controlled environment chamber set at 25 °C, 50% relative humidity and low light (~200 umol) and weighed using a precision balance. They were attached to a ‘clothesline’ and allowed to dehydrated slowly. Leaves were weighted every 15 min for 3 h and then every hour for 3h more. For each sample, the time of stomatal closure was determined as the inflection point of the relationship between leaf mass vs time, and g~min~ from the slope of the linear part of the curve after stomatal closure.
@@ -72,12 +75,12 @@ After 8 months of water stress treatment, the epidermal conductance of detached 
 ## Temperature acclimation in *Eucalyptus parramattensis*
 
 \
-We determined g~min~ from detached leaves collected before sunrise from each of 6 *Eucalyptus parramattensis* trees grown under ambient and ambient+3C temperature conditions, respectively. Leaves were scanned for leaf area determination before being weighed using a precision balance and attached to a ‘clothesline’ suspended inside controlled chambers set at different temperatures (17.5, 20, 22.5, 25, 27.5°C) and common low light (~200 umol m^-2^ s^-1^) and a relative humidity of 60%. Inbuilt fans in each chamber blew air gently across the leaf surfaces. Leaves were allowed to slowly dehydrate over a period of 7-8 hours during which time leaf mass was measured roughly every hour. For each leaf, transpiration was calculated from the slope of the linear part of the leaf mass vs time relationship, and converted to g~min~.
+We determined g~min~ from detached leaves collected before sunrise from each of 6 *Eucalyptus parramattensis* E.C. Hall trees grown under ambient and ambient+3C temperature conditions, respectively. Leaves were scanned for leaf area determination before being weighed using a precision balance and attached to a ‘clothesline’ suspended inside controlled chambers set at different temperatures (17.5, 20, 22.5, 25, 27.5°C) and common low light (~200 umol m^-2^ s^-1^) and a relative humidity of 60%. Inbuilt fans in each chamber blew air gently across the leaf surfaces. Leaves were allowed to slowly dehydrate over a period of 7-8 hours during which time leaf mass was measured roughly every hour. For each leaf, transpiration was calculated from the slope of the linear part of the leaf mass vs time relationship, and converted to g~min~.
 
 
 
 
-# 4. Effects of drought stress on g~min~
+# Table S1. Effects of drought stress on g~min~
 
 ```{r, echo=FALSE}
 dat <- read.csv("data/drought_gmin_table.csv", stringsAsFactors = FALSE)
@@ -88,13 +91,13 @@ knitr::kable(dat,
 ```
 
 
-# 5. Effects of leaf age on g~min~
+# Figure S1. Effects of leaf age on g~min~
 
 ```{r leafagefig, echo=FALSE, dpi=300, fig.width=8, fig.height=6}
 figure_leafage(gminall)
 ```
 
-**Figure S4**. Correlation between g~min~ and leaf age for five studies in the g~min~ database. Leaf age is expressed in years (0 = current year), with the exception of @phillips2010, who measured juvenile and adult foliage on *Eucalyptus*. Citations with species studied are @boyce2000 (*Abies lasiocarpa*, *Picea engelmanii*), @boyce2003 (*Tsuga canadensis*, *Pinus strobus*, *Pinus resinosa*, *Picea rubens*), @heinsoo1998 (*Picea abies*), @jordan2007 (*Agastachys odorata*), @phillips2010 (*Eucalyptus saligna*, *E. sideroxylon*, *E. cladocalyx*). 
+**Figure S1**. Correlation between g~min~ and leaf age for five studies in the g~min~ database. Leaf age is expressed in years (0 = current year), with the exception of @phillips2010, who measured juvenile and adult foliage on *Eucalyptus*. Citations with species studied are @boyce2000 (*Abies lasiocarpa*, *Picea engelmanii*), @boyce2003 (*Tsuga canadensis*, *Pinus strobus*, *Pinus resinosa*, *Picea rubens*), @heinsoo1998 (*Picea abies*), @jordan2007 (*Agastachys odorata*), @phillips2010 (*Eucalyptus saligna*, *E. sideroxylon*, *E. cladocalyx*). 
 
 
 

@@ -1,4 +1,4 @@
-to.pdf <- function(expr, filename, ..., verbose=TRUE) {
+to.pdf <- function(expr, filename, ..., verbose=FALSE) {
   if(!file.exists(dirname(filename)))
     dir.create(dirname(filename), recursive=TRUE)
   if ( verbose )
@@ -69,13 +69,13 @@ plotlabel <- function(txt, where, inset=0.08, inset.x=inset, inset.y=inset,...){
 
 
 convert_all_pdf <- function(path, ...){
+  message("Converting PDFs to PNG...")
   o <- getwd()
   on.exit(setwd(o))
   setwd(path)
   pdfs <- dir(pattern="[.]pdf")
   for(i in seq_along(pdfs)){
     convert_pdf_png(pdfs[i])
-    message(i)
   }
 }
 
@@ -130,7 +130,7 @@ plotCI2 <- function(yvar, group, data, transform_log10=FALSE,
   
   if(is.null(ylim))ylim <- c(0, max(ci)+0.1*max(ci))
   g <- glht(fit, linfct=mcp(G = "Tukey"))
-  lets <- cld(g)$mcletters$Letters
+  lets <- suppressWarnings(cld(g)$mcletters$Letters)
   n <- length(mn)
   
   plot(1:n, mn, pch=19, cex=1.1, ylim=ylim, axes=FALSE,
@@ -178,7 +178,7 @@ plotCIlog <- function(yvar, group, data,
 
   if(is.null(ylim))ylim <- c(0, max(ci)+0.1*max(ci))
   g <- glht(fit, linfct=mcp(G = "Tukey"))
-  lets <- cld(g)$mcletters$Letters
+  lets <- suppressWarnings(cld(g)$mcletters$Letters)
   
   n <- length(mn)
   
