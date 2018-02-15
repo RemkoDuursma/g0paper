@@ -78,7 +78,7 @@ Stomata exert a strong control on the transpiration rate of leaves. During sever
 # I. Introduction
 
 \
-Plants face a dilemma in constructing leaves that minimize water loss while allowing the uptake of CO~2~. Since a membrane that is permeable to CO~2~ but not H~2~O has never evolved, all land plants have stomata in their leaves, which disrupt the cuticle and allow CO~2~ uptake. It is well known that stomatal open and close in response to changes in light intensity, humidity and CO~2~ concentration at the leaf surface. In doing so, stomata can be thought to balance the uptake of CO~2~ with the loss of water, and thus can be expected to close stomata when photosynthetic rates are low. To avoid desiccation and ultimate death, stomata can also be expected to close during periods of severe water stress. When stomata are closed, water loss continues at a greatly diminished rate through the cuticle. After accounting for evaporative demand, this rate of water loss is expressed as the minimum conductance of a leaf. There is increasing recognition that the minimum conductance plays an important role in estimating water fluxes in plant canopies [@barnard2013], during heat waves [@kala2016], and in models of plant drought response [@blackman2016; @martinstpaul2017].
+Plants face a dilemma in constructing leaves that minimize water loss while allowing the uptake of CO~2~. Since a membrane that is permeable to CO~2~ but not H~2~O has never evolved, all land plants have stomata in their leaves, which disrupt the cuticle and allow CO~2~ uptake. It is well known that stomata open and close in response to changes in light intensity, humidity and CO~2~ concentration at the leaf surface. In doing so, stomata can be thought to balance the uptake of CO~2~ with the loss of water, and thus can be expected to close stomata when photosynthetic rates are low. To avoid desiccation and ultimate death, stomata can also be expected to close during periods of severe water stress. When stomata are closed, water loss continues at a greatly diminished rate through the cuticle. After accounting for evaporative demand, this rate of water loss is expressed as the minimum conductance of a leaf. There is increasing recognition that the minimum conductance plays an important role in estimating water fluxes in plant canopies [@barnard2013], during heat waves [@kala2016], and in models of plant drought response [@blackman2016; @martinstpaul2017].
 
 \
 The absolute minimum attainable water loss rate is through the cuticle only, which is typically measured on isolated cuticles of the adaxial (non-stomatal) side of the leaf. Other measurements allow for the estimation of water loss through incompletely closed and broken stomata. Of particular interest is the method where leaves are detached from the plant, and their weight loss monitored over time. This method (mass loss of detached leaves, MLD) is interesting because it more closely simulates actual field conditions for plants during severe drought, and includes both surfaces of the leaf - not just the stomata-free side. A comprehensive compilation of estimates of g~min~ is currently lacking, and is needed not just to parameterize models, but also to study sources of variation in this overlooked plant trait.
@@ -375,9 +375,13 @@ This work was made possible by the ARC Linkage Project LP140100232.
 # Supporting Information
 
 **Methods S1** Literature compilation of g~min~ estimates
+
 **Methods S2** Methodological issues with measurement of g~min~
+
 **Methods S3** Methods description for case studies
+
 **Table S1** Effects of drought stress on g~min~
+
 **Figure S1** Effects of leaf age on g~min~
 
 
