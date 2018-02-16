@@ -104,7 +104,8 @@ miner <- read.csv("data/Miner_table1.csv") %>%
 # Compilation of nighttime conductance.
 lombar <- read.csv("data/lombardozzi_gnight.csv", stringsAsFactors = FALSE) %>%
   rename(gmin = gnight) %>%
-  filter(gmin > 0) %>%
+  filter(gmin > 0, gmin < 1000,
+         method %in% c("ge","gas exchange","Li6400","IRGA")) %>%
   mutate(method="gnight")
 
 # Combine Lin and Miner's estimate of g0 from 'regression' based.
@@ -194,6 +195,17 @@ cls <- as_dataframe_cls(cls)
 
 gmindat <- left_join(gmindat,  cls, by="species")
 
+# gs at low PAR, gs at low A
+# Both from updated Lin database. Extracted for convenience.
+gs_low_a <- read.csv("data/cond_low_a.csv") %>%
+  dplyr::select(gmin = Cond.mean) %>%
+  mutate(method = "gslowA",
+         gmin = 1000*gmin)
+gs_low_par <- read.csv("data/cond_low_par.csv") %>%
+  dplyr::select(gmin = Cond) %>%
+  mutate(method = "gslowPAR",
+         gmin = 1000 * gmin)
+
 
 # Dataframe with comparison methods.
 gmindat_simple <- dplyr::select(gmindat, gmin) %>% 
@@ -204,9 +216,9 @@ kerst_simple <- group_by(kerst, species, method) %>%
   ungroup %>%
   dplyr::select(gmin, method)
 
-gdfr <- bind_rows(gmindat_simple, kerst_simple, schuster2017, lombar, g0s, minags) %>%
+gdfr <- bind_rows(gmindat_simple, kerst_simple, schuster2017, lombar, g0s, gs_low_a, gs_low_par) %>%
   filter(method != "gcut_seal") %>%  # I keep changing my mind!!
-  mutate(method = factor(method, levels=c("gcut_isol","gmin","gnight", "g0","gslowA")))
+  mutate(method = factor(method, levels=c("gcut_isol","gmin","gnight", "g0","gslowPAR","gslowA")))
 
 
 # Herve's simulations with Sureau

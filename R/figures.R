@@ -13,7 +13,9 @@ figure_gmin_review <- function(gdfr){
                      expression(g["min"]),
                      expression(g["dark"]),
                      expression(g["0"]),
-                     expression(g["s,low A"])))
+                     expression(g["low PAR"]),
+                     expression(g["low A"])
+                     ))
   
 }
 
