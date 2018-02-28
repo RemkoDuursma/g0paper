@@ -31,6 +31,7 @@ fits_lin2015 <- function(lin2015a){
                         sd_bbopti = sd(BBopti, na.rm=TRUE),
                         cv_bbopti = sd_bbopti/mean(BBopti, na.rm=TRUE),
                         sd_cond = sd(Cond, na.rm=TRUE),
+                        gsmax = max(Cond, na.rm=TRUE),
                         Qrange = max(PARin) - min(PARin),
                         Drange = max(VPD) - min(VPD),
                         Trange = max(Tleaf) - min(Tleaf)), 

@@ -12,7 +12,6 @@ figure_gmin_review <- function(gdfr){
             labels=c(expression(g["cuti"]),
                      expression(g["min"]),
                      expression(g["dark"]),
-                     expression(g["0"]),
                      expression(g["low PAR"]),
                      expression(g["low A"])
                      ))
@@ -132,7 +131,7 @@ figure_R2g0 <- function(lin2015coef, miner){
   
   l <- loess(g0_se ~ cv_bbopti, data=lin2015coef, span=0.9)
   with(lin2015coef, plot(cv_bbopti, g0_se, pch=16, ylim=c(0,60),
-                         xlab=expression("CV of"~A[n]/(C[a] * sqrt(VPD))),
+                         xlab=expression("CV of"~A[n]/(C[a] * sqrt(D))),
                          ylab=expression("SE of"~g[0]~~(mmol~m^-2~s^-1)),
                          panel.first=plot_loess(l, add=TRUE, band=TRUE, lwd=2, col="darkgrey")
                          ))

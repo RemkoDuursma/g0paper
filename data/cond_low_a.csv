@@ -1,80 +1,48 @@
 "dataset_fitgroup","Cond.mean"
-"AlexandreBosc Le Bray_Bordeaux drought",0.00744409412614789
 "AlexandreBosc Le Bray_Bordeaux nondrought",0.0247490813182432
-"Alistair Rogers Brookhaven National Laboratory Upton Populus_ctrl",0.106888255444444
-"Alistair Rogers Brookhaven National Laboratory Upton Populus_Innoculated",0.0711744163571429
-"Arnaud Heroult Richmond spp1_dry_time",0.065525
-"Arnaud Heroult Richmond spp2_dry_time",0.0228516666666667
 "Arnaud Heroult Richmond spp2_wet_time",0.090475
-"Arnaud Heroult Richmond spp3_dry_time",0.209883333333333
 "Arnaud Heroult Richmond spp3_wet_time",0.0071675
-"Arnaud Heroult Richmond spp4_dry_time",0.0124206764090909
 "Arnaud Heroult Richmond spp4_wet_time",0.0177666666666667
 "Belinda Medlyn Tumbarumba Month_Feb",0.145104214285714
 "Belinda Medlyn Tumbarumba Month_May",0.0122542
 "Belinda Medlyn Tumbarumba Month_Nov",0.009887
-"Cate Macinnis-Ng Arataki Visitor Centre Auckland 25m",0.169233333333333
+"Cate Macinnis-Ng Arataki Visitor Centre Auckland 25m",0.0611333333333333
 "Cate Macinnis-Ng Arataki Visitor Centre Auckland 4m",0.0588
 "Cate Macinnis-Ng Arataki Visitor Centre Auckland 5m",0.047
 "Claudia Keitel Tumbarumba all",0.12
-"Craig Barton Glencorse near Edinburgh CO2_ele",0.025820861
 "David Ellsworth Richmond amb_wet",0.0495
 "David Tissue Big Bend National Park_Taxes_USA light_sun",0.0148361407333333
-"Derek Eamus Castlereagh Western Sydney Angophora bakeri",0.066753
-"Derek Eamus Castlereagh Western Sydney Eucalyptus parramattensis",0.0443640714285714
-"Emery Boose Harvard Forest Acer rubrum",0.043469387755102
-"Emery Boose Harvard Forest Betula alleghaniensis",0.09
-"Emery Boose Harvard Forest Betula papyrifera",0.0433333333333333
-"Emery Boose Harvard Forest Quercus rubra",0.0688461538461538
-"Hutley et al Wildman River Andropogon gayanus",0.0508306666666667
-"Jean-Marc Limousin Sevilleta NWR_PJ rainfall manipulation Juniperus monosperma-Ambient",0.00392058823529412
-"Jean-Marc Limousin Sevilleta NWR_PJ rainfall manipulation Juniperus monosperma-Dry",0.006053125
-"Jean-Marc Limousin Sevilleta NWR_PJ rainfall manipulation Juniperus monosperma-Irrigation",0.00348484848484848
-"Jean-Marc Limousin Sevilleta NWR_PJ rainfall manipulation Pinus edulis-Ambient",0.00433513513513514
-"Jean-Marc Limousin Sevilleta NWR_PJ rainfall manipulation Pinus edulis-Dry",0.00416791044776119
+"Derek Eamus Castlereagh Western Sydney Angophora bakeri",0.0740426
+"Derek Eamus Castlereagh Western Sydney Eucalyptus parramattensis",0.173699
+"Emery Boose Harvard Forest Acer rubrum",0.0505882352941176
+"Emery Boose Harvard Forest Betula alleghaniensis",0.117142857142857
+"Emery Boose Harvard Forest Quercus rubra",0.0622222222222222
+"Hutley et al Wildman River Andropogon gayanus",0.08242
+"Jean-Marc Limousin Sevilleta NWR_PJ rainfall manipulation Juniperus monosperma-Ambient",0.00865
+"Jean-Marc Limousin Sevilleta NWR_PJ rainfall manipulation Juniperus monosperma-Irrigation",0.0036
+"Jean-Marc Limousin Sevilleta NWR_PJ rainfall manipulation Pinus edulis-Ambient",0.00449245283018868
 "Jean-Marc Limousin Sevilleta NWR_PJ rainfall manipulation Pinus edulis-Irrigation",0.00555731707317073
-"Jeff Kelly Cape Tribulation Canopy Crane spp1_lower_dry",0.02898561725
-"Jeff Kelly Cape Tribulation Canopy Crane spp1_top_dry",0.025936119
-"Jeff Kelly Cape Tribulation Canopy Crane spp2_lower_dry",0.0463723158333333
-"Jeff Kelly Cape Tribulation Canopy Crane spp2_lower_wet",0.037226987
-"Jeff Kelly Cape Tribulation Canopy Crane spp2_top_dry",0.003917776
-"Jeff Kelly Cape Tribulation Canopy Crane spp3_top_dry",0.0254191165
 "Jon Bennie Agoufou Hombori C4",0.09844
-"Lasse Tarvainen Skogaryd NA",0.0434861744489215
+"Lasse Tarvainen Skogaryd NA",0.0355567389060888
 "Lucas Cernusak Dry River Dry River",0.0157
 "Lucy_Rowland_Patrick_Meir Caxiuana Forest-Almeirim_Brazil all",0.00881666666666667
-"Maj-Lena Linderson Soroe All",0.0802533747833333
+"Maj-Lena Linderson Soroe All",0.0769733918333333
 "Mark Broadmeadow Headley S. London spp1_amb",0.0828571428571429
 "Mark Broadmeadow Headley S. London spp2_amb",0.075
 "Mark Broadmeadow Headley S. London spp3_amb",0.045
 "NA Near Roma all",0.0281583333333333
-"Nicolas Martin-StPaul Les Mages drought",0.000245626
-"Nicolas Martin-StPaul Puechabon drought",0.0107519715
-"Nicolas Martin-StPaul Vic la Gardiole drought",0.013917972
 "Oula Ghannoum Roma_Queensland_AU C4 grassland",0.0258375
 "Paolo de Angelis Montalto di Castro Phillyrea angustifolia",0.061
 "Paolo de Angelis Montalto di Castro Pistacia lentiscus",0.0265
-"Pasi Kolari Hyytiala autumn2006",0.0614247717767857
-"Pasi Kolari Hyytiala autumn2007",0.0591367724
-"Pasi Kolari Hyytiala autumn2008",0.0389745846666667
-"Pasi Kolari Hyytiala spring2006",0.0293732052627389
-"Pasi Kolari Hyytiala spring2007",0.0461148006231156
-"Pasi Kolari Hyytiala spring2008",0.089987952501199
 "Pasi Kolari Hyytiala summer2006",0.013533569253886
 "Pasi Kolari Hyytiala summer2007",0.0410141538
-"Pasi Kolari Hyytiala summer2008",0.0500920775384615
-"Pasi Kolari Hyytiala winter2006",0.0477476176104869
-"Pasi Kolari Hyytiala winter2007",0.08617000653125
-"Pasi Kolari Hyytiala winter2008",0.0466640302679739
-"Patrick Mitchell Corrigin Water Reserve Eucalyptus capillosa",0.010443
-"Patrick Mitchell Corrigin Water Reserve Eucalyptus salmonophloiia",0.00529733333333333
+"Pasi Kolari Hyytiala summer2008",0.0458665354166667
+"Patrick Mitchell Corrigin Water Reserve Eucalyptus capillosa",0.004585
 "Qingmin Han Field_FFPRI_Japan April07_ctrl",0.021
 "Qingmin Han Mt Fuji_Japan Aug05_top",0.0195714285714286
-"Reinhart Ceulemans_Markus Low Kranzberg Forest NA",0.0173457869282913
+"Reinhart Ceulemans_Markus Low Kranzberg Forest NA",0.0870289071333333
 "Sabine Tausz-Posch AGFACE Horsham Drysdale_ambCO2",0.0767625
-"Sabine Tausz-Posch AGFACE Horsham Drysdale_eleCO2",0.0274
 "Sabine Tausz-Posch AGFACE Horsham Hartog_ambCO2",0.04456
-"Sabine Tausz-Posch AGFACE Horsham Hartog_eleCO2",0.0305333333333333
 "Teresa E. Gimeno Alto Tajo Natural Park_Guadalajara_Spain Spring_mature",0.02151
 "Teresa E. Gimeno Alto Tajo Natural Park_Guadalajara_Spain Summer_Mature",0.020607143
 "Wei sun Charleston mesquite site_Tombstone_AZ USA Celtis reticulata",0.04415

@@ -104,7 +104,7 @@ miner <- read.csv("data/Miner_table1.csv") %>%
 # Compilation of nighttime conductance.
 lombar <- read.csv("data/lombardozzi_gnight.csv", stringsAsFactors = FALSE) %>%
   rename(gmin = gnight) %>%
-  filter(gmin > 0, gmin < 1000,
+  filter(gmin > 0, gmin < 1000, 
          method %in% c("ge","gas exchange","Li6400","IRGA")) %>%
   mutate(method="gnight")
 
@@ -113,19 +113,6 @@ g0s <- data.frame(gmin=c(lin2015coef$g0, miner$g0),
                   method="g0", stringsAsFactors = FALSE) %>%
   filter(!is.na(gmin),
          gmin > 0)
-
-
-# From Lin2015, data where A < threshold.
-minags <- group_by(lin2015, fitgroup) %>%
-  dplyr::summarize(
-    Amin = min(Photo, na.rm=TRUE),
-    gmin = 1000 * min(Cond, na.rm=TRUE),
-    Qrange = max(PARin) - min(PARin),
-    Pathway = unique(Pathway)[1]
-  ) %>%
-  filter(Amin < 2) %>%
-  mutate(method="gslowA") %>%
-  dplyr::select(gmin, method)
 
 
 #------ gmindatabase
@@ -216,9 +203,9 @@ kerst_simple <- group_by(kerst, species, method) %>%
   ungroup %>%
   dplyr::select(gmin, method)
 
-gdfr <- bind_rows(gmindat_simple, kerst_simple, schuster2017, lombar, g0s, gs_low_a, gs_low_par) %>%
-  filter(method != "gcut_seal") %>%  # I keep changing my mind!!
-  mutate(method = factor(method, levels=c("gcut_isol","gmin","gnight", "g0","gslowPAR","gslowA")))
+gdfr <- bind_rows(gmindat_simple, kerst_simple, schuster2017, lombar, gs_low_a, gs_low_par) %>%
+  filter(method != "gcut_seal") %>%  
+  mutate(method = factor(method, levels=c("gcut_isol", "gmin", "gnight", "gslowPAR", "gslowA")))
 
 
 # Herve's simulations with Sureau
