@@ -72,7 +72,7 @@ knitr::kable(tab, col.names="")
 
 # Summary
 
-Stomata exert a strong control on the transpiration rate of leaves. During severe drought, or conditions where photosynthesis does not take place, it seems advantageous for plants to completely halt water loss. However, water loss continues through the cuticle and incompletely closed stomata, together determined by the leaf minimum conductance (g~min~). In this review, we illustrate the role of g~min~ in models of leaf gas exchange, critically evaluate sources of variation in g~min~, and quantitatively compare various methods for its estimation. We pay special attention to the role of the minimum conductance in the Ball-Berry model of stomatal conductance, and caution against the usual regression-based method for its estimation. A literature compilation of g~min~ as measured by weight loss of detached leaves is presented, which shows much variation in this trait that is not clearly related to species groups, climate of origin, or leaf type. Much evidence points to the idea that g~min~ is highly responsive to the growing conditions of the plant, including soil water availability, temperature, and air humidity - as we further demonstrate with two case studies. The synthesis presented here provides guidelines for use of g~min~ in ecosystem models, and points to clear research gaps for this drought tolerance trait.
+During severe drought, or conditions where photosynthesis does not take place, it seems advantageous for plants to completely halt water loss. However, water loss continues through the cuticle and incompletely closed stomata, together determined by the leaf minimum conductance (g~min~). In this review, we illustrate the role of g~min~ in models of leaf gas exchange, critically evaluate sources of variation in g~min~, and quantitatively compare various methods for its estimation. We pay special attention to the role of the minimum conductance in the Ball-Berry model of stomatal conductance, and caution against the usual regression-based method for its estimation. A literature compilation of g~min~ as measured by weight loss of detached leaves is presented, which shows much variation in this trait that is not clearly related to species groups, climate of origin, or leaf type. Much evidence points to the idea that g~min~ is highly responsive to the growing conditions of the plant, including soil water availability, temperature, and air humidity - as we further demonstrate with two case studies. The synthesis presented here provides guidelines for use of g~min~ in ecosystem models, and points to clear research gaps for this drought tolerance trait.
 
 
 # I. Introduction
@@ -354,7 +354,7 @@ In a pioneering publication which presented the Jarvis model of stomatal conduct
 \
 We suggest that the minimum conductance in the Ball-Berry model should include both a g~0~ and a g~min~ term, since g~0~ represents the minimum reached during low light and conditions of low photosynthesis, and g~min~ represents the minimum reached during severe drought. Moreover, we suggest that the minimum conductance is not simply added to the photosynthesis-dependent term (right-hand side in Eq. 1), but used as an actual minimum. Thus,
 
-$$ g_s = max( min(g_{min}, g_0), g_1 \frac{A_n}{C_a}f(D))$$
+$$ g_s = max \big[ max(g_{min}, g_0), g_1 \frac{A_n}{C_a}f(D) \big]$$
 
 \
 This model for g~s~ will converge to g~0~ during periods of low photosynthesis, and to g~min~ during drought if we further include a model for the dependence of g~0~ on water availability [see @misson2004]. Another advantage is that independent estimates of g~0~ can be used, and not with regression which produces the undesirable correlation with estimates of g~1~. The above formulation is yet to be tested against data, but we propose this test to be done combining data from drought and non-drought conditions.
@@ -366,7 +366,7 @@ Finally, we conclude that g~min~ displays a large amount of variation between sp
 
 # Acknowledgments 
 
-This work was made possible by the ARC Linkage Project LP140100232.
+This work was made possible by the ARC Linkage Project LP140100232. All raw data, code and a fully reproducible workflow which generates the figures, this manuscript and all analyses is available at https://www.github.com/remkoduursma/g0paper.
 
 
 # Supporting Information
