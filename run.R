@@ -4,8 +4,6 @@ message("Loading packages, reading data...")
 source("R/load.R")
 
 # Make figures as PDF (see output/)
-# Conversion to png relies on an installation of ImageMagick (and GhostScript),
-# may fail on your system (but you can ignore these errors and continue).
 message("Making figures...")
 source("R/make_figures.R")
 

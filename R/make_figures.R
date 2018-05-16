@@ -20,6 +20,6 @@ to.pdf(figure_hakea_gmin(lopw), "output/figure7.pdf", height=5, width=6)
 to.pdf(figure_wtc4_gmin_2(wtc4gmin), "output/figure8.pdf", height=4, width=3.5)
 
 
-convert_all_pdf("output")
+#convert_all_pdf("output")
 
 

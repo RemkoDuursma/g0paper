@@ -1,7 +1,4 @@
 
-
-
-
 if(!require("pacman", quietly=TRUE))install.packages("pacman")
 suppressPackageStartupMessages(
   pacman::p_load(Hmisc, car, dplyr, tidyr, nlme, nlshelper, 
@@ -120,10 +117,10 @@ g0s <- data.frame(gmin=c(lin2015coef$g0, miner$g0),
 species_classes <- read.csv("data/Species_classifications.csv", stringsAsFactors = FALSE)
 
 # Data from gmindatabase
-# gmindat <- read.csv("https://raw.githubusercontent.com/RemkoDuursma/gmindatabase/master/combined/gmindatabase.csv",
-#                     stringsAsFactors = FALSE) 
-gmindat <- read.csv("c:/repos/gmindatabase/combined/gmindatabase.csv",
-                    stringsAsFactors = FALSE) %>%
+gmindat <- read.csv("https://raw.githubusercontent.com/RemkoDuursma/gmindatabase/master/combined/gmindatabase.csv",
+                     stringsAsFactors = FALSE) %>%
+# gmindat <- read.csv("c:/repos/gmindatabase/combined/gmindatabase.csv",
+#                     stringsAsFactors = FALSE) %>%
   filter(gmin > 0) %>%
   group_by(species) %>%
   dplyr::summarize(gmin = mean(gmin),
@@ -131,10 +128,13 @@ gmindat <- read.csv("c:/repos/gmindatabase/combined/gmindatabase.csv",
   ungroup %>%
   left_join(species_classes, by="species")
 
-cropgmin <- read.csv("c:/repos/gmindatabase/combined/cropgmindatabase.csv",
-                    stringsAsFactors = FALSE)
+cropgmin <- read.csv(paste0("https://raw.githubusercontent.com/RemkoDuursma/",
+                            "gmindatabase/master/combined/cropgmindatabase.csv"),
+                     stringsAsFactors = FALSE) 
 
-gminall <- dget("c:/repos/gmindatabase/combined/gminall.rdput")
+gminall <- dget(paste0("https://raw.githubusercontent.com/",
+                       "RemkoDuursma/gmindatabase/master/combined/gminall.rdput"))
+#gminall <- dget("c:/repos/gmindatabase/combined/gminall.rdput")
 
 #
 if(TRUE){

@@ -67,7 +67,8 @@ figure_g0g1_cor <- function(lin2015, group, legend=FALSE){
   el <- confidenceEllipse(fit, draw=FALSE)
   set.seed(123)
   
-  b <- bootCase(fit)
+  b <- car::Boot(fit)$t
+  
   rm(x, envir=.GlobalEnv)
   
   par(mfrow=c(1,2), mar=c(4,4,1,1), mgp=c(2.5,0.5,0), tcl=0.2, las=1,
