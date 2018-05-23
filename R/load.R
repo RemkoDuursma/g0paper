@@ -119,8 +119,6 @@ species_classes <- read.csv("data/Species_classifications.csv", stringsAsFactors
 # Data from gmindatabase
 gmindat <- read.csv("https://raw.githubusercontent.com/RemkoDuursma/gmindatabase/master/combined/gmindatabase.csv",
                      stringsAsFactors = FALSE) %>%
-# gmindat <- read.csv("c:/repos/gmindatabase/combined/gmindatabase.csv",
-#                     stringsAsFactors = FALSE) %>%
   filter(gmin > 0) %>%
   group_by(species) %>%
   dplyr::summarize(gmin = mean(gmin),
@@ -134,7 +132,6 @@ cropgmin <- read.csv(paste0("https://raw.githubusercontent.com/RemkoDuursma/",
 
 gminall <- dget(paste0("https://raw.githubusercontent.com/",
                        "RemkoDuursma/gmindatabase/master/combined/gminall.rdput"))
-#gminall <- dget("c:/repos/gmindatabase/combined/gminall.rdput")
 
 #
 if(TRUE){
@@ -179,6 +176,8 @@ if(!file.exists(clsfile)){
   cls <- readRDS(clsfile)
 }
 cls <- as_dataframe_cls(cls)
+rownames(cls) <- NULL
+cls <- cls[!duplicated(cls$species),]
 
 gmindat <- left_join(gmindat,  cls, by="species")
 

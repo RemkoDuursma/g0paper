@@ -67,7 +67,7 @@ figure_g0g1_cor <- function(lin2015, group, legend=FALSE){
   el <- confidenceEllipse(fit, draw=FALSE)
   set.seed(123)
   
-  b <- car::Boot(fit)$t
+  b <- suppressMessages(car::Boot(fit)$t)
   
   rm(x, envir=.GlobalEnv)
   
