@@ -13,7 +13,7 @@ bibliography: references.bib
 ---
 
 \
-Remko A. Duursma^1^, Chris J. Blackman^1^, Rosana Lopéz^1^, Nicolas K. Martin-StPaul^2^, Hervé Cochard^3^, Belinda E. Medlyn^1^
+Remko A. Duursma^1^, Chris J. Blackman^1^, Rosana Lopéz^1,3^, Nicolas K. Martin-StPaul^2^, Hervé Cochard^3^, Belinda E. Medlyn^1^
 
 \
 ^1^ Hawkesbury Institute for the Environment, Western Sydney University, Locked Bag 1797, Penrith, NSW, Australia
@@ -388,7 +388,7 @@ Finally, we conclude that g~min~ displays a large amount of variation between sp
 
 # Acknowledgments 
 
-This work was made possible by the ARC Linkage Project LP140100232. All raw data, code and a fully reproducible workflow which generates the figures, this manuscript and all analyses is available at https://www.github.com/remkoduursma/g0paper.
+This work was made possible by the ARC Linkage Project LP140100232. RL was supported by a Marie Curie fellowship (FP7-IOF 624473). All raw data, code and a fully reproducible workflow which generates the figures, this manuscript and all analyses is available at https://www.github.com/remkoduursma/g0paper.
 
 
 # Supporting Information
