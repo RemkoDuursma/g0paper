@@ -15,6 +15,6 @@ One dependency (the `speciesmap` package) is not on CRAN, and has to be installe
 devtools::install_github("remkoduursma/speciesmap")
 ```
 
-The workflow also depends on an installation of pandoc (or use Rstudio if you don't), and an installation of ImageMagick to convert the figures to PNG (this is optional only).
+The workflow also depends on an installation of pandoc (or use Rstudio if you don't).
 
 The first time you run this, it will be quite slow because species observation data and climate data will be downloaded and processed.
