@@ -1,3 +1,5 @@
+[![DOI](https://zenodo.org/badge/84373768.svg)](https://zenodo.org/badge/latestdoi/84373768)
+
 # Reproducible workflow for Tansley review on the minimum conductance
 
 This repository contains code needed to reproduce the article:
@@ -30,3 +32,7 @@ The workflow also depends on an installation of [pandoc](https://pandoc.org/), b
 
 The first time you run the complete workflow, it will be quite slow because species observation data and climate data will be downloaded (you do need an internet connection the first run) and processed.
 
+
+## Zenodo
+
+This repository is archived at Zenodo, with the doi: [10.5281/zenodo.1258003](doi.org/10.5281/zenodo.1258003)
