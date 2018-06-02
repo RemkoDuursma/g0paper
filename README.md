@@ -2,12 +2,21 @@
 
 This repository contains code needed to reproduce the article:
 
-**Remko A. Duursma1, Chris J. Blackman1, Rosana Lopéz1, Nicolas K. Martin-StPaul2, Hervé Cochard3, Belinda E. Medlyn1** On the minimum leaf conductance: its role in models of plant water use, and ecological and environmental controls. New Phytologist, in review.
+**On the minimum leaf conductance: its role in models of plant water use, and ecological and environmental controls**
+
+by 
+Remko A. Duursma, Chris J. Blackman, Rosana Lopéz, Nicolas K. Martin-StPaul2, Hervé Cochard, Belinda E. Medlyn. In review at *New Phytologist* as a 'Tansley review'.
 
 
 ## Instructions
 
-Simply source `run.R` to install dependencies, read data, compile manuscript and figures. The workflow uses `rmarkdown` for the manuscript, and produces `manuscript.docx` (and a supporting information document), and figures in `output/`. 
+From [R](https://www.r-project.org/), you can run all analyses, make figures, and compile the manuscript into docx, with this command:
+
+```
+source("run.R")
+```
+
+The workflow uses `rmarkdown` for the manuscript, and produces `manuscript.docx` (and a supporting information document), and figures as PDF in `output/`. 
 
 One dependency (the `speciesmap` package) is not on CRAN, and has to be installed with: 
 
@@ -15,6 +24,9 @@ One dependency (the `speciesmap` package) is not on CRAN, and has to be installe
 devtools::install_github("remkoduursma/speciesmap")
 ```
 
-The workflow also depends on an installation of pandoc (or use Rstudio if you don't).
+On Windows, you need to install [Rtools](https://cran.r-project.org/bin/windows/Rtools/) first.
 
-The first time you run this, it will be quite slow because species observation data and climate data will be downloaded and processed.
+The workflow also depends on an installation of [pandoc](https://pandoc.org/), but if you use Rstudio, it comes with an installation of pandoc already.
+
+The first time you run the complete workflow, it will be quite slow because species observation data and climate data will be downloaded (you do need an internet connection the first run) and processed.
+
