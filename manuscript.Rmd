@@ -348,7 +348,7 @@ Finally, we conclude that g~min~ displays a large amount of variation among spec
 
 # Acknowledgments 
 
-This work was made possible by the ARC Linkage Project LP140100232. RL was supported by a Marie Curie fellowship (FP7-IOF 624473). All raw data, code and a fully reproducible workflow which generates the figures, this manuscript and all analyses are available at https://www.github.com/remkoduursma/g0paper, archived at Zenodo (doi:XXX).
+This work was made possible by the ARC Linkage Project LP140100232. RL was supported by a Marie Curie fellowship (FP7-IOF 624473). All raw data, code and a fully reproducible workflow which generates the figures, this manuscript and all analyses are available at https://www.github.com/remkoduursma/g0paper, archived at Zenodo (doi:10.5281/zenodo.1308628).
 
 
 
