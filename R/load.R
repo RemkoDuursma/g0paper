@@ -183,6 +183,7 @@ gmindat <- left_join(gmindat,  cls, by="species")
 
 # gs at low PAR, gs at low A
 # Both from updated Lin database. Extracted for convenience.
+# See R_other/cond_low_a_low_par.R
 gs_low_a <- read.csv("data/cond_low_a.csv") %>%
   dplyr::select(gmin = Cond.mean) %>%
   mutate(method = "gslowA",
