@@ -39,4 +39,4 @@ The literature compilation of minimum conductance data is [available from this l
 
 ## Zenodo
 
-This repository is archived at Zenodo, with the doi: [10.5281/zenodo.1258003](doi.org/10.5281/zenodo.1258003)
+This repository is [archived at Zenodo](https://zenodo.org/account/settings/github/repository/RemkoDuursma/g0paper)
