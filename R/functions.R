@@ -225,3 +225,23 @@ as_dataframe_cls <- function(cls){
 return(as.data.frame(m, stringsAsFactors = FALSE))
 }
 
+
+download_and_read <- function(url, out_dir, out_file=NULL, use_cache=TRUE){
+  
+  if(!dir.exists(out_dir))dir.create(out_dir, showWarnings = FALSE)
+  
+  if(is.null(out_file))out_file <- basename(url)
+  out <- file.path(out_dir, out_file)
+  
+  if(!(use_cache && file.exists(out))){
+    download.file(url, out, quiet = TRUE)
+  }
+  
+  if(file_ext(out) == "rds"){
+    res <- readRDS(out)
+  } else if(file_ext(out) == "csv"){
+    res <- read.csv(out, stringsAsFactors = FALSE)
+  }
+  
+  return(res)
+}

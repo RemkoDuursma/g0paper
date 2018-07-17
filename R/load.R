@@ -4,12 +4,9 @@ suppressPackageStartupMessages(
   pacman::p_load(Hmisc, car, dplyr, tidyr, nlme, nlshelper, 
                forcats, tibble, magicaxis, 
                plantecophys, readxl, multcomp,
-               reporttools, Taxonstand, taxize, 
+               reporttools,  tools,
                doBy, stringi, rmarkdown, ggplot2)
 )
-
-#devtools::install_github("remkoduursma/speciesmap")
-suppressPackageStartupMessages(library(speciesmap))
 
 if(!dir.exists("download"))dir.create("download")
 if(!dir.exists("output"))dir.create("output")
@@ -17,17 +14,15 @@ source("R/functions.R")
 source("R/figures.R")
 
 # Lin et al. 2015
-linfn <- "download/lin2015.csv"
-if(!file.exists(linfn)){
-  download.file("https://ndownloader.figshare.com/files/1886204", linfn)
-}
-
-lin2015 <- read.csv(linfn, stringsAsFactors = FALSE) %>%
+lin2015 <- download_and_read("https://ndownloader.figshare.com/files/1886204",
+                             "download",
+                             "lin2015.csv") %>%
   mutate(fitgroup = paste(Datacontrib, Species, sep="_"),
          Ci = CO2S - Photo/(Cond/1.6),
          CiCa = Ci / CO2S,
          BBopti = Photo/(CO2S*sqrt(VPD)))
 
+# Filtered version, keep only groups with n>15, no bad PAR data, remove two groups.
 lin2015a <- group_by(lin2015, fitgroup) %>%
   filter(n() > 15,
          PARin < 2500,
@@ -35,10 +30,10 @@ lin2015a <- group_by(lin2015, fitgroup) %>%
          Datacontrib != "Derek Eamus",  # sorry derek you are an outlier
          fitgroup != "Jon Bennie_Zornia")
 
-# Lin 2015 fits
+# Lin 2015 fits: regression-based estimates of g0 and g1
 lin2015coef <- fits_lin2015(lin2015a)
 
-# Kerstiens 1996
+# Kerstiens 1996: literature compilation of various gmins.
 kerst <- read.csv("data/kerstiens1996_table1.csv", stringsAsFactors = FALSE) %>%
   filter(gmin > 0,
          species != "Molinia caerulea",
@@ -116,9 +111,10 @@ g0s <- data.frame(gmin=c(lin2015coef$g0, miner$g0),
 # Made with TRYDB and manual edits.
 species_classes <- read.csv("data/Species_classifications.csv", stringsAsFactors = FALSE)
 
-# Data from gmindatabase
-gmindat <- read.csv("https://raw.githubusercontent.com/RemkoDuursma/gmindatabase/master/combined/gmindatabase.csv",
-                     stringsAsFactors = FALSE) %>%
+# Literature compilation of gmin data.
+url <- paste0("https://raw.githubusercontent.com/RemkoDuursma/",
+              "gmindatabase/master/combined/gmindatabase.csv")
+gmindat <- download_and_read(url, "data") %>% 
   filter(gmin > 0) %>%
   group_by(species) %>%
   dplyr::summarize(gmin = mean(gmin),
@@ -126,50 +122,71 @@ gmindat <- read.csv("https://raw.githubusercontent.com/RemkoDuursma/gmindatabase
   ungroup %>%
   left_join(species_classes, by="species")
 
-cropgmin <- read.csv(paste0("https://raw.githubusercontent.com/RemkoDuursma/",
-                            "gmindatabase/master/combined/cropgmindatabase.csv"),
-                     stringsAsFactors = FALSE) 
+# Crop data compilation (subset of the above, aggregated by genotype not species)
+url <- paste0("https://raw.githubusercontent.com/RemkoDuursma/",
+                            "gmindatabase/master/combined/cropgmindatabase.csv")
+cropgmin <- download_and_read(url, "data")
 
-gminall <- dget(paste0("https://raw.githubusercontent.com/",
-                       "RemkoDuursma/gmindatabase/master/combined/gminall.rdput"))
+# All data for gmin (i.e. raw compiled data, with all columns and rows for each study,
+# not aggregated as the above two versions)
+url <- paste0("https://raw.githubusercontent.com/",
+              "RemkoDuursma/gmindatabase/master/combined/gminall.rds")
+gminall <- download_and_read(url, "data")
 
-#
-if(TRUE){
-  climfile <- "data/species_climate_wcpet.rds"
-  if(!file.exists(climfile)){
-    options(zomerpetpath="c:/data/zomerpet", worldclimpath="c:/data/worldclim")
-    ALA4R::ala_config(cache_directory="c:/data/ALAcache")
-    
-    sp <- unique(gmindat$species)
-    nf <- sapply(strsplit(sp, " "), length)
-    sp <- sp[nf == 2]
-    sp <- sort(sp)
-    
-    wc <- climate_presence(sp, vars=c("tavg","prec","bio","pet"), database="both")
-    
-    saveRDS(wc, climfile)
-  } else {
-    wc <- readRDS(climfile)
+# Read site climate data, prepared with the speciesmap R package.
+# The binary intermediate file (climfile) is included in this repository,
+# remove that file and run the code below to regenerate it.
+# As the potential error shows, we need to install that package from github with:
+# devtools::install_github("remkoduursma/speciesmap")
+climfile <- "data/species_climate_wcpet.rds"
+if(!file.exists(climfile)){
+  
+  r <- require(speciesmap, quietly=TRUE)
+  if(!r){
+    stop("Please install the speciesmap package like this (from R) :\n",
+         "devtools::install_github('remkoduursma/speciesmap')\n",
+         "if this fails, please check the README with this repository.\n",
+         .call=FALSE
+    )
   }
   
-  wc2 <- annualize_clim(wc) %>% aggregate_clim %>%
+  dir.create("data/zomerpet", showWarnings = FALSE)
+  dir.create("data/worldclim", showWarnings = FALSE)
+  dir.create("data/ALAcache", showWarnings = FALSE)
+  
+  options(zomerpetpath="data/zomerpet", worldclimpath="data/worldclim")
+  ALA4R::ala_config(cache_directory="data/ALAcache")
+  
+  sp <- unique(gmindat$species)
+  nf <- sapply(strsplit(sp, " "), length)
+  sp <- sp[nf == 2]
+  sp <- sort(sp)
+  
+  wc <- climate_presence(sp, vars=c("tavg","prec","bio","pet"), database="both") %>%
+    annualize_clim %>% aggregate_clim %>%
     mutate(species = as.character(species))
   
-  gmindat2 <- left_join(gmindat, wc2, by="species")
+  saveRDS(wc, climfile)
+} else {
+  wc <- readRDS(climfile)
 }
 
-# New grouping variable.
-gmindat$group2 <- NA
-gmindat$group2[gmindat$Woody] <- "Woody"
-gmindat$group2[gmindat$PlantGrowthForm == "graminoid"] <- "Graminoid"
-gmindat$group2[gmindat$Crop] <- "Crop"
-gmindat$group2[is.na(gmindat$group2)] <- "Other non-woody"
+gmindat2 <- left_join(gmindat, wc, by="species")
+
+# Add plant-growth form grouping variable (for one figure).
+gmindat <- mutate(gmindat, group2 = case_when(Woody ~ "Woody",
+                                              PlantGrowthForm == "graminoid" ~ "Graminoid",
+                                              Crop ~ "Crop",
+                                              TRUE ~ "Other non-woody"))
 
 
-# Add Family
+# Add taxonomic Family
+# This binary file is included with this repository, 
+# to regenerate it remove it and run this code again.
 clsfile <- "data/cls_output.rds"
 sp_dfr <- data.frame(species=unique(gmindat$species), stringsAsFactors = FALSE)
 if(!file.exists(clsfile)){
+  pacman::p_load(Taxonstand, taxize)
   cls <- classification(sp_dfr$species, db="ncbi")
   saveRDS(cls, clsfile)
 } else {
@@ -208,12 +225,12 @@ gdfr <- bind_rows(gmindat_simple, kerst_simple, schuster2017, lombar, gs_low_a, 
   mutate(method = factor(method, levels=c("gcut_isol", "gmin", "gnight", "gslowPAR", "gslowA")))
 
 
-# Herve's simulations with Sureau
+# Herve Cochard's simulations with Sureau
 planta <- read.csv("data/plant_a_sureau.csv", skip=1)
 plantb <- read.csv("data/plant_b_sureau.csv", skip=1)
 
 
-# Chris's example drying curves.
+# Chris Blackman's example drying curves.
 goodbadcurves <- read.csv("data/good and bad gmin.csv")
 
 
