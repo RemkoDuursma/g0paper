@@ -4,7 +4,7 @@ suppressPackageStartupMessages(
   pacman::p_load(Hmisc, car, dplyr, tidyr, nlme, nlshelper, 
                forcats, tibble, magicaxis, 
                plantecophys, readxl, multcomp,
-               reporttools,  tools,
+               reporttools,  tools, pander, knitr,
                doBy, stringi, rmarkdown, ggplot2)
 )
 
