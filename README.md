@@ -12,15 +12,18 @@ Remko A. Duursma, Chris J. Blackman, Rosana Lopéz, Nicolas K. Martin-StPaul2, H
 
 ## Instructions
 
-From [R](https://www.r-project.org/), you can run all analyses, make figures, and compile the manuscript into docx, with this command:
+This workflow depends on an installation of [R](https://www.r-project.org/). Missing packages will be installed on the fly. The workflow also depends on an installation of [pandoc](https://pandoc.org/), but if you use Rstudio, you do not need to install it again.
+
+After cloning this repository, you can run all analyses, make figures (in `output/`), and compile the manuscript into docx, with this command:
 
 ```
 source("run.R")
 ```
 
-The workflow uses `rmarkdown` for the manuscript, and produces `manuscript.docx` (and a supporting information document), and figures as PDF in `output/`. 
+(or `Rscript run.R` from the command line).
 
-One dependency (the `speciesmap` package) is not on CRAN, and has to be installed with: 
+
+If you want to re-generate the species climate envelopes (see `R/load.R` for details), you will need the `speciesmap` package, which can be installed with: 
 
 ```
 devtools::install_github("remkoduursma/speciesmap")
@@ -28,10 +31,11 @@ devtools::install_github("remkoduursma/speciesmap")
 
 On Windows, you need to install [Rtools](https://cran.r-project.org/bin/windows/Rtools/) first.
 
-The workflow also depends on an installation of [pandoc](https://pandoc.org/), but if you use Rstudio, it comes with an installation of pandoc already.
+## Data
 
-The first time you run the complete workflow, it will be quite slow because species observation data and climate data will be downloaded (you do need an internet connection the first run) and processed.
+All raw data files are included in this repository, except those that can be downloaded from a permanent URL (at figshare). Please read the source file `R/load.R` carefully to find the raw data files, how they are read, processed, etc.
 
+The literature compilation of minimum conductance data is [available from this link](https://www.github.com/remkoduursma/gmindatabase).
 
 ## Zenodo
 
