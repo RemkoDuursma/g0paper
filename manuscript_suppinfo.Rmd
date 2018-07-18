@@ -18,7 +18,22 @@ source("R/load.R")
 ```
 
 
-# Methods S1. Literature compilation of g~min~ estimates
+
+# Methods S1. Methodological issues with measurement of g~min~
+
+For measurements of gmin in detached leaves, the relationship between the change in mass (due to water loss) and time is typically curvilinear and characterised by three phases: 1)the rate of water loss initially increases as stomata temporally open in response to being placed under light; 2) the rate of water loss declines as stomata begin to close in response to increasing leaf water deficit; and 3) once stomata have closed (as much as possible) the rate of water loss is at minimum and is constant over time until leaf relative water content nears zero. In this case, g~min~ is calculated from the linear portion of the curve during phase 3. To achieve this type of response, it is important to ensure that the environmental conditions under which g~min~ is measured are conducive to stomatal closure. From experience, leaves placed under high light and/or high VPD conditions are often unable to effectively close stomata in response to desiccation, possibly as a result of rapid epidermal drying and hydro-passive stomatal opening [@buckley2005]. These conditions lead to a rapid decline in leaf water status and an overestimation of g~min~, as compared to control leaves from the same species.
+
+\
+Additionally, sometimes the stomatal response of replicate leaves from the same species can be highly variable, even under the same environmental conditions (see Figure S3). In light of these potential issues, we recommend measurements of g~min~ on detached leaves to be conducted under mild conditions (low light and low VPD), or at least that the measurement conditions are tested for different species and adjusted if necessary. We also note that previous studies have shown that g~min~ decreases substantially with very low relative water content [@gardingen1992]; again it is beneficial to dry the leaf slowly. 
+
+```{r goodbadfig, echo=FALSE, dpi=300, fig.width=8, fig.height=4}
+figure_goodandbad(goodbadcurves)
+```
+
+**Figure 3**. Two example curves for determination of minimum conductance (g~min~) via mass loss of detached leaves (MLD). Leaf weights are expressed as relative water content (RWC). The good quality curve shows a distinct linear portion at the end of the drying curve, from which minimum transpiration can be calculated (using actual leaf weight, and leaf area). The poor quality curve shows a quicker decrease towards the end of the drying curve (> 400min), indicating an *increased* transpiration rate despite the low water content. We speculate that this increase - which we have observed in a number of curves - is due to the epidermis drying so quickly that the stomata are 'pulled open', increasing water loss.
+
+
+# Methods S2. Literature compilation of g~min~ estimates
 
 \
 Data on minimum conductance (g~min~) from MLD was compiled from 40 original papers. For the compilation, we returned to all original papers mentioned in the review by @kerstiens1996, and added many newer sources. All conductance values were converted to per unit projected surface area. Total surface area for conifer leaves was converted to projected area following @barclay2000. Units were converted to molar fluxes assuming 41 mol m^-3^ (cf. @kerstiens1996). In many cases, minimum transpiration rates were reported instead of a conductance (termed 'residual transpiration', 'epidermal transpiration', 'minimum transpiration', etc.). For all papers included in the compilation, we were able to convert these transpiration rates to conductances, but unfortunately dozens of papers could not be included because of missing information on vapour pressure deficit or relative humidity / air temperature during measurements. All g~min~ estimates from original papers were entered in the database, but for this paper we only used 'control' treatments (filtering for drought, elevated temperature, and various other treatments). Where practical, other reported variables were also entered for each study. The complete database is available from github.com/remkoduursma/gmindatabase.
@@ -48,21 +63,6 @@ figure_gmin_bygroup(gmindat)
 figure_pet(gmindat2)
 ```
 **Figure 2**. No relationship between g~min~ and potential evapotranspiration across the range of the species. Climate variables were calculated across the distribution of each species; we tested many other variables (precipitation, temperature, etc.), but no relationship with climate could be determined.
-
-
-# Methods S2. Methodological issues with measurement of g~min~
-
-For measurements of gmin in detached leaves, the relationship between the change in mass (due to water loss) and time is typically curvilinear and characterised by three phases: 1)the rate of water loss initially increases as stomata temporally open in response to being placed under light; 2) the rate of water loss declines as stomata begin to close in response to increasing leaf water deficit; and 3) once stomata have closed (as much as possible) the rate of water loss is at minimum and is constant over time until leaf relative water content nears zero. In this case, g~min~ is calculated from the linear portion of the curve during phase 3. To achieve this type of response, it is important to ensure that the environmental conditions under which g~min~ is measured are conducive to stomatal closure. From experience, leaves placed under high light and/or high VPD conditions are often unable to effectively close stomata in response to desiccation, possibly as a result of rapid epidermal drying and hydro-passive stomatal opening [@buckley2005]. These conditions lead to a rapid decline in leaf water status and an overestimation of g~min~, as compared to control leaves from the same species.
-
-\
-Additionally, sometimes the stomatal response of replicate leaves from the same species can be highly variable, even under the same environmental conditions (see Figure S3). In light of these potential issues, we recommend measurements of g~min~ on detached leaves to be conducted under mild conditions (low light and low VPD), or at least that the measurement conditions are tested for different species and adjusted if necessary. We also note that previous studies have shown that g~min~ decreases substantially with very low relative water content [@gardingen1992]; again it is beneficial to dry the leaf slowly. 
-
-```{r goodbadfig, echo=FALSE, dpi=300, fig.width=8, fig.height=4}
-figure_goodandbad(goodbadcurves)
-```
-
-**Figure 3**. Two example curves for determination of minimum conductance (g~min~) via mass loss of detached leaves (MLD). Leaf weights are expressed as relative water content (RWC). The good quality curve shows a distinct linear portion at the end of the drying curve, from which minimum transpiration can be calculated (using actual leaf weight, and leaf area). The poor quality curve shows a quicker decrease towards the end of the drying curve (> 400min), indicating an *increased* transpiration rate despite the low water content. We speculate that this increase - which we have observed in a number of curves - is due to the epidermis drying so quickly that the stomata are 'pulled open', increasing water loss.
-
 
 
 # Methods S3. Methods description for case studies
